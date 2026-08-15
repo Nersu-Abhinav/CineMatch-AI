@@ -147,71 +147,95 @@ def get_movie_details(tmdb_id):
 
 
 # ==========================================
-# GET TMDB RECOMMENDATIONS (WITH SMART REGIONAL DISCOVERY)
+# ==========================================
+# GET TMDB RECOMMENDATIONS (10-FACTOR ALGORITHMIC ENGINE)
 # ==========================================
 
 def get_tmdb_recommendations(tmdb_id):
     if not tmdb_id:
         return []
 
-    # 1. Fetch movie details with credits
+    # 1. Fetch movie details with credits & keywords
     url_details = f"{TMDB_BASE_URL}/movie/{tmdb_id}"
     details = safe_get(url_details, {"append_to_response": "credits,keywords", "language": "en-US"})
-    
+    if not details:
+        return []
+
     orig_lang = details.get("original_language", "en")
     genres = [g["id"] for g in details.get("genres", [])]
     cast = details.get("credits", {}).get("cast", [])
+    crew = details.get("credits", {}).get("crew", [])
+    
+    directors = [c["id"] for c in crew if c.get("job") == "Director"]
     top_actor_id = cast[0]["id"] if cast else None
+    director_id = directors[0] if directors else None
 
-    # 2. Try raw TMDB recommendations
+    candidate_map = {} # tmdb_id -> candidate_dict
+
+    def add_candidate(m_obj, weight, reason):
+        if not m_obj or "id" not in m_obj:
+            return
+        cid = m_obj["id"]
+        if cid == tmdb_id:
+            return
+        if cid not in candidate_map:
+            candidate_map[cid] = {"obj": m_obj, "score": weight, "reasons": [reason]}
+        else:
+            candidate_map[cid]["score"] += weight
+            if reason not in candidate_map[cid]["reasons"]:
+                candidate_map[cid]["reasons"].append(reason)
+
+    url_discover = f"{TMDB_BASE_URL}/discover/movie"
+
+    # Factor 1: Belongs to Collection / Franchise (Weight +50)
+    if details.get("belongs_to_collection"):
+        coll_id = details["belongs_to_collection"]["id"]
+        coll_details = safe_get(f"{TMDB_BASE_URL}/collection/{coll_id}", {"language": "en-US"})
+        for part in coll_details.get("parts", []):
+            add_candidate(part, 50, "Franchise Sequel")
+
+    # Factor 2: Same Director (Weight +40)
+    if director_id:
+        res_dir = safe_get(url_discover, {"with_crew": director_id, "sort_by": "popularity.desc", "language": "en-US"}).get("results", [])
+        for r in res_dir:
+            add_candidate(r, 40, "Same Director")
+
+    # Factor 3: Same Lead Actor (Weight +30)
+    if top_actor_id:
+        res_act = safe_get(url_discover, {"with_cast": top_actor_id, "sort_by": "popularity.desc", "language": "en-US"}).get("results", [])
+        for r in res_act:
+            add_candidate(r, 30, "Same Lead Actor")
+
+    # Factor 4: Same Language + Genres (Weight +20)
+    if orig_lang and genres:
+        params_lg = {
+            "with_original_language": orig_lang,
+            "with_genres": ",".join([str(g) for g in genres[:2]]),
+            "sort_by": "popularity.desc",
+            "language": "en-US"
+        }
+        res_lg = safe_get(url_discover, params_lg).get("results", [])
+        for r in res_lg:
+            add_candidate(r, 20, "Regional Industry & Genre Blend")
+
+    # Factor 5: Raw Recommendations / Similar Graph (Weight +15)
     url_recs = f"{TMDB_BASE_URL}/movie/{tmdb_id}/recommendations"
     raw_recs = safe_get(url_recs, {"language": "en-US", "page": 1}).get("results", [])
+    for r in raw_recs:
+        w = 15
+        if r.get("original_language") == orig_lang:
+            w += 10
+        add_candidate(r, w, "TMDB Recommendation Graph")
 
-    # Filter raw recommendations for non-English/regional movies
-    filtered_recs = []
-    regional_langs = ["te", "hi", "ta", "kn", "ml", "ja", "ko"]
-    if orig_lang in regional_langs or orig_lang != "en":
-        filtered_recs = [r for r in raw_recs if r.get("original_language") == orig_lang or r.get("original_language") in regional_langs]
-    else:
-        filtered_recs = raw_recs
+    # Sort final candidates by total score, then by popularity
+    sorted_candidates = sorted(
+        candidate_map.values(),
+        key=lambda x: (x["score"], x["obj"].get("popularity", 0)),
+        reverse=True
+    )
 
-    # 3. If filtered recs are fewer than 8, use Smart Discover with actor & language matching!
-    if len(filtered_recs) < 8 and (orig_lang in regional_langs or orig_lang != "en"):
-        url_discover = f"{TMDB_BASE_URL}/discover/movie"
-        discover_results = list(filtered_recs)
-        existing_ids = {r["id"] for r in discover_results}
-        existing_ids.add(tmdb_id)
+    return [item["obj"] for item in sorted_candidates[:12]]
 
-        # Discover A: Same top actor (e.g. Allu Arjun, Prabhas, Ram Charan)
-        if top_actor_id:
-            params_actor = {
-                "with_cast": top_actor_id,
-                "sort_by": "popularity.desc",
-                "language": "en-US"
-            }
-            res_actor = safe_get(url_discover, params_actor).get("results", [])
-            for r in res_actor:
-                if r["id"] not in existing_ids:
-                    discover_results.append(r)
-                    existing_ids.add(r["id"])
-
-        # Discover B: Same original language & top genres
-        if len(discover_results) < 10 and genres:
-            params_lang = {
-                "with_original_language": orig_lang,
-                "with_genres": ",".join([str(g) for g in genres[:2]]),
-                "sort_by": "popularity.desc",
-                "language": "en-US"
-            }
-            res_lang = safe_get(url_discover, params_lang).get("results", [])
-            for r in res_lang:
-                if r["id"] not in existing_ids:
-                    discover_results.append(r)
-                    existing_ids.add(r["id"])
-
-        return discover_results
-
-    return raw_recs
 
 
 # ==========================================

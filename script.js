@@ -407,7 +407,33 @@ const CLIENT_BENCHMARKS = {
             { "movie_id": 77715, "tmdb_id": 77715, "title": "Badrinath", "similarity": 0.82, "rating": 5.4, "release_date": "2011-06-10", "genres": ["Action", "Drama"], "overview": "Allu Arjun, action drama.", "poster_url": "https://image.tmdb.org/t/p/w500/9b9823.jpg", "backdrop_url": null },
             { "movie_id": 117058, "tmdb_id": 117058, "title": "Desamuduru", "similarity": 0.80, "rating": 5.1, "release_date": "2007-01-12", "genres": ["Action", "Romance"], "overview": "Allu Arjun, action romance.", "poster_url": "https://image.tmdb.org/t/p/w500/3d6LhrRYxTv7oG51cmULdBJQ0GN.jpg", "backdrop_url": null }
         ]
+    },
+    "rangasthalam": {
+        "selected_movie": {
+            "movie_id": 461126,
+            "tmdb_id": 461126,
+            "title": "Rangasthalam",
+            "rating": 8.1,
+            "release_date": "2018-03-30",
+            "genres": ["Action", "Drama"],
+            "overview": "Chitti Babu, a hearing impaired man, stands up against the corrupt village president to protect his brother.",
+            "poster_url": "https://image.tmdb.org/t/p/w500/iJzS92s.jpg",
+            "backdrop_url": null
+        },
+        "recommendations": [
+            { "movie_id": 690957, "tmdb_id": 690957, "title": "Pushpa: The Rise", "similarity": 0.98, "rating": 7.4, "release_date": "2021-12-16", "genres": ["Action", "Drama", "Thriller"], "overview": "Director Sukumar, village action drama.", "poster_url": "https://image.tmdb.org/t/p/w500/5P8lF4hWz9.jpg", "backdrop_url": null },
+            { "movie_id": 857598, "tmdb_id": 857598, "title": "Pushpa 2 - The Rule", "similarity": 0.96, "rating": 7.5, "release_date": "2024-12-04", "genres": ["Action", "Drama", "Thriller"], "overview": "Director Sukumar, mass action sequel.", "poster_url": "https://image.tmdb.org/t/p/w500/vQ9xedlGZ2r14.jpg", "backdrop_url": null },
+            { "movie_id": 579974, "tmdb_id": 579974, "title": "RRR", "similarity": 0.94, "rating": 7.8, "release_date": "2022-03-24", "genres": ["Action", "Drama"], "overview": "Ram Charan, epic action drama.", "poster_url": "https://image.tmdb.org/t/p/w500/wE0bv.jpg", "backdrop_url": null },
+            { "movie_id": 435032, "tmdb_id": 435032, "title": "Dhruva", "similarity": 0.92, "rating": 7.2, "release_date": "2016-12-09", "genres": ["Action", "Thriller"], "overview": "Ram Charan, action thriller.", "poster_url": null, "backdrop_url": null },
+            { "movie_id": 353597, "tmdb_id": 353597, "title": "Nannaku Prematho", "similarity": 0.90, "rating": 7.1, "release_date": "2016-01-13", "genres": ["Action", "Drama"], "overview": "Director Sukumar, emotional action drama.", "poster_url": null, "backdrop_url": null },
+            { "movie_id": 809462, "tmdb_id": 809462, "title": "Virupaksha", "similarity": 0.88, "rating": 7.3, "release_date": "2023-04-21", "genres": ["Horror", "Mystery", "Thriller"], "overview": "Sukumar Writings, village mystery thriller.", "poster_url": null, "backdrop_url": null },
+            { "movie_id": 782414, "tmdb_id": 782414, "title": "Dasara", "similarity": 0.86, "rating": 7.0, "release_date": "2023-03-30", "genres": ["Action", "Drama"], "overview": "Raw village period action drama.", "poster_url": null, "backdrop_url": null },
+            { "movie_id": 923939, "tmdb_id": 923939, "title": "Kantara", "similarity": 0.84, "rating": 7.9, "release_date": "2022-09-30", "genres": ["Action", "Thriller"], "overview": "Epic folklore village action drama.", "poster_url": null, "backdrop_url": null },
+            { "movie_id": 4922, "tmdb_id": 4922, "title": "Magadheera", "similarity": 0.82, "rating": 7.5, "release_date": "2009-07-31", "genres": ["Action", "Fantasy"], "overview": "Ram Charan, epic fantasy action.", "poster_url": null, "backdrop_url": null },
+            { "movie_id": 490132, "tmdb_id": 490132, "title": "K.G.F: Chapter 1", "similarity": 0.80, "rating": 8.0, "release_date": "2018-12-21", "genres": ["Action", "Drama"], "overview": "Period mass action drama.", "poster_url": null, "backdrop_url": null }
+        ]
     }
+
 
 
 
