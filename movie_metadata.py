@@ -42,6 +42,8 @@ def format_tmdb_item(movie_data):
     tmdb_id = movie_data.get("id")
     poster_path = movie_data.get("poster_path")
     backdrop_path = movie_data.get("backdrop_path")
+    title = movie_data.get("title") or movie_data.get("name") or "Unknown Title"
+    release_date = movie_data.get("release_date") or movie_data.get("first_air_date") or ""
     
     genres = []
     if "genres" in movie_data and isinstance(movie_data["genres"], list):
@@ -53,20 +55,27 @@ def format_tmdb_item(movie_data):
             80: "Crime", 99: "Documentary", 18: "Drama", 10751: "Family",
             14: "Fantasy", 36: "History", 27: "Horror", 10402: "Music",
             9648: "Mystery", 10749: "Romance", 878: "Science Fiction",
-            10770: "TV Movie", 53: "Thriller", 10752: "War", 37: "Western"
+            10770: "TV Movie", 53: "Thriller", 10752: "War", 37: "Western",
+            10759: "Action & Adventure", 10765: "Sci-Fi & Fantasy", 10768: "War & Politics"
         }
-        genres = [genre_map.get(gid, "Movie") for gid in movie_data["genre_ids"]]
+        genres = [genre_map.get(gid, "Drama") for gid in movie_data["genre_ids"]]
 
-    return {
+    item = {
         "tmdb_id": tmdb_id,
-        "title": movie_data.get("title"),
-        "overview": movie_data.get("overview"),
+        "title": title,
+        "overview": movie_data.get("overview") or "Discover details and recommendations for this title.",
         "rating": round(float(movie_data.get("vote_average", 0)), 1) if movie_data.get("vote_average") else None,
-        "release_date": movie_data.get("release_date"),
+        "release_date": release_date,
         "genres": genres,
         "poster_url": get_poster_url(poster_path),
         "backdrop_url": get_backdrop_url(backdrop_path)
     }
+
+    if "auto_corrected_from" in movie_data:
+        item["auto_corrected_from"] = movie_data["auto_corrected_from"]
+
+    return item
+
 
 
 # ==========================================

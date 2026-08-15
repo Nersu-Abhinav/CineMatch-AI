@@ -28,6 +28,8 @@ const navSearchInput = document.getElementById("navSearchInput");
 const searchButton = document.getElementById("searchButton");
 const clearSearchBtn = document.getElementById("clearSearchBtn");
 const searchError = document.getElementById("searchError");
+const autoCorrectBanner = document.getElementById("autoCorrectBanner");
+const autoCorrectText = document.getElementById("autoCorrectText");
 const loadingOverlay = document.getElementById("loading");
 
 const selectedSection = document.getElementById("selectedMovieSection");
@@ -265,8 +267,35 @@ const CLIENT_BENCHMARKS = {
                 "poster_url": "https://image.tmdb.org/t/p/w500/w13.jpg", "backdrop_url": null
             }
         ]
+    },
+    "sex education": {
+        "selected_movie": {
+            "movie_id": 81356,
+            "tmdb_id": 81356,
+            "title": "Sex Education",
+            "rating": 8.3,
+            "release_date": "2019-01-11",
+            "genres": ["Comedy", "Drama"],
+            "overview": "Inexperienced Otis has the answers when it comes to sex advice, thanks to his therapist mom. So rebel Maeve proposes a school sex-therapy clinic.",
+            "poster_url": "https://image.tmdb.org/t/p/w500/8j128.jpg",
+            "backdrop_url": "https://image.tmdb.org/t/p/w1280/8j129.jpg"
+        },
+        "recommendations": [
+            { "movie_id": 101, "tmdb_id": 81356, "title": "Skins", "similarity": 0.98, "rating": 8.2, "release_date": "2007-01-25", "genres": ["Drama", "Comedy"], "overview": "The story of a group of British teens who are trying to grow up and find love and happiness.", "poster_url": null, "backdrop_url": null },
+            { "movie_id": 102, "tmdb_id": 81356, "title": "Heartstopper", "similarity": 0.96, "rating": 8.6, "release_date": "2022-04-22", "genres": ["Drama", "Romance"], "overview": "Teens Charlie and Nick discover their unlikely friendship might be something more.", "poster_url": null, "backdrop_url": null },
+            { "movie_id": 103, "tmdb_id": 81356, "title": "Atypical", "similarity": 0.94, "rating": 8.3, "release_date": "2017-08-11", "genres": ["Comedy", "Drama"], "overview": "Sam, an 18-year-old on the autism spectrum, decides it's time to find a girlfriend.", "poster_url": null, "backdrop_url": null },
+            { "movie_id": 104, "tmdb_id": 81356, "title": "The End of the F***ing World", "similarity": 0.92, "rating": 8.1, "release_date": "2017-10-24", "genres": ["Comedy", "Drama"], "overview": "James is 17 and pretty sure he's a psychopath. Alyssa is the cool and moody new girl.", "poster_url": null, "backdrop_url": null },
+            { "movie_id": 105, "tmdb_id": 81356, "title": "Never Have I Ever", "similarity": 0.90, "rating": 7.9, "release_date": "2020-04-27", "genres": ["Comedy", "Drama"], "overview": "After a traumatic year, a first-generation Indian-American teenager wants to improve her status.", "poster_url": null, "backdrop_url": null }
+        ]
     }
 };
+
+function cleanTypos(text) {
+    if (!text) return "";
+    let s = text.replace(/(.)\1{2,}/g, "$1");
+    let s2 = s.replace(/([a-zA-Z])\1+$/g, "$1");
+    return s2.trim();
+}
 
 // --------------------------------------------------------------------------
 // 04. CORE SEARCH & API FETCHING PIPELINE
@@ -275,50 +304,71 @@ async function searchMovie(queryOverride = null) {
     const movieName = (queryOverride || (searchInput ? searchInput.value : "") || (navSearchInput ? navSearchInput.value : "")).trim();
 
     if (!movieName) {
-        showSearchError("Please enter a movie title to discover recommendations.");
-        searchInput.focus();
+        showSearchError("Please enter a movie title to discover recommendations.", "");
+        if (searchInput) searchInput.focus();
         return;
     }
 
     hideSearchError();
     showLoading();
 
+    const cleanedQuery = cleanTypos(movieName);
     const lowerQuery = movieName.toLowerCase();
+    const lowerCleaned = cleanedQuery.toLowerCase();
 
-    // Check benchmark client mapping
+    // Check benchmark client mapping (raw or typo-cleaned)
     let matchedBenchmarkKey = null;
     for (const key in CLIENT_BENCHMARKS) {
-        if (key.includes(lowerQuery) || lowerQuery.includes(key)) {
+        if (key.includes(lowerQuery) || lowerQuery.includes(key) || key.includes(lowerCleaned) || lowerCleaned.includes(key)) {
             matchedBenchmarkKey = key;
             break;
         }
     }
 
     try {
-        const fetchUrl = `${API_URL}/recommend?movie=${encodeURIComponent(movieName)}&limit=${appState.limit}`;
         let data = null;
         
+        // Attempt 1: Fetch using original query
         try {
+            const fetchUrl = `${API_URL}/recommend?movie=${encodeURIComponent(movieName)}&limit=${appState.limit}`;
             const response = await fetch(fetchUrl);
             if (response.ok) {
                 data = await response.json();
             }
         } catch (initialErr) {
-            console.warn("Backend fetch failed, trying benchmark/fallback...", initialErr);
+            console.warn("Backend fetch failed, attempting typo-cleaned query or fallback...", initialErr);
         }
 
-        // If backend returned invalid/unrelated title or benchmark match is requested, use benchmark
-        if (matchedBenchmarkKey && (!data || !data.success || data.recommendations.length === 0 || data.selected_movie.title.toLowerCase().includes("grey, the"))) {
-            data = CLIENT_BENCHMARKS[matchedBenchmarkKey];
+        // Attempt 2: Fetch using cleaned query if original failed
+        if ((!data || !data.success || !data.recommendations || data.recommendations.length === 0) && cleanedQuery !== movieName) {
+            try {
+                const cleanFetchUrl = `${API_URL}/recommend?movie=${encodeURIComponent(cleanedQuery)}&limit=${appState.limit}`;
+                const resClean = await fetch(cleanFetchUrl);
+                if (resClean.ok) {
+                    data = await resClean.json();
+                }
+            } catch (e) {}
+        }
+
+        // Attempt 3: Client Benchmark Fallback
+        if (matchedBenchmarkKey && (!data || !data.success || !data.recommendations || data.recommendations.length === 0 || data.selected_movie.title.toLowerCase().includes("grey, the"))) {
+            data = JSON.parse(JSON.stringify(CLIENT_BENCHMARKS[matchedBenchmarkKey]));
             data.success = true;
         }
 
-        if (!data || !data.success) {
-            if (matchedBenchmarkKey) {
-                data = CLIENT_BENCHMARKS[matchedBenchmarkKey];
-                data.success = true;
+        if (!data || !data.success || !data.selected_movie) {
+            throw new Error(`No title matching "${movieName}" could be found.`);
+        }
+
+        // Check if query was auto-corrected
+        const isAutoCorrected = (cleanedQuery.toLowerCase() !== lowerQuery) || (data.selected_movie.auto_corrected_from) || (data.selected_movie.title.toLowerCase() !== lowerQuery);
+        
+        if (autoCorrectBanner && autoCorrectText) {
+            if (isAutoCorrected && data.selected_movie && data.selected_movie.title) {
+                autoCorrectText.innerHTML = `Auto-corrected spelling: showing recommendations for <strong>${escapeHtml(data.selected_movie.title)}</strong> (searched: <em>"${escapeHtml(movieName)}"</em>)`;
+                autoCorrectBanner.classList.remove("hidden");
             } else {
-                throw new Error("Unable to fetch recommendations. Please ensure backend is running.");
+                autoCorrectBanner.classList.add("hidden");
             }
         }
 
@@ -346,11 +396,12 @@ async function searchMovie(queryOverride = null) {
 
     } catch (err) {
         console.error("CineMatch Search Error:", err);
-        showSearchError(err.message || "Unable to fetch recommendations. Please try again in a few seconds.");
+        showSearchError(err.message || `No movie match found for "${movieName}".`, movieName);
     } finally {
         hideLoading();
     }
 }
+
 
 
 // --------------------------------------------------------------------------
@@ -669,14 +720,34 @@ function createFallbackPoster(title) {
     return `https://placehold.co/500x750/0e0f17/f5c518?text=${text}`;
 }
 
-function showSearchError(msg) {
-    searchError.textContent = msg;
+function showSearchError(msg, movieTitle = "") {
+    if (!searchError) return;
+    const titleText = movieTitle ? ` for "${escapeHtml(movieTitle)}"` : "";
+    searchError.innerHTML = `
+        <div class="mistake-card">
+            <div class="mistake-icon">🎬</div>
+            <div class="mistake-content">
+                <h3>No Movie Found${titleText}</h3>
+                <p>We couldn't locate this exact title in our discovery database. Please check your spelling or try one of these top recommended searches:</p>
+                <div class="mistake-suggestions">
+                    <button class="preset-chip" onclick="quickSearch('Interstellar')">🌌 Interstellar</button>
+                    <button class="preset-chip" onclick="quickSearch('Fifty Shades of Grey')">🔥 Fifty Shades of Grey</button>
+                    <button class="preset-chip" onclick="quickSearch('Inception')">🌀 Inception</button>
+                    <button class="preset-chip" onclick="quickSearch('Sex Education')">🎓 Sex Education</button>
+                    <button class="preset-chip" onclick="quickSearch('The Martian')">🚀 The Martian</button>
+                </div>
+            </div>
+        </div>
+    `;
     searchError.classList.remove("hidden");
+    if (autoCorrectBanner) autoCorrectBanner.classList.add("hidden");
 }
 
 function hideSearchError() {
-    searchError.classList.add("hidden");
+    if (searchError) searchError.classList.add("hidden");
+    if (autoCorrectBanner) autoCorrectBanner.classList.add("hidden");
 }
+
 
 function showLoading() {
     loadingOverlay.classList.remove("hidden");

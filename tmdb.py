@@ -62,22 +62,68 @@ def safe_get(url, params=None):
     return {}
 
 
+import re
+
 # ==========================================
-# SEARCH TMDB MOVIE BY TITLE
+# TYPO CLEANING & FUZZY SANITIZER
+# ==========================================
+
+def clean_typos(title):
+    if not title:
+        return ""
+    # Collapse 3+ repeated letters (e.g., "sex educationnn" -> "sex education", "interstellarrr" -> "interstellar")
+    s = re.sub(r'(.)\1{2,}', r'\1', title)
+    # Collapse 2 repeated letters at end of title if word ends with repeated char
+    s2 = re.sub(r'([a-zA-Z])\1+$', r'\1', s)
+    return s2.strip()
+
+
+# ==========================================
+# SEARCH TMDB MOVIE / SHOW BY TITLE (WITH TYPO CORRECTION)
 # ==========================================
 
 def search_tmdb_movie(title):
-    url = f"{TMDB_BASE_URL}/search/movie"
-    params = {
-        "query": title,
-        "language": "en-US",
-        "include_adult": False
-    }
-    data = safe_get(url, params)
+    if not title:
+        return None
+
+    # Try raw search first
+    url_movie = f"{TMDB_BASE_URL}/search/movie"
+    params = {"query": title, "language": "en-US", "include_adult": False}
+    data = safe_get(url_movie, params)
     results = data.get("results", [])
     if results:
         return results[0]
+
+    # Try cleaned query (typo auto-correction)
+    cleaned = clean_typos(title)
+    if cleaned and cleaned.lower() != title.lower():
+        data_clean = safe_get(url_movie, {"query": cleaned, "language": "en-US", "include_adult": False})
+        results_clean = data_clean.get("results", [])
+        if results_clean:
+            item = results_clean[0]
+            item["auto_corrected_from"] = title
+            item["corrected_query"] = cleaned
+            return item
+
+    # Try multi search (for shows like Sex Education or movies with alternative naming)
+    url_multi = f"{TMDB_BASE_URL}/search/multi"
+    for q in [title, cleaned]:
+        if not q:
+            continue
+        data_multi = safe_get(url_multi, {"query": q, "language": "en-US", "include_adult": False})
+        multi_results = [r for r in data_multi.get("results", []) if r.get("media_type") in ["movie", "tv"]]
+        if multi_results:
+            item = multi_results[0]
+            # Standardize title for TV series
+            if "name" in item and "title" not in item:
+                item["title"] = item["name"]
+            if q.lower() != title.lower():
+                item["auto_corrected_from"] = title
+                item["corrected_query"] = q
+            return item
+
     return None
+
 
 
 # ==========================================

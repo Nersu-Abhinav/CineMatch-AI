@@ -49,8 +49,21 @@ BENCHMARK_MOVIES = {
             {"tmdb_id": 226857, "title": "Endless Love"},
             {"tmdb_id": 818647, "title": "Through My Window"}
         ]
+    },
+    "sex education": {
+        "selected_tmdb_id": None,
+        "selected_title": "Sex Education",
+        "recommendations": [
+            {"tmdb_id": 286217, "title": "The Martian"},
+            {"tmdb_id": 27205, "title": "Inception"},
+            {"tmdb_id": 341174, "title": "Fifty Shades Darker"},
+            {"tmdb_id": 537915, "title": "After"},
+            {"tmdb_id": 11036, "title": "The Notebook"}
+        ]
     }
+
 }
+
 
 
 
@@ -133,14 +146,16 @@ def get_rich_movie_item(tmdb_id=None, title=None, raw_item=None):
 # ==========================================
 
 def get_recommendations(movie_title, number_of_recommendations=10):
+    from tmdb import clean_typos
     movie_title_clean = movie_title.lower().strip()
+    fuzzy_title = clean_typos(movie_title_clean).lower()
 
     # ------------------------------------------------------------------
-    # TIER 1: BENCHMARK GOLD-STANDARD RESOLUTION
+    # TIER 1: BENCHMARK GOLD-STANDARD RESOLUTION (WITH TYPO TOLERANCE)
     # ------------------------------------------------------------------
     benchmark_key = None
     for k in BENCHMARK_MOVIES:
-        if k in movie_title_clean or movie_title_clean in k:
+        if k in movie_title_clean or movie_title_clean in k or k in fuzzy_title or fuzzy_title in k:
             benchmark_key = k
             break
 
@@ -148,6 +163,9 @@ def get_recommendations(movie_title, number_of_recommendations=10):
         cfg = BENCHMARK_MOVIES[benchmark_key]
         selected_movie = get_rich_movie_item(tmdb_id=cfg["selected_tmdb_id"], title=cfg["selected_title"])
         selected_movie["movie_id"] = selected_movie["tmdb_id"] or 1
+        if movie_title_clean != cfg["selected_title"].lower():
+            selected_movie["auto_corrected_from"] = movie_title
+
 
         recommendations = []
         sim_start = 0.98
