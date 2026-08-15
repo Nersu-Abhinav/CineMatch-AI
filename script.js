@@ -321,26 +321,16 @@ const CLIENT_BENCHMARKS = {
             "backdrop_url": "https://image.tmdb.org/t/p/w1280/g4bH3p7F.jpg"
         },
         "recommendations": [
-            { "movie_id": 125835, "tmdb_id": 125835, "title": "Julayi", "similarity": 0.98, "rating": 6.4, "release_date": "2012-08-09", "genres": ["Action", "Comedy", "Romance"], "overview": "Allu Arjun, action + comedy + romance.", "poster_url": "https://image.tmdb.org/t/p/w500/tIUBifudyRCKhF1utslaDoDRteW.jpg", "backdrop_url": null },
-            { "movie_id": 374954, "tmdb_id": 374954, "title": "Sarrainodu", "similarity": 0.96, "rating": 6.1, "release_date": "2016-04-22", "genres": ["Action", "Drama"], "overview": "Allu Arjun, action + mass entertainment.", "poster_url": "https://image.tmdb.org/t/p/w500/dYOlnzv8LmirzwtbXTU4ROGIebv.jpg", "backdrop_url": null },
-            { "movie_id": 443635, "tmdb_id": 443635, "title": "DJ: Duvvada Jagannadham", "similarity": 0.94, "rating": 5.8, "release_date": "2017-06-23", "genres": ["Action", "Comedy"], "overview": "Allu Arjun, action + comedy.", "poster_url": "https://image.tmdb.org/t/p/w500/hb0hntwxMyFz0HLLmXS3M4cae0P.jpg", "backdrop_url": null },
-            { "movie_id": 60807, "tmdb_id": 60807, "title": "Kick", "similarity": 0.92, "rating": 6.8, "release_date": "2009-05-08", "genres": ["Action", "Comedy", "Romance"], "overview": "Action, comedy, romance.", "poster_url": "https://image.tmdb.org/t/p/w500/lei28oUtPXyzGjkf6YKaIlAscAV.jpg", "backdrop_url": null },
-            { "movie_id": 73583, "tmdb_id": 73583, "title": "Ready", "similarity": 0.90, "rating": 5.7, "release_date": "2008-06-19", "genres": ["Romance", "Comedy", "Action"], "overview": "Romance + comedy + family entertainment.", "poster_url": "https://image.tmdb.org/t/p/w500/7OMenpYP2riOMS4FVdFgrTrYntc.jpg", "backdrop_url": null },
-            { "movie_id": 80276, "tmdb_id": 80276, "title": "Dookudu", "similarity": 0.88, "rating": 6.8, "release_date": "2011-09-22", "genres": ["Action", "Comedy"], "overview": "Action + comedy + commercial entertainer.", "poster_url": "https://image.tmdb.org/t/p/w500/e9uffrN9z22uuiBF9B0bTDDvbjz.jpg", "backdrop_url": null },
-            { "movie_id": 83824, "tmdb_id": 83824, "title": "Bunny", "similarity": 0.86, "rating": 5.0, "release_date": "2005-04-06", "genres": ["Action", "Romance"], "overview": "Allu Arjun, romance + action.", "poster_url": "https://image.tmdb.org/t/p/w500/pG7tY1LcXyjQJrULCOciWnFwYfG.jpg", "backdrop_url": null },
-            { "movie_id": 117058, "tmdb_id": 117058, "title": "Desamuduru", "similarity": 0.84, "rating": 5.1, "release_date": "2007-01-12", "genres": ["Action", "Romance", "Comedy"], "overview": "Allu Arjun, action + romance + comedy.", "poster_url": "https://image.tmdb.org/t/p/w500/3d6LhrRYxTv7oG51cmULdBJQ0GN.jpg", "backdrop_url": null },
-            { "movie_id": 294413, "tmdb_id": 294413, "title": "Aagadu", "similarity": 0.82, "rating": 4.8, "release_date": "2014-09-19", "genres": ["Action", "Comedy"], "overview": "Action + comedy + mass entertainment.", "poster_url": "https://image.tmdb.org/t/p/w500/xDRDhFd4A9QSnJlE5hIJPVSyYuL.jpg", "backdrop_url": null },
-            { "movie_id": 111836, "tmdb_id": 111836, "title": "Gabbar Singh", "similarity": 0.80, "rating": 5.9, "release_date": "2012-05-11", "genres": ["Action", "Comedy"], "overview": "Action + comedy + mass elements.", "poster_url": "https://image.tmdb.org/t/p/w500/tFDhzLPhWnjDNda7YHcbeB4gcGi.jpg", "backdrop_url": null },
-            { "movie_id": 628241, "tmdb_id": 628241, "title": "Ala Vaikunthapurramuloo", "similarity": 0.78, "rating": 7.2, "release_date": "2020-01-12", "genres": ["Action", "Comedy", "Family"], "overview": "Allu Arjun, family action comedy blockbuster.", "poster_url": "https://image.tmdb.org/t/p/w500/z6h3n92.jpg", "backdrop_url": null },
-            { "movie_id": 690957, "tmdb_id": 690957, "title": "Pushpa: The Rise", "similarity": 0.76, "rating": 7.4, "release_date": "2021-12-16", "genres": ["Action", "Drama", "Thriller"], "overview": "Allu Arjun, iconic mass action entertainer.", "poster_url": "https://image.tmdb.org/t/p/w500/5P8lF4hWz9.jpg", "backdrop_url": null },
-            { "movie_id": 857598, "tmdb_id": 857598, "title": "Pushpa 2 - The Rule", "similarity": 0.74, "rating": 7.5, "release_date": "2024-12-04", "genres": ["Action", "Drama", "Thriller"], "overview": "Allu Arjun, mass action blockbuster sequel.", "poster_url": "https://image.tmdb.org/t/p/w500/vQ9xedlGZ2r14.jpg", "backdrop_url": null },
-            { "movie_id": 215248, "tmdb_id": 215248, "title": "Yevadu", "similarity": 0.72, "rating": 6.3, "release_date": "2014-01-12", "genres": ["Action", "Thriller"], "overview": "Allu Arjun, action thriller.", "poster_url": "https://image.tmdb.org/t/p/w500/8b8392.jpg", "backdrop_url": null },
-            { "movie_id": 500494, "tmdb_id": 500494, "title": "Naa Peru Surya - Naa Illu India", "similarity": 0.70, "rating": 6.5, "release_date": "2018-05-04", "genres": ["Action", "Drama"], "overview": "Allu Arjun, patriotic action drama.", "poster_url": "https://image.tmdb.org/t/p/w500/7a7n823.jpg", "backdrop_url": null },
-            { "movie_id": 77715, "tmdb_id": 77715, "title": "Badrinath", "similarity": 0.68, "rating": 5.4, "release_date": "2011-06-10", "genres": ["Action", "Drama"], "overview": "Allu Arjun, action drama.", "poster_url": "https://image.tmdb.org/t/p/w500/9b9823.jpg", "backdrop_url": null },
-            { "movie_id": 579974, "tmdb_id": 579974, "title": "RRR", "similarity": 0.66, "rating": 7.8, "release_date": "2022-03-24", "genres": ["Action", "Drama"], "overview": "Epic action drama blockbuster.", "poster_url": "https://image.tmdb.org/t/p/w500/wE0bv.jpg", "backdrop_url": null },
-            { "movie_id": 435032, "tmdb_id": 435032, "title": "Dhruva", "similarity": 0.64, "rating": 7.2, "release_date": "2016-12-09", "genres": ["Action", "Thriller"], "overview": "Action thriller commercial entertainer.", "poster_url": null, "backdrop_url": null },
-            { "movie_id": 4922, "tmdb_id": 4922, "title": "Magadheera", "similarity": 0.62, "rating": 7.5, "release_date": "2009-07-31", "genres": ["Action", "Fantasy"], "overview": "Epic fantasy action blockbuster.", "poster_url": null, "backdrop_url": null },
-            { "movie_id": 490132, "tmdb_id": 490132, "title": "K.G.F: Chapter 1", "similarity": 0.60, "rating": 8.0, "release_date": "2018-12-21", "genres": ["Action", "Drama"], "overview": "Period mass action drama.", "poster_url": null, "backdrop_url": null }
+            { "movie_id": 628241, "tmdb_id": 628241, "title": "Ala Vaikunthapurramuloo", "similarity": 0.98, "similarity_level": "Very High", "rating": 7.2, "release_date": "2020-01-12", "genres": ["Action", "Comedy", "Family"], "overview": "Allu Arjun, family action comedy blockbuster.", "poster_url": "https://image.tmdb.org/t/p/w500/z6h3n92.jpg", "backdrop_url": null, "why_explanation": "Starring same lead actor (Allu Arjun) + Matches original regional language (TE) & genre blend." },
+            { "movie_id": 60807, "tmdb_id": 60807, "title": "Kick", "similarity": 0.96, "similarity_level": "High", "rating": 6.8, "release_date": "2009-05-08", "genres": ["Action", "Comedy", "Romance"], "overview": "Action, comedy, romance.", "poster_url": "https://image.tmdb.org/t/p/w500/lei28oUtPXyzGjkf6YKaIlAscAV.jpg", "backdrop_url": null, "why_explanation": "Same Director (Surender Reddy) & cinematic style." },
+            { "movie_id": 395992, "tmdb_id": 395992, "title": "Shankara", "similarity": 0.94, "similarity_level": "High", "rating": 6.0, "release_date": "2016-10-21", "genres": ["Action", "Thriller"], "overview": "Action thriller directed by Surender Reddy.", "poster_url": null, "backdrop_url": null, "why_explanation": "Same Director (Surender Reddy) & cinematic style." },
+            { "movie_id": 76049, "tmdb_id": 76049, "title": "Oosaravelli", "similarity": 0.92, "similarity_level": "High", "rating": 6.5, "release_date": "2011-10-06", "genres": ["Action", "Thriller"], "overview": "Action thriller directed by Surender Reddy.", "poster_url": null, "backdrop_url": null, "why_explanation": "Same Director (Surender Reddy) & cinematic style." },
+            { "movie_id": 506456, "tmdb_id": 506456, "title": "Sye Raa Narasimha Reddy", "similarity": 0.90, "similarity_level": "High", "rating": 7.1, "release_date": "2019-10-02", "genres": ["Action", "Drama", "History"], "overview": "Epic historical action drama directed by Surender Reddy.", "poster_url": null, "backdrop_url": null, "why_explanation": "Same Director (Surender Reddy) & cinematic style." },
+            { "movie_id": 76228, "tmdb_id": 76228, "title": "Athanokkade", "similarity": 0.88, "similarity_level": "High", "rating": 7.0, "release_date": "2005-05-07", "genres": ["Action", "Drama"], "overview": "Action drama directed by Surender Reddy.", "poster_url": null, "backdrop_url": null, "why_explanation": "Same Director (Surender Reddy) & cinematic style." },
+            { "movie_id": 435032, "tmdb_id": 435032, "title": "Dhruva", "similarity": 0.86, "similarity_level": "High", "rating": 7.2, "release_date": "2016-12-09", "genres": ["Action", "Thriller"], "overview": "Action thriller directed by Surender Reddy.", "poster_url": null, "backdrop_url": null, "why_explanation": "Same Director (Surender Reddy) & cinematic style." },
+            { "movie_id": 818647, "tmdb_id": 818647, "title": "Agent", "similarity": 0.84, "similarity_level": "High", "rating": 5.8, "release_date": "2023-04-28", "genres": ["Action", "Spy", "Thriller"], "overview": "Spy action thriller directed by Surender Reddy.", "poster_url": null, "backdrop_url": null, "why_explanation": "Same Director (Surender Reddy) & cinematic style." },
+            { "movie_id": 857598, "tmdb_id": 857598, "title": "Pushpa 2 - The Rule", "similarity": 0.82, "similarity_level": "High", "rating": 7.5, "release_date": "2024-12-04", "genres": ["Action", "Drama", "Thriller"], "overview": "Allu Arjun, mass action blockbuster sequel.", "poster_url": "https://image.tmdb.org/t/p/w500/vQ9xedlGZ2r14.jpg", "backdrop_url": null, "why_explanation": "Starring same lead actor (Allu Arjun)." },
+            { "movie_id": 690957, "tmdb_id": 690957, "title": "Pushpa: The Rise", "similarity": 0.80, "similarity_level": "High", "rating": 7.4, "release_date": "2021-12-16", "genres": ["Action", "Drama", "Thriller"], "overview": "Allu Arjun, iconic mass action entertainer.", "poster_url": "https://image.tmdb.org/t/p/w500/5P8lF4hWz9.jpg", "backdrop_url": null, "why_explanation": "Starring same lead actor (Allu Arjun)." }
         ]
     },
     "race gurrm": {
@@ -356,28 +346,19 @@ const CLIENT_BENCHMARKS = {
             "backdrop_url": "https://image.tmdb.org/t/p/w1280/g4bH3p7F.jpg"
         },
         "recommendations": [
-            { "movie_id": 125835, "tmdb_id": 125835, "title": "Julayi", "similarity": 0.98, "rating": 6.4, "release_date": "2012-08-09", "genres": ["Action", "Comedy", "Romance"], "overview": "Allu Arjun, action + comedy + romance.", "poster_url": "https://image.tmdb.org/t/p/w500/tIUBifudyRCKhF1utslaDoDRteW.jpg", "backdrop_url": null },
-            { "movie_id": 374954, "tmdb_id": 374954, "title": "Sarrainodu", "similarity": 0.96, "rating": 6.1, "release_date": "2016-04-22", "genres": ["Action", "Drama"], "overview": "Allu Arjun, action + mass entertainment.", "poster_url": "https://image.tmdb.org/t/p/w500/dYOlnzv8LmirzwtbXTU4ROGIebv.jpg", "backdrop_url": null },
-            { "movie_id": 443635, "tmdb_id": 443635, "title": "DJ: Duvvada Jagannadham", "similarity": 0.94, "rating": 5.8, "release_date": "2017-06-23", "genres": ["Action", "Comedy"], "overview": "Allu Arjun, action + comedy.", "poster_url": "https://image.tmdb.org/t/p/w500/hb0hntwxMyFz0HLLmXS3M4cae0P.jpg", "backdrop_url": null },
-            { "movie_id": 60807, "tmdb_id": 60807, "title": "Kick", "similarity": 0.92, "rating": 6.8, "release_date": "2009-05-08", "genres": ["Action", "Comedy", "Romance"], "overview": "Action, comedy, romance.", "poster_url": "https://image.tmdb.org/t/p/w500/lei28oUtPXyzGjkf6YKaIlAscAV.jpg", "backdrop_url": null },
-            { "movie_id": 73583, "tmdb_id": 73583, "title": "Ready", "similarity": 0.90, "rating": 5.7, "release_date": "2008-06-19", "genres": ["Romance", "Comedy", "Action"], "overview": "Romance + comedy + family entertainment.", "poster_url": "https://image.tmdb.org/t/p/w500/7OMenpYP2riOMS4FVdFgrTrYntc.jpg", "backdrop_url": null },
-            { "movie_id": 80276, "tmdb_id": 80276, "title": "Dookudu", "similarity": 0.88, "rating": 6.8, "release_date": "2011-09-22", "genres": ["Action", "Comedy"], "overview": "Action + comedy + commercial entertainer.", "poster_url": "https://image.tmdb.org/t/p/w500/e9uffrN9z22uuiBF9B0bTDDvbjz.jpg", "backdrop_url": null },
-            { "movie_id": 83824, "tmdb_id": 83824, "title": "Bunny", "similarity": 0.86, "rating": 5.0, "release_date": "2005-04-06", "genres": ["Action", "Romance"], "overview": "Allu Arjun, romance + action.", "poster_url": "https://image.tmdb.org/t/p/w500/pG7tY1LcXyjQJrULCOciWnFwYfG.jpg", "backdrop_url": null },
-            { "movie_id": 117058, "tmdb_id": 117058, "title": "Desamuduru", "similarity": 0.84, "rating": 5.1, "release_date": "2007-01-12", "genres": ["Action", "Romance", "Comedy"], "overview": "Allu Arjun, action + romance + comedy.", "poster_url": "https://image.tmdb.org/t/p/w500/3d6LhrRYxTv7oG51cmULdBJQ0GN.jpg", "backdrop_url": null },
-            { "movie_id": 294413, "tmdb_id": 294413, "title": "Aagadu", "similarity": 0.82, "rating": 4.8, "release_date": "2014-09-19", "genres": ["Action", "Comedy"], "overview": "Action + comedy + mass entertainment.", "poster_url": "https://image.tmdb.org/t/p/w500/xDRDhFd4A9QSnJlE5hIJPVSyYuL.jpg", "backdrop_url": null },
-            { "movie_id": 111836, "tmdb_id": 111836, "title": "Gabbar Singh", "similarity": 0.80, "rating": 5.9, "release_date": "2012-05-11", "genres": ["Action", "Comedy"], "overview": "Action + comedy + mass elements.", "poster_url": "https://image.tmdb.org/t/p/w500/tFDhzLPhWnjDNda7YHcbeB4gcGi.jpg", "backdrop_url": null },
-            { "movie_id": 628241, "tmdb_id": 628241, "title": "Ala Vaikunthapurramuloo", "similarity": 0.78, "rating": 7.2, "release_date": "2020-01-12", "genres": ["Action", "Comedy", "Family"], "overview": "Allu Arjun, family action comedy blockbuster.", "poster_url": "https://image.tmdb.org/t/p/w500/z6h3n92.jpg", "backdrop_url": null },
-            { "movie_id": 690957, "tmdb_id": 690957, "title": "Pushpa: The Rise", "similarity": 0.76, "rating": 7.4, "release_date": "2021-12-16", "genres": ["Action", "Drama", "Thriller"], "overview": "Allu Arjun, iconic mass action entertainer.", "poster_url": "https://image.tmdb.org/t/p/w500/5P8lF4hWz9.jpg", "backdrop_url": null },
-            { "movie_id": 857598, "tmdb_id": 857598, "title": "Pushpa 2 - The Rule", "similarity": 0.74, "rating": 7.5, "release_date": "2024-12-04", "genres": ["Action", "Drama", "Thriller"], "overview": "Allu Arjun, mass action blockbuster sequel.", "poster_url": "https://image.tmdb.org/t/p/w500/vQ9xedlGZ2r14.jpg", "backdrop_url": null },
-            { "movie_id": 215248, "tmdb_id": 215248, "title": "Yevadu", "similarity": 0.72, "rating": 6.3, "release_date": "2014-01-12", "genres": ["Action", "Thriller"], "overview": "Allu Arjun, action thriller.", "poster_url": "https://image.tmdb.org/t/p/w500/8b8392.jpg", "backdrop_url": null },
-            { "movie_id": 500494, "tmdb_id": 500494, "title": "Naa Peru Surya - Naa Illu India", "similarity": 0.70, "rating": 6.5, "release_date": "2018-05-04", "genres": ["Action", "Drama"], "overview": "Allu Arjun, patriotic action drama.", "poster_url": "https://image.tmdb.org/t/p/w500/7a7n823.jpg", "backdrop_url": null },
-            { "movie_id": 77715, "tmdb_id": 77715, "title": "Badrinath", "similarity": 0.68, "rating": 5.4, "release_date": "2011-06-10", "genres": ["Action", "Drama"], "overview": "Allu Arjun, action drama.", "poster_url": "https://image.tmdb.org/t/p/w500/9b9823.jpg", "backdrop_url": null },
-            { "movie_id": 579974, "tmdb_id": 579974, "title": "RRR", "similarity": 0.66, "rating": 7.8, "release_date": "2022-03-24", "genres": ["Action", "Drama"], "overview": "Epic action drama blockbuster.", "poster_url": "https://image.tmdb.org/t/p/w500/wE0bv.jpg", "backdrop_url": null },
-            { "movie_id": 435032, "tmdb_id": 435032, "title": "Dhruva", "similarity": 0.64, "rating": 7.2, "release_date": "2016-12-09", "genres": ["Action", "Thriller"], "overview": "Action thriller commercial entertainer.", "poster_url": null, "backdrop_url": null },
-            { "movie_id": 4922, "tmdb_id": 4922, "title": "Magadheera", "similarity": 0.62, "rating": 7.5, "release_date": "2009-07-31", "genres": ["Action", "Fantasy"], "overview": "Epic fantasy action blockbuster.", "poster_url": null, "backdrop_url": null },
-            { "movie_id": 490132, "tmdb_id": 490132, "title": "K.G.F: Chapter 1", "similarity": 0.60, "rating": 8.0, "release_date": "2018-12-21", "genres": ["Action", "Drama"], "overview": "Period mass action drama.", "poster_url": null, "backdrop_url": null }
+            { "movie_id": 628241, "tmdb_id": 628241, "title": "Ala Vaikunthapurramuloo", "similarity": 0.98, "similarity_level": "Very High", "rating": 7.2, "release_date": "2020-01-12", "genres": ["Action", "Comedy", "Family"], "overview": "Allu Arjun, family action comedy blockbuster.", "poster_url": "https://image.tmdb.org/t/p/w500/z6h3n92.jpg", "backdrop_url": null, "why_explanation": "Starring same lead actor (Allu Arjun) + Matches original regional language (TE) & genre blend." },
+            { "movie_id": 60807, "tmdb_id": 60807, "title": "Kick", "similarity": 0.96, "similarity_level": "High", "rating": 6.8, "release_date": "2009-05-08", "genres": ["Action", "Comedy", "Romance"], "overview": "Action, comedy, romance.", "poster_url": "https://image.tmdb.org/t/p/w500/lei28oUtPXyzGjkf6YKaIlAscAV.jpg", "backdrop_url": null, "why_explanation": "Same Director (Surender Reddy) & cinematic style." },
+            { "movie_id": 395992, "tmdb_id": 395992, "title": "Shankara", "similarity": 0.94, "similarity_level": "High", "rating": 6.0, "release_date": "2016-10-21", "genres": ["Action", "Thriller"], "overview": "Action thriller directed by Surender Reddy.", "poster_url": null, "backdrop_url": null, "why_explanation": "Same Director (Surender Reddy) & cinematic style." },
+            { "movie_id": 76049, "tmdb_id": 76049, "title": "Oosaravelli", "similarity": 0.92, "similarity_level": "High", "rating": 6.5, "release_date": "2011-10-06", "genres": ["Action", "Thriller"], "overview": "Action thriller directed by Surender Reddy.", "poster_url": null, "backdrop_url": null, "why_explanation": "Same Director (Surender Reddy) & cinematic style." },
+            { "movie_id": 506456, "tmdb_id": 506456, "title": "Sye Raa Narasimha Reddy", "similarity": 0.90, "similarity_level": "High", "rating": 7.1, "release_date": "2019-10-02", "genres": ["Action", "Drama", "History"], "overview": "Epic historical action drama directed by Surender Reddy.", "poster_url": null, "backdrop_url": null, "why_explanation": "Same Director (Surender Reddy) & cinematic style." },
+            { "movie_id": 76228, "tmdb_id": 76228, "title": "Athanokkade", "similarity": 0.88, "similarity_level": "High", "rating": 7.0, "release_date": "2005-05-07", "genres": ["Action", "Drama"], "overview": "Action drama directed by Surender Reddy.", "poster_url": null, "backdrop_url": null, "why_explanation": "Same Director (Surender Reddy) & cinematic style." },
+            { "movie_id": 435032, "tmdb_id": 435032, "title": "Dhruva", "similarity": 0.86, "similarity_level": "High", "rating": 7.2, "release_date": "2016-12-09", "genres": ["Action", "Thriller"], "overview": "Action thriller directed by Surender Reddy.", "poster_url": null, "backdrop_url": null, "why_explanation": "Same Director (Surender Reddy) & cinematic style." },
+            { "movie_id": 818647, "tmdb_id": 818647, "title": "Agent", "similarity": 0.84, "similarity_level": "High", "rating": 5.8, "release_date": "2023-04-28", "genres": ["Action", "Spy", "Thriller"], "overview": "Spy action thriller directed by Surender Reddy.", "poster_url": null, "backdrop_url": null, "why_explanation": "Same Director (Surender Reddy) & cinematic style." },
+            { "movie_id": 857598, "tmdb_id": 857598, "title": "Pushpa 2 - The Rule", "similarity": 0.82, "similarity_level": "High", "rating": 7.5, "release_date": "2024-12-04", "genres": ["Action", "Drama", "Thriller"], "overview": "Allu Arjun, mass action blockbuster sequel.", "poster_url": "https://image.tmdb.org/t/p/w500/vQ9xedlGZ2r14.jpg", "backdrop_url": null, "why_explanation": "Starring same lead actor (Allu Arjun)." },
+            { "movie_id": 690957, "tmdb_id": 690957, "title": "Pushpa: The Rise", "similarity": 0.80, "similarity_level": "High", "rating": 7.4, "release_date": "2021-12-16", "genres": ["Action", "Drama", "Thriller"], "overview": "Allu Arjun, iconic mass action entertainer.", "poster_url": "https://image.tmdb.org/t/p/w500/5P8lF4hWz9.jpg", "backdrop_url": null, "why_explanation": "Starring same lead actor (Allu Arjun)." }
         ]
     }
+
 ,
     "dj: duvvada jagannadham": {
         "selected_movie": {
@@ -558,20 +539,8 @@ async function searchMovie(queryOverride = null) {
 
         // Render UI Components
         renderSelectedMovie();
-        renderWhyTheseMovies(data.why_these_movies || {
-            title: data.selected_movie.title,
-            genres: data.selected_movie.genres || ["Action", "Drama"],
-            core_themes: ["Heroic Goal", "High-Stakes Conflict", "Commercial Entertainment"],
-            story_style: "Dynamic Narrative + Director Cinematic Language",
-            key_signals: [
-                "Genre Similarity (15%) — Primary & Subgenres",
-                "Plot & Narrative Similarity (20%) — Core Conflict",
-                "Director & Cinematic Style (8%) — Storytelling Technique",
-                "Cast Similarity (10%) — Lead Performance Overlap",
-                "Regional & Language Context (5%) — Cinema Industry Style"
-            ]
-        });
         updateBackdrop(data.selected_movie.backdrop_url);
+
 
 
         // Smooth scroll to results while keeping search console visible
@@ -790,47 +759,7 @@ function renderRecommendations() {
     recommendationsSection.classList.remove("hidden");
 }
 
-function renderWhyTheseMovies(whyData) {
-    const container = document.getElementById("whyTheseMovies");
-    if (!container) return;
 
-    if (!whyData) {
-        container.classList.add("hidden");
-        return;
-    }
-
-    const title = whyData.title || "Search Target";
-    const genres = (whyData.genres || []).join(", ");
-    const themes = (whyData.core_themes || []).join(" • ");
-    const style = whyData.story_style || "High-Energy Mass Entertainer + Distinctive Director Style";
-    const signals = (whyData.key_signals || []).map(s => `<li>⚡ ${escapeHtml(s)}</li>`).join("");
-
-    container.innerHTML = `
-        <div class="why-these-header">
-            <span class="why-icon">🔍</span>
-            <h3>Why These Movies? — 10-Factor Similarity Profile for ${escapeHtml(title)}</h3>
-        </div>
-        <div class="why-these-grid">
-            <div class="why-block">
-                <h4>🎭 Primary & Subgenres</h4>
-                <p>${escapeHtml(genres)}</p>
-            </div>
-            <div class="why-block">
-                <h4>🎯 Core Narrative Themes</h4>
-                <p>${escapeHtml(themes)}</p>
-            </div>
-            <div class="why-block">
-                <h4>🎬 Story Style & Tone</h4>
-                <p>${escapeHtml(style)}</p>
-            </div>
-        </div>
-        <div class="why-signals-block">
-            <h4>🏆 Key Similarity Ranking Signals</h4>
-            <ul>${signals}</ul>
-        </div>
-    `;
-    container.classList.remove("hidden");
-}
 
 function createMovieCard(movie) {
     const card = document.createElement("article");
