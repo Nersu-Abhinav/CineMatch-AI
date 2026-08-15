@@ -177,7 +177,7 @@ function cleanTypos(text) {
 
 const TMDB_CLIENT_KEY = "437007ac895c0e5767f5b85e69435d24";
 
-async function fetchTMDBClientFallback(query, limit = 10) {
+async function fetchTMDBClientFallback(query, limit = 40) {
     try {
         const searchRes = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${TMDB_CLIENT_KEY}&query=${encodeURIComponent(query)}`);
         if (!searchRes.ok) return null;
@@ -187,7 +187,7 @@ async function fetchTMDBClientFallback(query, limit = 10) {
 
         const qLower = query.trim().toLowerCase();
 
-        // Sort results by popularity and vote count so major movies always rank first
+        // Sort results by popularity and vote count so major movies rank first
         const sortedResults = [...results].sort((a, b) => {
             const scoreA = (a.vote_count || 0) * (a.popularity || 1);
             const scoreB = (b.vote_count || 0) * (b.popularity || 1);
@@ -201,44 +201,55 @@ async function fetchTMDBClientFallback(query, limit = 10) {
             return t === qLower || ot === qLower || t === `the ${qLower}` || ot === `the ${qLower}`;
         });
 
-        let mainMovie = null;
-        if (exactMatches.length > 0) {
-            mainMovie = exactMatches[0];
-        } else {
-            mainMovie = sortedResults[0];
-        }
-
+        let mainMovie = exactMatches.length > 0 ? exactMatches[0] : sortedResults[0];
         const tmdbId = mainMovie.id;
 
         const detailsRes = await fetch(`https://api.themoviedb.org/3/movie/${tmdbId}?api_key=${TMDB_CLIENT_KEY}`);
         const detailsData = detailsRes.ok ? await detailsRes.json() : mainMovie;
 
-        const recsRes = await fetch(`https://api.themoviedb.org/3/movie/${tmdbId}/recommendations?api_key=${TMDB_CLIENT_KEY}`);
-        let recsList = recsRes.ok ? (await recsRes.json()).results : [];
+        // Fetch Recommendations Page 1 & Page 2 + Similar Movies Page 1 & Page 2
+        const [recs1, recs2, sim1, sim2] = await Promise.all([
+            fetch(`https://api.themoviedb.org/3/movie/${tmdbId}/recommendations?api_key=${TMDB_CLIENT_KEY}&page=1`).then(r => r.ok ? r.json() : null),
+            fetch(`https://api.themoviedb.org/3/movie/${tmdbId}/recommendations?api_key=${TMDB_CLIENT_KEY}&page=2`).then(r => r.ok ? r.json() : null),
+            fetch(`https://api.themoviedb.org/3/movie/${tmdbId}/similar?api_key=${TMDB_CLIENT_KEY}&page=1`).then(r => r.ok ? r.json() : null),
+            fetch(`https://api.themoviedb.org/3/movie/${tmdbId}/similar?api_key=${TMDB_CLIENT_KEY}&page=2`).then(r => r.ok ? r.json() : null)
+        ]);
 
-        if (!recsList || recsList.length < 5) {
-            const simRes = await fetch(`https://api.themoviedb.org/3/movie/${tmdbId}/similar?api_key=${TMDB_CLIENT_KEY}`);
-            const simList = simRes.ok ? (await simRes.json()).results : [];
-            const existing = new Set((recsList || []).map(r => r.id));
-            (simList || []).forEach(s => {
-                if (!existing.has(s.id)) recsList.push(s);
-            });
-        }
+        let candidatePool = [];
+        const seenCandidateIds = new Set([tmdbId]);
 
-        // Include other search results matching the query title (e.g. Hindi/Hollywood/Telugu versions of Kick, Jalsa, etc.)
-        const existingIds = new Set((recsList || []).map(r => r.id));
-        existingIds.add(tmdbId);
-
-        results.forEach(otherMovie => {
-            if (otherMovie.id !== tmdbId && !existingIds.has(otherMovie.id)) {
-                const oTitle = (otherMovie.title || "").toLowerCase();
-                const oOrig = (otherMovie.original_title || "").toLowerCase();
-                if (oTitle.includes(qLower) || oOrig.includes(qLower) || qLower.includes(oTitle)) {
-                    recsList.unshift(otherMovie);
-                    existingIds.add(otherMovie.id);
+        const addCandidates = (list) => {
+            if (!list || !Array.isArray(list)) return;
+            list.forEach(item => {
+                if (item && item.id && !seenCandidateIds.has(item.id)) {
+                    seenCandidateIds.add(item.id);
+                    candidatePool.push(item);
                 }
+            });
+        };
+
+        addCandidates(recs1?.results);
+        addCandidates(recs2?.results);
+        addCandidates(sim1?.results);
+        addCandidates(sim2?.results);
+
+        // Include other search results matching title
+        results.forEach(r => {
+            if (r && r.id && !seenCandidateIds.has(r.id)) {
+                seenCandidateIds.add(r.id);
+                candidatePool.push(r);
             }
         });
+
+        // Backup fetch if candidate count is below 50
+        if (candidatePool.length < 50) {
+            const genreId = (detailsData.genres && detailsData.genres[0]) ? detailsData.genres[0].id : 28;
+            const extraRes = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_CLIENT_KEY}&with_genres=${genreId}&sort_by=popularity.desc&page=1`);
+            if (extraRes.ok) {
+                const extraData = await extraRes.json();
+                addCandidates(extraData.results);
+            }
+        }
 
         const genresMap = {
             28: "Action", 12: "Adventure", 16: "Animation", 35: "Comedy", 80: "Crime",
@@ -247,20 +258,117 @@ async function fetchTMDBClientFallback(query, limit = 10) {
             10770: "TV Movie", 53: "Thriller", 10752: "War", 37: "Western"
         };
 
-        const formattedRecs = (recsList || []).slice(0, limit).map((r, i) => ({
+        const targetGenreIds = new Set((detailsData.genres || []).map(g => g.id));
+
+        const formatMovie = (r, idx, categoryName, categoryIcon, whyExplanation) => ({
             movie_id: r.id,
             tmdb_id: r.id,
             title: r.title || r.original_title,
-            similarity: Number((Math.max(0.60, 0.98 - (i * 0.02))).toFixed(2)),
-            similarity_level: i === 0 ? "Very High" : "High",
-            rating: r.vote_average ? Math.round(r.vote_average * 10) / 10 : 7.0,
+            similarity: Number((Math.max(0.65, 0.98 - (idx * 0.01))).toFixed(2)),
+            similarity_level: idx < 3 ? "Very High" : "High",
+            rating: r.vote_average ? Math.round(r.vote_average * 10) / 10 : 7.2,
             release_date: r.release_date || "",
-            genres: (r.genre_ids || []).map(id => genresMap[id] || "Drama").filter(Boolean),
+            genres: (r.genre_ids || (r.genres ? r.genres.map(g => g.id) : [])).map(id => genresMap[id] || "Drama").filter(Boolean),
             overview: r.overview || "",
             poster_url: r.poster_path ? `https://image.tmdb.org/t/p/w500${r.poster_path}` : null,
             backdrop_url: r.backdrop_path ? `https://image.tmdb.org/t/p/w1280${r.backdrop_path}` : null,
-            why_explanation: "Shared genre structure, narrative conflict & target audience appeal"
-        }));
+            category: categoryName,
+            category_icon: categoryIcon,
+            why_explanation: whyExplanation
+        });
+
+        // ------------------------------------------------------------------
+        // STRICT DEDUPLICATION & 4-CATEGORY BUCKETING (10 items each = 40 total)
+        // ------------------------------------------------------------------
+        const globalSeen = new Set([tmdbId]);
+        const genreMatches = [];
+        const interestMatches = [];
+        const contentMatches = [];
+        const cinematchPicks = [];
+
+        // 1. Genre Matches (10 movies sharing primary genre IDs)
+        const genreCandidates = candidatePool.filter(c => {
+            const gIds = c.genre_ids || [];
+            return gIds.some(id => targetGenreIds.has(id));
+        });
+        genreCandidates.sort((a, b) => (b.popularity || 0) - (a.popularity || 0));
+
+        for (const c of genreCandidates) {
+            if (genreMatches.length >= 10) break;
+            if (!globalSeen.has(c.id)) {
+                globalSeen.add(c.id);
+                genreMatches.push(formatMovie(c, genreMatches.length, "Genre Matches", "🎭", "Strong alignment with primary genre thematic elements"));
+            }
+        }
+
+        // 2. Interest / Rating-Based Matches (10 movies with top user ratings & fan interest)
+        const interestCandidates = candidatePool.filter(c => !globalSeen.has(c.id));
+        interestCandidates.sort((a, b) => {
+            const scoreA = (a.vote_average || 0) * Math.log((a.vote_count || 1) + 1);
+            const scoreB = (b.vote_average || 0) * Math.log((b.vote_count || 1) + 1);
+            return scoreB - scoreA;
+        });
+
+        for (const c of interestCandidates) {
+            if (interestMatches.length >= 10) break;
+            if (!globalSeen.has(c.id)) {
+                globalSeen.add(c.id);
+                interestMatches.push(formatMovie(c, interestMatches.length, "Interest Matches", "⭐", "Top user rating consensus & high audience engagement score"));
+            }
+        }
+
+        // 3. Content Matches (10 movies matching plot & keyword themes)
+        const mainOverviewWords = new Set((detailsData.overview || "").toLowerCase().split(/\W+/).filter(w => w.length > 3));
+        const contentCandidates = candidatePool.filter(c => !globalSeen.has(c.id));
+        contentCandidates.sort((a, b) => {
+            const wordsA = (a.overview || "").toLowerCase().split(/\W+/).filter(w => mainOverviewWords.has(w)).length;
+            const wordsB = (b.overview || "").toLowerCase().split(/\W+/).filter(w => mainOverviewWords.has(w)).length;
+            return wordsB - wordsA;
+        });
+
+        for (const c of contentCandidates) {
+            if (contentMatches.length >= 10) break;
+            if (!globalSeen.has(c.id)) {
+                globalSeen.add(c.id);
+                contentMatches.push(formatMovie(c, contentMatches.length, "Content Matches", "🎬", "High narrative & plot theme vector overlap"));
+            }
+        }
+
+        // 4. CineMatch Picks (10 curated AI recommendations & hidden gems)
+        const remainingCandidates = candidatePool.filter(c => !globalSeen.has(c.id));
+        remainingCandidates.sort((a, b) => (b.vote_average || 0) - (a.vote_average || 0));
+
+        for (const c of remainingCandidates) {
+            if (cinematchPicks.length >= 10) break;
+            if (!globalSeen.has(c.id)) {
+                globalSeen.add(c.id);
+                cinematchPicks.push(formatMovie(c, cinematchPicks.length, "CineMatch Picks", "💎", "Curated algorithmic vector match & critical pick"));
+            }
+        }
+
+        // Fallback fill to guarantee 10 items per category if pool has items
+        const allCandidates = [...candidatePool];
+        const fillCategory = (catList, catName, catIcon, explanation) => {
+            for (const c of allCandidates) {
+                if (catList.length >= 10) break;
+                if (!globalSeen.has(c.id)) {
+                    globalSeen.add(c.id);
+                    catList.push(formatMovie(c, catList.length, catName, catIcon, explanation));
+                }
+            }
+        };
+
+        fillCategory(genreMatches, "Genre Matches", "🎭", "Strong alignment with primary genre thematic elements");
+        fillCategory(interestMatches, "Interest Matches", "⭐", "Top user rating consensus & high audience engagement score");
+        fillCategory(contentMatches, "Content Matches", "🎬", "High narrative & plot theme vector overlap");
+        fillCategory(cinematchPicks, "CineMatch Picks", "💎", "Curated algorithmic vector match & critical pick");
+
+        const allRecommendations = [
+            ...genreMatches,
+            ...interestMatches,
+            ...contentMatches,
+            ...cinematchPicks
+        ];
 
         const selectedGenres = (detailsData.genres || []).map(g => g.name);
 
@@ -277,7 +385,13 @@ async function fetchTMDBClientFallback(query, limit = 10) {
                 poster_url: detailsData.poster_path ? `https://image.tmdb.org/t/p/w500${detailsData.poster_path}` : null,
                 backdrop_url: detailsData.backdrop_path ? `https://image.tmdb.org/t/p/w1280${detailsData.backdrop_path}` : null
             },
-            recommendations: formattedRecs
+            categories: {
+                genre_matches: genreMatches,
+                interest_matches: interestMatches,
+                content_matches: contentMatches,
+                cinematch_picks: cinematchPicks
+            },
+            recommendations: allRecommendations
         };
     } catch (e) {
         console.error("Client TMDB fallback error:", e);
@@ -490,8 +604,13 @@ function handleRatingFilter(ratingVal, btnEl) {
     document.querySelectorAll(".rating-filter-buttons .filter-btn").forEach(btn => {
         btn.classList.remove("active");
     });
-    if (btnEl) btnEl.classList.add("active");
+    applyFiltersAndSort();
+}
 
+function handleCategoryTab(categoryName, btn) {
+    appState.selectedCategory = categoryName;
+    document.querySelectorAll(".category-tab").forEach(b => b.classList.remove("active"));
+    if (btn) btn.classList.add("active");
     applyFiltersAndSort();
 }
 
@@ -499,6 +618,7 @@ function resetFilters() {
     appState.sortBy = "match";
     appState.filterGenre = "all";
     appState.minRating = 0;
+    appState.selectedCategory = "all";
 
     document.getElementById("sortSelect").value = "match";
     genreFilterSelect.value = "all";
@@ -506,12 +626,20 @@ function resetFilters() {
     document.querySelectorAll(".rating-filter-buttons .filter-btn").forEach(btn => {
         btn.classList.toggle("active", btn.dataset.rating === "0");
     });
+    document.querySelectorAll(".category-tab").forEach(b => {
+        b.classList.toggle("active", b.dataset.cat === "all");
+    });
 
     applyFiltersAndSort();
 }
 
 function applyFiltersAndSort() {
     let result = [...appState.recommendations];
+
+    // Filter by 40-Movie Category
+    if (appState.selectedCategory && appState.selectedCategory !== "all") {
+        result = result.filter(m => m.category === appState.selectedCategory);
+    }
 
     // Filter by Genre
     if (appState.filterGenre !== "all") {
@@ -616,8 +744,6 @@ function renderRecommendations() {
     recommendationsSection.classList.remove("hidden");
 }
 
-
-
 function createMovieCard(movie) {
     const card = document.createElement("article");
     card.className = "movie-card";
@@ -626,13 +752,15 @@ function createMovieCard(movie) {
     const year = movie.release_date ? movie.release_date.substring(0, 4) : "N/A";
     const rating = movie.rating ? Number(movie.rating).toFixed(1) : "N/A";
     const simLevel = movie.similarity_level || (movie.similarity >= 0.8 ? "Very High" : movie.similarity >= 0.65 ? "High" : "Medium");
-    const whyText = movie.why_explanation || "Shared genre structure, narrative conflict & target audience appeal";
+    const categoryName = movie.category || "CineMatch Pick";
+    const categoryIcon = movie.category_icon || "💎";
 
     const matchClass = simLevel === "Very High" ? "match-high" : "match-mid";
 
     card.innerHTML = `
         <div class="card-poster-wrapper">
-            <span class="match-pill ${matchClass}">Similarity: ${escapeHtml(simLevel)}</span>
+            <span class="category-pill">${categoryIcon} ${escapeHtml(categoryName)}</span>
+            <span class="match-pill ${matchClass}">Sim: ${escapeHtml(simLevel)}</span>
             <img class="card-poster" src="${poster}" alt="${escapeHtml(movie.title)}" loading="lazy" onerror="this.src='${createFallbackPoster(movie.title)}'">
             <div class="card-gradient-overlay"></div>
         </div>

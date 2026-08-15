@@ -69,9 +69,9 @@ def recommend(
     ),
 
     limit: int = Query(
-        10,
+        40,
         ge=1,
-        le=20
+        le=50
     )
 ):
 
