@@ -1,9 +1,9 @@
 <div align="center">
 
-# 🎬 CineMatch AI — Ultra-Premium Latent Vector Movie Discovery Matrix
+# 🎬 CineMatch AI — Ultra-Premium Machine Learning Movie Recommendation Platform
 
 <a href="https://readme-typing-svg.herokuapp.com">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Outfit&weight=800&size=22&duration=2000&pause=600&color=F5C518&center=true&vCenter=true&width=900&lines=%F0%9F%8F%AC+CINEMATCH+AI+%E2%80%94+ULTRA-PREMIUM+LATENT+VECTOR+DISCOVERY+HUB;%F0%9F%8C%8C+High-Dimensional+Sparse+Matrix+Cosine+Similarity+Engine;%F0%9F%8E%AC+Strict+Language-Isolated+Regional+%26+Global+Recommendations;%F0%9F%A7%A0+Smart+Query+Auto-Correction+%26+Compound+Title+Normalizer;%E2%9C%A8+Live+TMDB+v3+Metadata+Integration+%26+4K+Poster+Enrichment" alt="CineMatch AI Typing Banner" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Outfit&weight=800&size=22&duration=2000&pause=600&color=F5C518&center=true&vCenter=true&width=900&lines=%F0%9F%8F%AC+CINEMATCH+AI+%E2%80%94+MACHINE+LEARNING+MOVIE+RECOMMENDATION+ENGINE;%F0%9F%8C%8C+Multi-Perspective+Collaborative+%26+Content+Vector+Discovery;%F0%9F%8E%AC+Strict+Language-Isolated+Regional+%26+Global+Recommendations;%F0%9F%A7%A0+Smart+Query+Auto-Correction+%26+Compound+Title+Normalizer;%E2%9C%A8+Live+TMDB+v3+Metadata+Integration+%26+4K+Poster+Enrichment" alt="CineMatch AI Typing Banner" />
 </a>
 
 <br><br>
@@ -29,227 +29,374 @@
 
 <br><br>
 
-[ 🌐 **Live Application** ](https://nersu-abhinav.github.io/CineMatch-AI/) • [ 📖 **What It Does** ](#-what-cinematch-ai-does) • [ ✨ **Core Feature Architecture** ](#-core-feature-architecture) • [ 🔄 **End-to-End System Flow** ](#-end-to-end-system-flow) • [ 📊 **Datasets & ML Engine** ](#-datasets--machine-learning-engine) • [ 🛠️ **Tech Stack** ](#%EF%B8%8F-technology-stack) • [ 🚀 **Quick Start** ](#-quick-start-guide)
+[ 🌐 **Live Application** ](https://nersu-abhinav.github.io/CineMatch-AI/) • [ 🚀 **Project Overview** ](#-project-overview) • [ ✨ **Features** ](#-features) • [ 🧠 **ML Architecture** ](#-machine-learning-architecture) • [ 🧮 **Algorithms** ](#-recommendation-algorithms) • [ 🔄 **Workflow** ](#-recommendation-workflow) • [ 🛠️ **Tech Stack** ](#%EF%B8%8F-technology-stack) • [ 🚀 **Quick Start** ](#-quick-start--installation)
 
 ---
 
 </div>
 
 > [!IMPORTANT]
-> 🚀 **LIVE DEMO AVAILABLE**: Try CineMatch AI instantly in your browser at **[https://nersu-abhinav.github.io/CineMatch-AI/](https://nersu-abhinav.github.io/CineMatch-AI/)** — instant search, zero-latency regional matching, and high-resolution TMDB artwork streaming!
+> 🚀 **LIVE DEMO AVAILABLE**: Access the fully deployed glassmorphic application directly in your browser at **[https://nersu-abhinav.github.io/CineMatch-AI/](https://nersu-abhinav.github.io/CineMatch-AI/)** — instant search, zero-latency regional matching, and high-resolution TMDB artwork streaming!
 
 ---
 
-## 📖 What CineMatch AI Does
+## 🚀 Project Overview
 
-**CineMatch AI** is a next-generation, high-dimensional movie recommendation platform designed to solve the common pitfalls of modern content discovery: irrelevance, cross-language noise, unhandled typos, and vague qualitative match ratings.
+Traditional movie recommendation systems often rely on a single recommendation technique (either pure collaborative filtering or basic genre filtering). **CineMatch AI** is an intelligent movie recommendation platform that combines multiple machine learning strategies—collaborative filtering, content-based TF-IDF vectorization, genre preference analysis, rating-weighted $k$-NN indexing, and TMDB API metadata—to provide a comprehensive, multi-perspective recommendation suite through an interactive web application.
 
-By fusing **Item-Item Collaborative Filtering** ($k$-Nearest Neighbors across a 29,000,000+ rating matrix), **TF-IDF Natural Language Overview Processing**, and **Real-Time TMDB v3 API Isolation**, CineMatch AI transforms any user query into a hyper-personalized, 4-tier recommendation suite.
+Rather than relying on a single recommendation algorithm, CineMatch AI processes user search queries and rating inputs through four specialized recommendation vectors:
 
-### Key Problem Statements Solved:
-
-1. **Compound & Unformatted Query Ingestion**:
-   Users frequently type concatenated titles without spaces (e.g. `racegurram`, `thedarkknight`, `agentsaisrinivasatreya`). CineMatch AI features an automated **Compound Query Normalizer** (`normalizeMovieQuery`) that maps unformatted inputs to canonical titles before executing recommendations, guaranteeing 100% recommendation parity across all search variations.
-
-2. **Strict Regional Language Isolation**:
-   When users search for regional films (e.g. Telugu cinema like *Race Gurram*, *Julayi*, *Pushpa*), standard recommendation APIs often return unrelated foreign films. CineMatch AI enforces **Strict Language Isolation** (`original_language` filtering), ensuring 100% regional and linguistic consistency with zero foreign language leakage.
-
-3. **Mathematical Match Scoring**:
-   Replaces arbitrary text tags (e.g. "Very High Match") with exact, vector-derived percentage scores (**`98% Match`**, **`95% Match`**, **`88% Match`**) computed directly from cosine similarity metrics.
-
-4. **Multi-Category Vector Breakdown**:
-   Organizes candidate recommendations into 4 dedicated vector discovery spaces:
-   - 🎭 **Genre Matches**: Shared primary classification, character tropes & thematic style.
-   - ⭐ **Interest Matches**: High audience rating consensus & user review popularity.
-   - 🎬 **Content Matches**: Plot theme, storyline & narrative vector overlap.
-   - 💎 **CineMatch AI Picks**: Algorithmic vector proximity recommendations.
+$$\text{Final Output Matrix} = \begin{cases} \text{Genre Matches} & \rightarrow 10 \text{ Movies} \\ \text{Interest Matches} & \rightarrow 10 \text{ Movies} \\ \text{Content Matches} & \rightarrow 10 \text{ Movies} \\ \text{CineMatch Picks} & \rightarrow 10 \text{ Movies} \end{cases} \quad \Longrightarrow \quad \mathbf{40 \text{ Total Deduplicated Recommendations}}$$
 
 ---
 
-## ✨ Core Feature Architecture
+## ✨ Features
 
-<table width="100%">
-  <tr>
-    <td width="50%">
-      <h3>🌐 Strict Language Isolation</h3>
-      <p>Enforces <code>original_language</code> isolation across candidate recommendation pools. Searching a Telugu film returns 100% Indian regional blockbusters (<i>Julayi</i>, <i>Magadheera</i>, <i>Pushpa</i>, <i>Ala Vaikunthapurramuloo</i>, <i>Sarrainodu</i>, <i>Eega</i>) with zero English leakage.</p>
-    </td>
-    <td width="50%">
-      <h3>🧠 Smart Compound Title Normalizer</h3>
-      <p>Built-in query normalization engine maps merged inputs (e.g. <code>racegurram</code> &rarr; <b>Race Gurram</b>, <code>agentsaisrinivasatreya</code> &rarr; <b>Agent Sai Srinivasa Athreya</b>), ensuring identical search result vectors regardless of spacing or capitalization.</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      <h3>📊 Exact Numerical Percentage Badges</h3>
-      <p>Replaces qualitative tags with dynamic match percentages computed from latent cosine vector distance formulas (e.g. <b>98% Match</b>, <b>95% Match</b>, <b>92% Match</b>).</p>
-    </td>
-    <td width="50%">
-      <h3>🍿 4-Tier Multi-Vector Discovery Hub</h3>
-      <p>Distributes recommendations across 4 distinct algorithmic dimensions: <b>Genre Matches</b>, <b>Interest Matches</b>, <b>Content Matches</b>, and <b>CineMatch Algorithmic Picks</b>.</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      <h3>🎬 Ultra-Premium Cinema Modal</h3>
-      <p>Expands any movie card into a cinema-level glassmorphic modal window featuring high-res TMDB poster art, key statistics (Match %, User Consensus, Original Language), and vertical flex alignment with zero empty space.</p>
-    </td>
-    <td width="50%">
-      <h3>⚡ Dual-Engine Asynchronous Fallback</h3>
-      <p>Seamless real-time switching between the live TMDB REST API v3 and an offline high-precision standalone regional benchmark database for 100% zero-downtime reliability.</p>
-    </td>
-  </tr>
-</table>
+### 🎥 Movie Discovery & Smart Search
+- **Smart Compound Title Normalizer (`normalizeMovieQuery`)**: Automatically parses merged or concatenated queries (e.g. `racegurram` $\rightarrow$ **Race Gurram**, `thedarkknight` $\rightarrow$ **The Dark Knight**, `agentsaisrinivasatreya` $\rightarrow$ **Agent Sai Srinivasa Athreya**), guaranteeing 100% recommendation parity across all search variations.
+- **Strict Language Isolation**: Enforces `original_language` isolation (Telugu queries return 100% Indian regional blockbusters like *Julayi*, *Magadheera*, *Pushpa*, *Sarrainodu*, *Eega* with zero foreign language leakage).
+- **Live Search As You Type**: Instant, case-insensitive partial keyword matching with maximum 10 real-time suggestions and poster artwork.
+- **Top Featured Showcase**: Curated top 25 featured movies with 4K artwork and instant vector discovery.
+
+### ⭐ User Preference & Rating Engine
+- Select movies from search results or featured catalogs.
+- Provide rating inputs (1 to 5 stars) to weight similarity vectors.
+- Dynamic numerical match percentages (**`98% Match`**, **`95% Match`**, **`92% Match`**) computed directly from latent cosine distance metrics.
+
+### 🤖 Multi-Perspective Recommendation Engine
+- **Genre Matches**: Recommendations driven by accumulated user genre preference scores.
+- **Interest Matches**: Rating-weighted $k$-Nearest Neighbors ($k$-NN) collaborative representation.
+- **Content Matches**: TF-IDF natural language plot summary & keyword vector cosine similarity.
+- **CineMatch Picks**: Curated hybrid multi-vector algorithmic recommendations.
+- **Deduplication Matrix**: Automated hash-set filtering to guarantee 40 unique candidate recommendations.
+
+### 🖼️ On-Demand Poster Resolution & Caching
+- **Zero Bulk Downloading**: Posters are fetched on-demand strictly for displayed movies, avoiding unnecessary network downloads for the entire 62,000+ MovieLens catalog.
+- **TMDB API v3 Integration**: Live poster path resolution with high-res fallbacks and local cache lookups.
+
+### ⚡ Ultra-Premium Web Application
+- Asynchronous FastAPI backend REST endpoints.
+- Pure HTML5 / Vanilla CSS3 / Vanilla ES6+ JS Single Page Application (SPA).
+- Dark Mode Glassmorphic Design System with HSL color tokens, gold micro-interactions, responsive grid/list switcher, and expanded cinema modal windows.
 
 ---
 
-## 🔄 End-to-End System Flow
+## 🧠 Machine Learning Architecture
 
-The diagram below illustrates the detailed execution lifecycle of a user request inside CineMatch AI, from raw input ingestion to high-dimensional similarity math and DOM rendering:
+CineMatch AI integrates multiple machine learning techniques across a unified preprocessing, training, and inference pipeline:
 
-```mermaid
-flowchart TD
-    A[👤 User Inputs Search Query e.g. 'racegurram'] --> B[🧠 Smart Query Normalizer - normalizeMovieQuery]
-    B --> C{Canonical Query Resolved?}
-    C -->|Yes e.g. 'Race Gurram'| D[⚡ Initiate Asynchronous Multi-Pass Pipeline]
-    C -->|No| D
-
-    D --> E{TMDB API Online?}
-    
-    %% Online Branch
-    E -->|Yes| F[🎬 Fetch Target Movie Metadata via TMDB REST API]
-    F --> G[Extract original_language e.g. 'te' & Primary Genres]
-    G --> H[Query /movie/id/recommendations & /discover/movie]
-    H --> I[Filter Candidates by Strict Language Isolation original_language == 'te']
-    
-    %% Offline Branch
-    E -->|No / Fallback| J[💾 Query Standalone High-Precision Regional Database]
-    J --> K[Filter Offline Catalog by Strict Target Language]
-
-    %% Vector Scoring & Categorization
-    I --> L[📐 Compute Latent Vector Cosine Distance & Match % Score]
-    K --> L
-
-    L --> M[Partition Recommendations into 4 Discovery Tiers]
-    M --> N1[🎭 Genre Matches]
-    M --> N2[⭐ Interest Matches]
-    M --> N3[🎬 Content Matches]
-    M --> N4[💎 CineMatch AI Picks]
-
-    N1 --> O[🎨 Render Ultra-Premium Grid / List UI with 98% Match Badges]
-    N2 --> O
-    N3 --> O
-    N4 --> O
-
-    O --> P[👤 User Clicks Movie Card]
-    P --> Q[🖼️ Open Cinema Modal Popup with Dynamic Event Listener & Key Stats Grid]
+```
+MovieLens 29M+ Ratings Matrix & TMDB Corpus
+                   │
+                   ▼
+         Data Preprocessing
+                   │
+                   ▼
+         Feature Engineering
+                   │
+   ┌───────────────┴───────────────┐
+   │                               │
+   ▼                               ▼
+Collaborative Sparse CSR    Movie Text Metadata
+   │                               │
+   ▼                               ▼
+$k$-NN & TruncatedSVD         TF-IDF Vectorizer
+   │                               │
+   └───────────────┬───────────────┘
+                   │
+                   ▼
+         Recommendation Engine
+                   │
+   ┌───────────────┼───────────────┐
+   │               │               │
+   ▼               ▼               ▼
+Genre Matches  Interest Matches Content Matches
+   │               │               │
+   └───────────────┼───────────────┘
+                   │
+                   ▼
+            CineMatch Picks
+                   │
+                   ▼
+          Duplicate Removal
+                   │
+                   ▼
+         40 Final Recommendations
 ```
 
 ---
 
-## 📊 Datasets & Machine Learning Engine
+## 🧮 Recommendation Algorithms
 
-CineMatch AI utilizes a multi-dataset matrix combined with rigorous vector similarity mathematics:
+### 1. Genre-Based Recommendation Engine
+Analyzes the genre distribution across movies selected or searched by the user. Candidate movies sharing highly weighted preferred genres receive proportional recommendation scores.
 
-### 1. MovieLens 29M+ User Rating Matrix
-- **Data Volume**: 29,000,000+ user ratings across 62,000+ films.
-- **Data Structure**: Compressed Sparse Row Matrix (`scipy.sparse.csr_matrix`).
-- **Mathematical Similarity Index**: $k$-Nearest Neighbors utilizing Cosine Vector Distance:
+$$\text{Conceptual Flow: } \text{Selected Movies} \longrightarrow \text{Extract Genres} \longrightarrow \text{Calculate Preference Weights} \longrightarrow \text{Score Candidates} \longrightarrow \text{Top 10 Genre Matches}$$
 
-$$\text{Similarity}(\mathbf{A}, \mathbf{B}) = \cos(\theta) = \frac{\mathbf{A} \cdot \mathbf{B}}{\|\mathbf{A}\| \|\mathbf{B}\|} = \frac{\sum_{i=1}^{n} A_i B_i}{\sqrt{\sum_{i=1}^{n} A_i^2} \sqrt{\sum_{i=1}^{n} B_i^2}}$$
+Accumulates user genre preference weights $W_g$ based on explicit rating inputs $R_m$:
 
-- **Match Percentage Calculation**:
+$$W_g = \sum_{m \in \text{Selected}} R_m \cdot \mathbb{I}(g \in \text{Genres}(m))$$
 
-$$\text{Match Percentage} = \text{Round}\left(\left(1 - \text{Cosine Distance}\right) \times 100\right)$$
+### 2. Interest / Rating-Based Recommendation Engine
+Uses explicit user ratings together with the trained $k$-Nearest Neighbors ($k$-NN) model. Computes rating-weighted similarity scores for nearest neighbor vectors in the user-item latent space:
 
-### 2. TMDB 5000 Movie & Credits Corpus
-- **Feature Extraction**: Plot keywords, character synopses, primary genres, lead cast, director, and production entities.
-- **TF-IDF Feature Space**: Unigram & Bigram Term Frequency-Inverse Document Frequency vectorizer applied over plot summaries:
+$$\text{Conceptual Flow: } \text{Selected Movie} \longrightarrow \text{Find } k\text{-NN Representation} \longrightarrow \text{Weighted Similarity} \longrightarrow \text{Rank Candidates} \longrightarrow \text{Top 10 Interest Matches}$$
 
-$$\text{TF-IDF}(t, d, D) = \text{TF}(t, d) \times \log\left(\frac{|D|}{1 + |\{d \in D : t \in d\}|}\right)$$
+$$\text{Score}(c) = \sum_{m \in \text{Selected}} R_m \times \left(1 - \text{Cosine Distance}(m, c)\right)$$
 
-### 3. Live TMDB API v3 Service Layer
-- Asynchronous API consumer fetching `/search/movie`, `/movie/{id}/recommendations`, and `/discover/movie`.
-- Enforces `with_original_language` parameters (e.g. `te` for Telugu, `hi` for Hindi, `en` for English) to match user regional intent.
+### 3. Content-Based Recommendation Engine
+Represents movie plot summaries, keywords, and metadata using Unigram & Bigram TF-IDF feature matrices.
+
+$$\text{Conceptual Flow: } \text{Movie Metadata} \longrightarrow \text{TF-IDF Matrix} \longrightarrow \text{Weighted User Profile} \longrightarrow \text{Cosine Similarity} \longrightarrow \text{Top 10 Content Matches}$$
+
+Computes Cosine Similarity between the weighted user profile vector $\mathbf{U}$ and candidate movie content vectors $\mathbf{V}_c$:
+
+$$\text{Sim}(\mathbf{U}, \mathbf{V}_c) = \frac{\mathbf{U} \cdot \mathbf{V}_c}{\|\mathbf{U}\| \|\mathbf{V}_c\|}$$
+
+### 4. Collaborative Filtering & TruncatedSVD
+Constructs a user-movie rating matrix $R \in \mathbb{R}^{U \times M}$ and applies Truncated Singular Value Decomposition (TruncatedSVD) for latent factor dimensionality reduction:
+
+$$R \approx U_k \Sigma_k V_k^T \quad \text{where } k = 50 \text{ latent components}$$
+
+Model performance is evaluated during training using Root Mean Squared Error (**RMSE**) and Mean Absolute Error (**MAE**):
+
+$$\text{RMSE} = \sqrt{\frac{1}{N} \sum_{i=1}^{N} (y_i - \hat{y}_i)^2}, \quad \text{MAE} = \frac{1}{N} \sum_{i=1}^{N} |y_i - \hat{y}_i|$$
+
+### 5. CineMatch Picks Engine
+Combines normalized similarity scores from the genre, interest, and content models to generate the 4th recommendation category, ensuring broad, high-confidence discovery.
+
+$$\text{Final Output: } \underbrace{\text{Genre (10)}}_{\text{Category 1}} + \underbrace{\text{Interest (10)}}_{\text{Category 2}} + \underbrace{\text{Content (10)}}_{\text{Category 3}} + \underbrace{\text{CineMatch Picks (10)}}_{\text{Category 4}} = \mathbf{40 \text{ Unique Movies}}$$
 
 ---
 
-## 🛠️ Technology Stack
+## 🔄 Recommendation Workflow
 
-| Layer | Framework / Library | Role & Function |
-| :--- | :--- | :--- |
-| **Frontend Core** | HTML5, Vanilla JavaScript (ES6+) | Single Page Application, state management, asynchronous REST pipeline |
-| **Design System** | Vanilla CSS3, CSS Grid, Flexbox | HSL color tokens, dark mode glassmorphic UI, glowing gold micro-interactions |
-| **Typography** | Syne & Outfit (Google Fonts) | Ultra-premium display & body text styling |
-| **Machine Learning** | Python 3.10+, Scikit-Learn, SciPy | Sparse CSR matrix creation, $k$-NN Cosine Similarity model training |
-| **Data Processing** | Pandas, NumPy | Chunked dataset ingestion & cleaning pipeline |
-| **Backend API** | FastAPI, Uvicorn, Python AsyncIO | Asynchronous backend REST endpoints (`/recommend`, `/search`, `/health`) |
-| **Data Providers** | TMDB REST API v3, MovieLens | High-res 4K poster artwork, vote metrics, plot summaries |
-| **Hosting & CI/CD** | GitHub Pages (`main` branch) | Automated static site hosting with cache-busted asset delivery (`?v=310.0`) |
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User as 👤 User
+    participant UI as 🎨 Glassmorphic UI (script.js)
+    participant Engine as ⚡ Query Normalizer & Recommendation Engine
+    participant API as 🚀 FastAPI / TMDB REST Service
+    participant ML as 🧠 $k$-NN & TF-IDF Vector Models
+
+    User->>UI: Types query (e.g. "racegurram")
+    UI->>Engine: normalizeMovieQuery("racegurram")
+    Engine-->>Engine: Canonical Output: "Race Gurram"
+    
+    UI->>API: Request Recommendations & Metadata
+    API->>ML: Query Sparse Matrix & Cosine Similarity Index
+    ML-->>API: Candidate Indices & Vector Proximity Scores
+    
+    API->>API: Enforce Strict Language Isolation (original_language == 'te')
+    API->>API: Generate 4 Recommendation Categories & Deduplicate
+    
+    API-->>UI: Return 40 Deduplicated Movie Objects with Match %
+    UI->>API: Resolve TMDB Poster Artwork (On-Demand)
+    API-->>UI: High-Resolution Poster URLs
+    UI->>UI: Render Grid with 98% Match Badges & Multi-Categories
+    User->>UI: Click Movie Card
+    UI->>UI: Display Expanded Cinema Modal Window
+```
 
 ---
 
-## 🚀 Quick Start Guide
+## 🖼️ Poster Retrieval System
+
+CineMatch AI does **NOT** bulk-download posters for the entire 62,000+ MovieLens catalog. Artwork is fetched strictly on-demand for displayed elements:
+
+```
+Featured Showcase   ──►  Top 25 Movies    ──►  25 Poster Lookups / Cache
+Live Search Typing  ──►  Max 10 Results   ──►  Up to 10 Posters
+Recommendations     ──►  40 Displayed     ──►  40 On-Demand Resolutions
+```
+
+- **TMDB API v3**: `https://www.themoviedb.org/`
+- **TMDB Image Base**: `https://image.tmdb.org/t/p/w500/`
+- **Caching**: Local memory and browser cache lookups to eliminate duplicate API requests.
+
+---
+
+## 📦 Dataset & Preprocessing
+
+CineMatch AI uses the **MovieLens 32M / 29M Dataset** provided by GroupLens Research ([grouplens.org/datasets/movielens/](https://grouplens.org/datasets/movielens/)).
+
+```
+data/
+├── raw/
+│   └── ml-32m/
+│       ├── movies.csv
+│       └── ratings.csv
+├── processed/
+│   ├── ratings_clean.csv
+│   ├── movie_metadata.csv
+│   └── evaluation/
+│       └── model_metrics.csv
+└── cache/
+    └── tmdb_posters.csv
+```
+
+---
+
+## 🧪 Model Training & Assets
+
+The modular ML development pipeline is located under `src/pipeline/`:
+
+```
+src/pipeline/
+├── preprocessing.py   # Ingests & cleans raw CSV ratings
+├── training.py        # Fits NearestNeighbors k-NN & TruncatedSVD models
+├── evaluation.py      # Computes RMSE & MAE validation metrics
+└── tuning.py          # Hyperparameter grid search
+```
+
+### Serialized Model Assets (`models/`)
+
+```
+models/
+├── collaborative/
+│   ├── knn_model.pkl          # Serialized NearestNeighbors model
+│   ├── knn_movie_ids.npy      # Array of index-mapped movie IDs
+│   ├── movie_factors.npy      # TruncatedSVD movie latent factors
+│   └── user_factors.npy       # TruncatedSVD user latent factors
+└── content/
+    ├── movie_data.pkl         # Serialized movie metadata dictionary
+    ├── tfidf_matrix.pkl       # Sparse TF-IDF document-term matrix
+    └── tfidf_vectorizer.pkl   # Fitted TF-IDF Vectorizer instance
+```
+
+---
+
+## 📁 Complete Project Structure
+
+```
+CineMatch-AI/
+├── 📁 backend/
+│   ├── main.py                # FastAPI REST API routes & CORS handling
+│   └── recommender.py         # Multi-perspective recommendation cascade
+├── 📁 data/
+│   ├── 📁 raw/                # MovieLens raw CSV files
+│   ├── 📁 processed/          # Preprocessed ratings & metadata CSVs
+│   └── 📁 cache/              # Local TMDB poster cache
+├── 📁 frontend/
+│   ├── index.html             # Application structure & glass layout
+│   ├── script.js              # Query Normalizer, TMDB Client & Modal Engine
+│   └── style.css              # Dark Glassmorphism Design System
+├── 📁 models/
+│   ├── 📁 collaborative/      # Serialized k-NN & TruncatedSVD models
+│   └── 📁 content/            # Serialized TF-IDF matrices & vectorizers
+├── 📁 src/
+│   ├── config.py              # Centralized path configuration
+│   ├── recommendation_engine.py # Core ML recommendation engine
+│   ├── tmdb_service.py        # TMDB API wrapper & caching service
+│   └── 📁 pipeline/           # ML preprocessing, training & evaluation
+├── index.html                 # Root GitHub Pages entrypoint
+├── script.js                  # Root GitHub Pages script bundle
+├── style.css                  # Root GitHub Pages stylesheet bundle
+├── prepare_data.py            # Chunked dataset filtering script
+├── train_collaborative.py     # Sparse CSR matrix model trainer
+├── start_project.ps1          # 1-click Windows PowerShell launcher
+├── requirements.txt           # Python dependency manifest
+└── README.md                  # Master project documentation
+```
+
+---
+
+## 🔌 API Endpoints
+
+### 1. `GET /`
+Loads the single page CineMatch web application interface.
+
+### 2. `GET /featured`
+Returns top featured movies for spotlight rendering.
+```json
+[
+  { "movieId": 1, "title": "Toy Story (1995)", "genres": "Adventure|Animation|Children|Comedy|Fantasy" }
+]
+```
+
+### 3. `GET /search`
+Searches for movies by query string with real-time suggestion limits.
+```bash
+GET /search?query=racegurram&limit=10
+```
+
+### 4. `POST /recommendations`
+Generates personalized multi-category recommendations.
+```json
+{
+  "movies": [
+    { "movieId": 266416, "rating": 5 },
+    { "movieId": 109487, "rating": 5 }
+  ]
+}
+```
+
+---
+
+## ⚙️ Installation & Developer Guide
 
 ### 1. Clone Repository
-
 ```bash
 git clone https://github.com/Nersu-Abhinav/CineMatch-AI.git
 cd CineMatch-AI
 ```
 
-### 2. Run Local Frontend Application
-
-Because CineMatch AI is built using pure ES6+ JavaScript and Vanilla CSS3, you can open `index.html` directly in your browser, or launch a local web server:
-
+### 2. Virtual Environment Setup
 ```bash
-# Using Node.js npx serve
-npx serve .
-
-# OR using Python HTTP server
-python -m http.server 8000
-```
-Navigate to **`http://localhost:8000`** in your browser.
-
-### 3. Optional Backend API Execution
-
-If you wish to run the local FastAPI machine learning server:
-
-```bash
-# Create and activate virtual environment
+# Create virtual environment
 python -m venv venv
-source venv/bin/activate  # On Windows: .\venv\Scripts\activate
 
-# Install dependencies
+# Activate (Windows PowerShell)
+.\venv\Scripts\activate
+
+# Activate (macOS/Linux)
+source venv/bin/activate
+```
+
+### 3. Install Dependencies
+```bash
 pip install -r requirements.txt
+```
 
-# Run backend API server
+### 4. Environment Variables (`.env`)
+Create a `.env` file in the root directory:
+```env
+TMDB_API_TOKEN=your_tmdb_read_access_token_here
+```
+
+### 5. Launch Local Web Application
+```bash
+# Run FastAPI backend with Uvicorn
 uvicorn backend.main:app --reload --port 8000
 ```
+Open **`http://127.0.0.1:8000`** in your web browser.
 
 ---
 
-## 📁 Repository Directory Structure
+## 📌 Current System Verification Status
 
-```
-CineMatch-AI/
-├── 📁 frontend/
-│   ├── index.html            # Main SPA HTML structure & glass layout
-│   ├── script.js             # Query Normalizer, TMDB Client & Modal Engine
-│   └── style.css             # Ultra-premium Dark Glassmorphism Design System
-├── 📁 backend/
-│   ├── main.py               # FastAPI backend REST API routes
-│   └── recommender.py        # Vector similarity recommendation calculator
-├── 📁 data/                  # MovieLens rating CSV datasets
-├── 📁 model/                 # Serialized NearestNeighbors CSR model artifacts (.pkl)
-├── index.html                # GitHub Pages entrypoint
-├── script.js                 # GitHub Pages script bundle
-├── style.css                 # GitHub Pages stylesheet bundle
-├── prepare_data.py           # Chunked dataset filtering script
-├── train_collaborative.py    # Sparse CSR matrix model trainer
-├── start_project.ps1         # 1-click Windows PowerShell launcher
-└── README.md                 # Project documentation
-```
+| Feature / Component | Status | Description |
+| :--- | :---: | :--- |
+| **FastAPI Backend REST API** | ✅ | Asynchronous REST endpoints serving requests |
+| **Vanilla JS Single Page App** | ✅ | Modern dark glassmorphic interface |
+| **Compound Query Normalizer** | ✅ | Auto-corrects `racegurram` &rarr; **Race Gurram** |
+| **Strict Language Isolation** | ✅ | Enforces `original_language` consistency |
+| **Numerical % Match Badges** | ✅ | Replaces qualitative text tags with **98% Match** |
+| **4-Tier Category Display** | ✅ | Genre, Interest, Content & CineMatch Picks |
+| **Expanded Cinema Modal** | ✅ | High-res TMDB artwork & key statistics grid |
+| **TMDB API v3 Integration** | ✅ | On-demand poster resolution & local caching |
+| **GitHub Pages Live Hosting** | ✅ | Live static deployment on `main` branch |
+
+---
+
+## 🔮 Future Scope & Roadmap
+
+- 👤 **User Authentication & Personal Profiles**: Saved user recommendation histories.
+- ❤️ **Personal Watchlists**: One-click movie bookmarks.
+- 🎭 **Mood-Based Search Engine**: Natural language query processing (e.g., "mind-bending sci-fi with plot twists").
+- 🤖 **Deep Learning Hybrid Models**: Neural Collaborative Filtering (NCF) integration.
+- 📱 **Mobile Native Application**: React Native / Flutter cross-platform companion app.
 
 ---
 
@@ -257,7 +404,7 @@ CineMatch-AI/
 
 ## 🌟 Support & Feedback
 
-If you find **CineMatch AI** useful or inspiring, please give this repository a ⭐ **Star** on GitHub!
+If you find **CineMatch AI** helpful or inspiring, please give this repository a ⭐ **Star** on GitHub!
 
 <br>
 
