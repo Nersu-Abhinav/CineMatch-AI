@@ -1038,6 +1038,11 @@ function switchView(mode) {
 // 08. ENDLESS DISCOVERY MODAL & CHAIN DISCOVERY
 // --------------------------------------------------------------------------
 function openModal(movie) {
+    if (!movie) return;
+    const modalMovieBody = document.getElementById("modalMovieBody");
+    const movieModal = document.getElementById("movieModal");
+    if (!modalMovieBody || !movieModal) return;
+
     const poster = movie.poster_url || createFallbackPoster(movie.title);
     const year = movie.release_date ? movie.release_date.substring(0, 4) : "N/A";
     const rating = movie.rating ? Number(movie.rating).toFixed(1) : "N/A";
