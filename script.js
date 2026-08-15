@@ -228,6 +228,22 @@ function smartSplitConcatenatedQuery(text) {
     return clean;
 }
 
+function normalizeMovieQuery(rawQuery) {
+    if (!rawQuery) return "";
+    let clean = rawQuery.trim().replace(/\s+/g, " ");
+    const lowerKey = clean.toLowerCase().replace(/[^a-z0-9]/g, "");
+
+    if (KNOWN_MOVIE_COMPOUNDS[lowerKey]) {
+        return KNOWN_MOVIE_COMPOUNDS[lowerKey];
+    }
+
+    if (!clean.includes(" ") && clean.length > 5) {
+        return smartSplitConcatenatedQuery(clean);
+    }
+
+    return clean;
+}
+
 const TMDB_CLIENT_KEY = "437007ac895c0e5767f5b85e69435d24";
 
 async function fetchTMDBClientFallback(query, limit = 40) {
@@ -577,20 +593,22 @@ async function searchMovie(queryOverride = null) {
         appState.limit = 20;
     }
 
-    let movieName = "";
+    let rawMovieName = "";
     if (queryOverride) {
-        movieName = String(queryOverride).trim();
+        rawMovieName = String(queryOverride).trim();
     } else if (searchInput && searchInput.value && searchInput.value.trim()) {
-        movieName = searchInput.value.trim();
+        rawMovieName = searchInput.value.trim();
     } else if (navSearchInput && navSearchInput.value && navSearchInput.value.trim()) {
-        movieName = navSearchInput.value.trim();
+        rawMovieName = navSearchInput.value.trim();
     }
 
-    if (!movieName) {
+    if (!rawMovieName) {
         showSearchError("Please enter a movie title to discover recommendations.", "");
         if (searchInput) searchInput.focus();
         return;
     }
+
+    const movieName = normalizeMovieQuery(rawMovieName);
 
     hideSearchError();
     showLoading();
