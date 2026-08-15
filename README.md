@@ -1,10 +1,13 @@
 # 🎬 CineMatch AI — Next-Gen Movie Recommendation Engine
 
+[![Live Web Application](https://img.shields.io/badge/Live_Site-https%3A%2F%2Fnersu--abhinav.github.io%2FCineMatch--AI%2F-f5c518?style=for-the-badge&logo=googlechrome&logoColor=black)](https://nersu-abhinav.github.io/CineMatch-AI/)
 ![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688?style=for-the-badge&logo=fastapi&logoColor=white)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-1.3+-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
 ![TMDB API](https://img.shields.io/badge/TMDB%20API-v3-01b4e4?style=for-the-badge&logo=themoviedb&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)
+
+🌐 **Live Web Application**: [https://nersu-abhinav.github.io/CineMatch-AI/](https://nersu-abhinav.github.io/CineMatch-AI/)
 
 **CineMatch AI** is an end-to-end movie recommendation web application powered by **Item-Item Collaborative Filtering** (k-Nearest Neighbors over 29M+ ratings), real-time metadata & poster enrichment via **TMDB API v3**, a high-performance **FastAPI** backend, and a modern glassmorphic single-page frontend.
 
