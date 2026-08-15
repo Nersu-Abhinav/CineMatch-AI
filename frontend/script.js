@@ -800,14 +800,11 @@ function createMovieCard(movie) {
     const year = movie.release_date ? movie.release_date.substring(0, 4) : "N/A";
     const rating = movie.rating ? Number(movie.rating).toFixed(1) : "N/A";
     const simLevel = movie.similarity_level || (movie.similarity >= 0.8 ? "Very High" : movie.similarity >= 0.65 ? "High" : "Medium");
-    const categoryName = movie.category || "CineMatch Pick";
-    const categoryIcon = movie.category_icon || "💎";
 
     const matchClass = simLevel === "Very High" ? "match-high" : "match-mid";
 
     card.innerHTML = `
         <div class="card-poster-wrapper">
-            <span class="category-pill">${categoryIcon} ${escapeHtml(categoryName)}</span>
             <span class="match-pill ${matchClass}">Sim: ${escapeHtml(simLevel)}</span>
             <img class="card-poster" src="${poster}" alt="${escapeHtml(movie.title)}" loading="lazy" onerror="this.src='${createFallbackPoster(movie.title)}'">
             <div class="card-gradient-overlay"></div>
@@ -848,9 +845,7 @@ function openModal(movie) {
     const rating = movie.rating ? Number(movie.rating).toFixed(1) : "N/A";
     const genres = (movie.genres || []).map(g => `<span class="genre-pill">${escapeHtml(g)}</span>`).join("");
     const simLevel = movie.similarity_level || "High";
-    const catName = movie.category || "CineMatch Pick";
-    const catIcon = movie.category_icon || "💎";
-    const whyText = movie.why_explanation || `Matched via ${catName} vector analysis`;
+    const whyText = movie.why_explanation || "High vector proximity in user ratings space & shared thematic structure";
     const tmdbLink = movie.tmdb_id ? `https://www.themoviedb.org/movie/${movie.tmdb_id}` : "#";
 
     modalMovieBody.innerHTML = `
@@ -862,14 +857,11 @@ function openModal(movie) {
             <div class="movie-meta-bar">
                 <span class="rating-badge">★ ${rating}</span>
                 <span class="year-badge">${year}</span>
-                <span class="category-modal-pill" style="background: rgba(245, 197, 24, 0.18); color: var(--accent-gold); border: 1px solid rgba(245, 197, 24, 0.4); padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 700;">${catIcon} ${escapeHtml(catName)}</span>
                 <span class="rating-badge" style="background: rgba(6, 182, 212, 0.2); color: var(--accent-cyan);">Similarity: ${escapeHtml(simLevel)}</span>
                 ${genres}
             </div>
             <div style="background: rgba(245, 197, 24, 0.1); border-left: 4px solid var(--accent-gold); padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-size: 14px;">
-                <strong style="color: var(--accent-gold); display: flex; align-items: center; gap: 6px;">
-                    ${catIcon} Why Recommended (${escapeHtml(catName)}):
-                </strong>
+                <strong style="color: var(--accent-gold);">Why Recommended:</strong>
                 <span style="color: #e2e8f0; display: block; margin-top: 4px;">${escapeHtml(whyText)}</span>
             </div>
             <p>${escapeHtml(movie.overview || "No overview available.")}</p>
