@@ -11,7 +11,7 @@ const appState = {
     selectedMovie: null,
     recommendations: [],
     filteredRecommendations: [],
-    limit: 40,
+    limit: 20,
     sortBy: "match",      // 'match' | 'rating' | 'year_desc' | 'year_asc' | 'title'
     filterGenre: "all",
     filterEra: "all",
@@ -496,9 +496,9 @@ function generateOfflineFallback(query, limit = 40) {
 async function searchMovie(queryOverride = null) {
     const limitSelect = document.getElementById("limitSelect");
     if (limitSelect && limitSelect.value) {
-        appState.limit = parseInt(limitSelect.value, 10) || 40;
+        appState.limit = parseInt(limitSelect.value, 10) || 20;
     } else {
-        appState.limit = 40;
+        appState.limit = 20;
     }
 
     let movieName = "";
