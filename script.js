@@ -844,6 +844,7 @@ function openModal(movie) {
     const year = movie.release_date ? movie.release_date.substring(0, 4) : "N/A";
     const rating = movie.rating ? Number(movie.rating).toFixed(1) : "N/A";
     const genres = (movie.genres || []).map(g => `<span class="genre-pill">${escapeHtml(g)}</span>`).join("");
+    const simLevel = movie.similarity_level || (movie.similarity >= 0.8 ? "Very High" : "High");
     const catName = movie.category || "CineMatch Pick";
     let whyText = movie.why_explanation;
     if (!whyText || whyText.includes("vector proximity")) {
