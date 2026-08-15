@@ -171,21 +171,83 @@ function quickSearch(title) {
 // CLIENT-SIDE BENCHMARK ACCURACY ENGINE
 const CLIENT_BENCHMARKS = {};
 
+const KNOWN_MOVIE_COMPOUNDS = {
+    "racegurram": "Race Gurram",
+    "thedarkknight": "The Dark Knight",
+    "pulpfiction": "Pulp Fiction",
+    "fightclub": "Fight Club",
+    "ironman": "Iron Man",
+    "spiderman": "Spider-Man",
+    "starwars": "Star Wars",
+    "harrypotter": "Harry Potter",
+    "avengersendgame": "Avengers Endgame",
+    "interstellar": "Interstellar",
+    "inception": "Inception",
+    "fiftyshadesofgrey": "Fifty Shades of Grey",
+    "sexeducation": "Sex Education",
+    "themartian": "The Martian",
+    "avatar": "Avatar",
+    "thematrix": "The Matrix",
+    "gladiator": "Gladiator"
+};
+
 function cleanTypos(text) {
     if (!text) return "";
     let s = text.replace(/(.)\1{2,}/g, "$1");
-    let s2 = s.replace(/([a-zA-Z])\1+$/g, "$1");
-    return s2.trim();
+    let s2 = s.replace(/([a-zA-Z])\1+$/g, "$1").trim();
+    return s2;
+}
+
+function smartSplitConcatenatedQuery(text) {
+    if (!text) return "";
+    const clean = cleanTypos(text);
+    const lower = clean.toLowerCase().replace(/[^a-z0-9]/g, "");
+
+    // 1. Direct dictionary lookup
+    if (KNOWN_MOVIE_COMPOUNDS[lower]) {
+        return KNOWN_MOVIE_COMPOUNDS[lower];
+    }
+
+    // 2. Common sub-word heuristic splitting if single word and length > 5
+    if (!clean.includes(" ") && clean.length > 5) {
+        if (lower.startsWith("the") && lower.length > 5) {
+            const rest = lower.substring(3);
+            return "The " + rest.charAt(0).toUpperCase() + rest.slice(1);
+        }
+        const commonSubwords = ["race", "dark", "pulp", "fight", "iron", "spider", "star", "harry", "super", "bat", "dead", "wonder", "fast", "black", "mad", "top", "jurassic", "mission"];
+        for (const sub of commonSubwords) {
+            if (lower.startsWith(sub) && lower.length > sub.length + 2) {
+                const part1 = sub.charAt(0).toUpperCase() + sub.slice(1);
+                const rest = lower.substring(sub.length);
+                const part2 = rest.charAt(0).toUpperCase() + rest.slice(1);
+                return `${part1} ${part2}`;
+            }
+        }
+    }
+
+    return clean;
 }
 
 const TMDB_CLIENT_KEY = "437007ac895c0e5767f5b85e69435d24";
 
 async function fetchTMDBClientFallback(query, limit = 40) {
     try {
-        const searchRes = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${TMDB_CLIENT_KEY}&query=${encodeURIComponent(query)}`);
-        if (!searchRes.ok) return null;
-        const searchData = await searchRes.json();
-        const results = searchData.results || [];
+        let currentQuery = query;
+        let searchRes = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${TMDB_CLIENT_KEY}&query=${encodeURIComponent(currentQuery)}`);
+        let searchData = searchRes.ok ? await searchRes.json() : null;
+        let results = searchData && searchData.results ? searchData.results : [];
+
+        // Multi-pass smart query fallback for concatenated words (e.g. racegurram -> Race Gurram)
+        if (results.length === 0) {
+            const smartCleaned = smartSplitConcatenatedQuery(query);
+            if (smartCleaned && smartCleaned !== query) {
+                currentQuery = smartCleaned;
+                searchRes = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${TMDB_CLIENT_KEY}&query=${encodeURIComponent(currentQuery)}`);
+                searchData = searchRes.ok ? await searchRes.json() : null;
+                results = searchData && searchData.results ? searchData.results : [];
+            }
+        }
+
         if (results.length === 0) return null;
 
         const qLower = query.trim().toLowerCase();
@@ -563,32 +625,31 @@ async function searchMovie(queryOverride = null) {
             data = await fetchTMDBClientFallback(movieName, appState.limit);
         }
 
-        // Attempt 4: Cleaned query fallback via Direct Client TMDB API
-        if ((!data || !data.success || !data.recommendations || data.recommendations.length === 0) && cleanedQuery !== movieName) {
-            data = await fetchTMDBClientFallback(cleanedQuery, appState.limit);
+        // Attempt 4: Smart Split Concatenated query fallback via Direct Client TMDB API
+        const smartQuery = smartSplitConcatenatedQuery(movieName);
+        if ((!data || !data.success || !data.recommendations || data.recommendations.length === 0) && smartQuery && smartQuery.toLowerCase() !== lowerQuery) {
+            data = await fetchTMDBClientFallback(smartQuery, appState.limit);
         }
 
         // Attempt 5: Fail-Safe Offline Recommendation Engine (guarantees recommendations for any search)
         if (!data || !data.success || !data.selected_movie || !data.recommendations || data.recommendations.length === 0) {
-            data = generateOfflineFallback(movieName, appState.limit);
+            data = generateOfflineFallback(smartQuery || movieName, appState.limit);
         }
 
         if (!data || !data.success || !data.selected_movie) {
             throw new Error(`No movie match found for "${movieName}". Please check the spelling or try another title.`);
         }
 
-
-
         if (data.recommendations && Array.isArray(data.recommendations)) {
             data.recommendations = data.recommendations.slice(0, appState.limit);
         }
 
-
-        // Check if query was auto-corrected (only show for actual typo cleanups)
-        const isAutoCorrected = Boolean(data.selected_movie.auto_corrected_from) || (cleanedQuery.toLowerCase() !== lowerQuery && cleanedQuery.length < lowerQuery.length);
+        // Check if query was auto-corrected (e.g. racegurram -> Race Gurram)
+        const finalTitleLower = (data.selected_movie.title || "").toLowerCase();
+        const isAutoCorrected = Boolean(data.selected_movie.auto_corrected_from) || (finalTitleLower !== lowerQuery);
         
         if (autoCorrectBanner && autoCorrectText) {
-            if (isAutoCorrected && data.selected_movie && data.selected_movie.title && data.selected_movie.auto_corrected_from) {
+            if (isAutoCorrected && data.selected_movie && data.selected_movie.title && finalTitleLower !== lowerQuery) {
                 autoCorrectText.innerHTML = `Auto-corrected spelling: showing recommendations for <strong>${escapeHtml(data.selected_movie.title)}</strong> (searched: <em>"${escapeHtml(movieName)}"</em>)`;
                 autoCorrectBanner.classList.remove("hidden");
             } else {
