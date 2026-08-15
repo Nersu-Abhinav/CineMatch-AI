@@ -500,16 +500,18 @@ async function searchMovie(queryOverride = null) {
                     data = await resClean.json();
                 }
             } catch (e) {}
+        }
+
         // Attempt 3: Client Benchmark Fallback
-        if (matchedBenchmarkKey && (!data || !data.success || !data.recommendations || data.recommendations.length === 0 || data.selected_movie.title.toLowerCase().includes("race gurram"))) {
+        if (matchedBenchmarkKey && (!data || !data.success || !data.recommendations || data.recommendations.length === 0)) {
             data = JSON.parse(JSON.stringify(CLIENT_BENCHMARKS[matchedBenchmarkKey]));
             data.success = true;
         }
 
         if (!data || !data.success || !data.selected_movie) {
-
-            throw new Error(`No title matching "${movieName}" could be found.`);
+            throw new Error(`No movie match found for "${movieName}". Please check the spelling or try another title.`);
         }
+
 
         if (data.recommendations && Array.isArray(data.recommendations)) {
             data.recommendations = data.recommendations.slice(0, appState.limit);
