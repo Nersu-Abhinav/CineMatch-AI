@@ -1040,9 +1040,12 @@ function switchView(mode) {
 function openModal(movie) {
     try {
         if (!movie) return;
-        const modalMovieBody = document.getElementById("modalMovieBody");
+        const modalMovieBody = document.getElementById("modalMovieBody") || document.getElementById("modalMovie");
         const movieModal = document.getElementById("movieModal");
-        if (!modalMovieBody || !movieModal) return;
+        if (!modalMovieBody || !movieModal) {
+            console.error("Modal elements not found in DOM");
+            return;
+        }
 
         const poster = movie.poster_url || createFallbackPoster(movie.title);
         const year = movie.release_date ? movie.release_date.substring(0, 4) : "N/A";
