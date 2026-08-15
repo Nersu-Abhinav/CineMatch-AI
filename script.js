@@ -299,7 +299,7 @@ async function fetchTMDBClientFallback(query, limit = 40) {
             if (genreMatches.length >= 10) break;
             if (!globalSeen.has(c.id)) {
                 globalSeen.add(c.id);
-                genreMatches.push(formatMovie(c, genreMatches.length, "Genre Matches", "🎭", "Strong alignment with primary genre thematic elements"));
+                genreMatches.push(formatMovie(c, genreMatches.length, "Genre Matches", "🎭", "Genre Match — Shares primary genre classification, character tropes & thematic style"));
             }
         }
 
@@ -315,7 +315,7 @@ async function fetchTMDBClientFallback(query, limit = 40) {
             if (interestMatches.length >= 10) break;
             if (!globalSeen.has(c.id)) {
                 globalSeen.add(c.id);
-                interestMatches.push(formatMovie(c, interestMatches.length, "Interest Matches", "⭐", "Top user rating consensus & high audience engagement score"));
+                interestMatches.push(formatMovie(c, interestMatches.length, "Interest Matches", "⭐", "Interest Match — High audience rating consensus, user reviews & popularity score"));
             }
         }
 
@@ -332,7 +332,7 @@ async function fetchTMDBClientFallback(query, limit = 40) {
             if (contentMatches.length >= 10) break;
             if (!globalSeen.has(c.id)) {
                 globalSeen.add(c.id);
-                contentMatches.push(formatMovie(c, contentMatches.length, "Content Matches", "🎬", "High narrative & plot theme vector overlap"));
+                contentMatches.push(formatMovie(c, contentMatches.length, "Content Matches", "🎬", "Content Match — High narrative, storyline & plot theme vector overlap"));
             }
         }
 
@@ -344,7 +344,7 @@ async function fetchTMDBClientFallback(query, limit = 40) {
             if (cinematchPicks.length >= 10) break;
             if (!globalSeen.has(c.id)) {
                 globalSeen.add(c.id);
-                cinematchPicks.push(formatMovie(c, cinematchPicks.length, "CineMatch Picks", "💎", "Curated algorithmic vector match & critical pick"));
+                cinematchPicks.push(formatMovie(c, cinematchPicks.length, "CineMatch Picks", "💎", "CineMatch Pick — Curated k-NN algorithmic vector match & critical recommendation"));
             }
         }
 
@@ -360,10 +360,10 @@ async function fetchTMDBClientFallback(query, limit = 40) {
             }
         };
 
-        fillCategory(genreMatches, "Genre Matches", "🎭", "Strong alignment with primary genre thematic elements");
-        fillCategory(interestMatches, "Interest Matches", "⭐", "Top user rating consensus & high audience engagement score");
-        fillCategory(contentMatches, "Content Matches", "🎬", "High narrative & plot theme vector overlap");
-        fillCategory(cinematchPicks, "CineMatch Picks", "💎", "Curated algorithmic vector match & critical pick");
+        fillCategory(genreMatches, "Genre Matches", "🎭", "Genre Match — Shares primary genre classification, character tropes & thematic style");
+        fillCategory(interestMatches, "Interest Matches", "⭐", "Interest Match — High audience rating consensus, user reviews & popularity score");
+        fillCategory(contentMatches, "Content Matches", "🎬", "Content Match — High narrative, storyline & plot theme vector overlap");
+        fillCategory(cinematchPicks, "CineMatch Picks", "💎", "CineMatch Pick — Curated k-NN algorithmic vector match & critical recommendation");
 
         const allRecommendations = [
             ...genreMatches,
@@ -844,8 +844,19 @@ function openModal(movie) {
     const year = movie.release_date ? movie.release_date.substring(0, 4) : "N/A";
     const rating = movie.rating ? Number(movie.rating).toFixed(1) : "N/A";
     const genres = (movie.genres || []).map(g => `<span class="genre-pill">${escapeHtml(g)}</span>`).join("");
-    const simLevel = movie.similarity_level || "High";
-    const whyText = movie.why_explanation || "High vector proximity in user ratings space & shared thematic structure";
+    const catName = movie.category || "CineMatch Pick";
+    let whyText = movie.why_explanation;
+    if (!whyText || whyText.includes("vector proximity")) {
+        if (catName === "Genre Matches") {
+            whyText = "Genre Match — Shares primary genre classification, character tropes & thematic style";
+        } else if (catName === "Interest Matches") {
+            whyText = "Interest Match — High audience rating consensus, user reviews & popularity score";
+        } else if (catName === "Content Matches") {
+            whyText = "Content Match — High narrative, storyline & plot theme vector overlap";
+        } else {
+            whyText = "CineMatch Pick — Curated k-NN algorithmic vector match & critical recommendation";
+        }
+    }
     const tmdbLink = movie.tmdb_id ? `https://www.themoviedb.org/movie/${movie.tmdb_id}` : "#";
 
     modalMovieBody.innerHTML = `
