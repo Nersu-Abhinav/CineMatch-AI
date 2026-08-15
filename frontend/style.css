@@ -1558,6 +1558,42 @@ button, input, select {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
+.search-filter-group input {
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    padding: 8px 14px;
+    border-radius: var(--radius-md, 10px);
+    font-size: 0.88rem;
+    outline: none;
+    transition: all 0.3s ease;
+    width: 140px;
+}
+
+.search-filter-group input:focus {
+    border-color: var(--accent-gold, #f5c518);
+    box-shadow: 0 0 12px rgba(245, 197, 24, 0.25);
+}
+
+.toolbar-reset-btn {
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    color: #f87171;
+    padding: 8px 14px;
+    border-radius: var(--radius-md, 10px);
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.toolbar-reset-btn:hover {
+    background: rgba(239, 68, 68, 0.25);
+    border-color: #f87171;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
 /* --------------------------------------------------------------------------
    13. UTILITIES & RESPONSIVE BREAKPOINTS
    -------------------------------------------------------------------------- */

@@ -11,10 +11,13 @@ const appState = {
     selectedMovie: null,
     recommendations: [],
     filteredRecommendations: [],
-    limit: 10,
+    limit: 40,
     sortBy: "match",      // 'match' | 'rating' | 'year_desc' | 'year_asc' | 'title'
     filterGenre: "all",
+    filterEra: "all",
+    quickTitleFilter: "",
     minRating: 0,
+    selectedCategory: "all",
     viewMode: "grid",     // 'grid' | 'list'
     sessionHistory: [],   // Array of strings kept in JS memory only
     isSearching: false
@@ -404,6 +407,13 @@ async function fetchTMDBClientFallback(query, limit = 40) {
 // 04. CORE SEARCH & API FETCHING PIPELINE
 // --------------------------------------------------------------------------
 async function searchMovie(queryOverride = null) {
+    const limitSelect = document.getElementById("limitSelect");
+    if (limitSelect && limitSelect.value) {
+        appState.limit = parseInt(limitSelect.value, 10) || 40;
+    } else {
+        appState.limit = 40;
+    }
+
     let movieName = "";
     if (queryOverride) {
         movieName = String(queryOverride).trim();
@@ -587,6 +597,13 @@ function populateGenreDropdown() {
     genreFilterSelect.innerHTML = html;
 }
 
+function updateLimit(val) {
+    appState.limit = parseInt(val, 10) || 40;
+    if (appState.selectedMovie && appState.selectedMovie.title) {
+        searchMovie(appState.selectedMovie.title);
+    }
+}
+
 function handleSortChange(sortVal) {
     appState.sortBy = sortVal;
     applyFiltersAndSort();
@@ -604,6 +621,17 @@ function handleRatingFilter(ratingVal, btnEl) {
     document.querySelectorAll(".rating-filter-buttons .filter-btn").forEach(btn => {
         btn.classList.remove("active");
     });
+    if (btnEl) btnEl.classList.add("active");
+    applyFiltersAndSort();
+}
+
+function handleEraFilter(eraVal) {
+    appState.filterEra = eraVal;
+    applyFiltersAndSort();
+}
+
+function handleQuickFilter(text) {
+    appState.quickTitleFilter = (text || "").trim().toLowerCase();
     applyFiltersAndSort();
 }
 
@@ -617,11 +645,15 @@ function handleCategoryTab(categoryName, btn) {
 function resetFilters() {
     appState.sortBy = "match";
     appState.filterGenre = "all";
+    appState.filterEra = "all";
+    appState.quickTitleFilter = "";
     appState.minRating = 0;
     appState.selectedCategory = "all";
 
-    document.getElementById("sortSelect").value = "match";
-    genreFilterSelect.value = "all";
+    if (document.getElementById("sortSelect")) document.getElementById("sortSelect").value = "match";
+    if (genreFilterSelect) genreFilterSelect.value = "all";
+    if (document.getElementById("eraFilterSelect")) document.getElementById("eraFilterSelect").value = "all";
+    if (document.getElementById("quickFilterInput")) document.getElementById("quickFilterInput").value = "";
     
     document.querySelectorAll(".rating-filter-buttons .filter-btn").forEach(btn => {
         btn.classList.toggle("active", btn.dataset.rating === "0");
@@ -636,22 +668,39 @@ function resetFilters() {
 function applyFiltersAndSort() {
     let result = [...appState.recommendations];
 
-    // Filter by 40-Movie Category
+    // 1. Filter by 40-Movie Category
     if (appState.selectedCategory && appState.selectedCategory !== "all") {
         result = result.filter(m => m.category === appState.selectedCategory);
     }
 
-    // Filter by Genre
-    if (appState.filterGenre !== "all") {
+    // 2. Filter by Genre
+    if (appState.filterGenre && appState.filterGenre !== "all") {
         result = result.filter(m => Array.isArray(m.genres) && m.genres.includes(appState.filterGenre));
     }
 
-    // Filter by Min Rating
+    // 3. Filter by Min Rating
     if (appState.minRating > 0) {
         result = result.filter(m => (m.rating || 0) >= appState.minRating);
     }
 
-    // Sort
+    // 4. Filter by Era / Release Year
+    if (appState.filterEra && appState.filterEra !== "all") {
+        result = result.filter(m => {
+            const y = getYear(m.release_date);
+            if (appState.filterEra === "2020s") return y >= 2020;
+            if (appState.filterEra === "2010s") return y >= 2010 && y <= 2019;
+            if (appState.filterEra === "2000s") return y >= 2000 && y <= 2009;
+            if (appState.filterEra === "classics") return y > 0 && y < 2000;
+            return true;
+        });
+    }
+
+    // 5. Filter by Quick Title Search
+    if (appState.quickTitleFilter) {
+        result = result.filter(m => (m.title || "").toLowerCase().includes(appState.quickTitleFilter));
+    }
+
+    // 6. Sort
     result.sort((a, b) => {
         switch (appState.sortBy) {
             case "match":

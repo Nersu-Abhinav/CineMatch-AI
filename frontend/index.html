@@ -111,9 +111,9 @@
                         <div class="limit-selector" title="Number of recommendations">
                             <label for="limitSelect">Results:</label>
                             <select id="limitSelect" onchange="updateLimit(this.value)">
-                                <option value="5">5 Movies</option>
-                                <option value="10" selected>10 Movies</option>
-                                <option value="15">15 Movies</option>
+                                <option value="40" selected>40 Movies</option>
+                                <option value="60">60 Movies</option>
+                                <option value="80">80 Movies</option>
                                 <option value="20">20 Movies</option>
                             </select>
                         </div>
@@ -237,12 +237,35 @@
                         </div>
                     </div>
 
-                    <!-- GENRE FILTER PILLS -->
+                    <!-- GENRE FILTER -->
                     <div class="control-group genre-group">
                         <label class="control-label">Genre:</label>
                         <select id="genreFilterSelect" onchange="handleGenreFilter(this.value)">
                             <option value="all" selected>All Genres</option>
                         </select>
+                    </div>
+
+                    <!-- ERA FILTER -->
+                    <div class="control-group">
+                        <label class="control-label">Era:</label>
+                        <select id="eraFilterSelect" onchange="handleEraFilter(this.value)">
+                            <option value="all" selected>All Eras</option>
+                            <option value="2020s">2020s (Recent)</option>
+                            <option value="2010s">2010s</option>
+                            <option value="2000s">2000s</option>
+                            <option value="classics">Classics (Pre-2000)</option>
+                        </select>
+                    </div>
+
+                    <!-- QUICK TITLE FILTER -->
+                    <div class="control-group search-filter-group">
+                        <label class="control-label">Filter Title:</label>
+                        <input type="text" id="quickFilterInput" placeholder="Filter results..." oninput="handleQuickFilter(this.value)">
+                    </div>
+
+                    <!-- RESET FILTERS BUTTON -->
+                    <div class="control-group">
+                        <button class="toolbar-reset-btn" onclick="resetFilters()" title="Reset all active filters">🔄 Reset</button>
                     </div>
 
                     <!-- VIEW SWITCHER TOGGLE -->
@@ -457,7 +480,7 @@
     <!-- ======================================
          JAVASCRIPT ENGINE
     ======================================= -->
-    <script src="script.js?v=40.0"></script>
+    <script src="script.js?v=50.0"></script>
 
 
 
