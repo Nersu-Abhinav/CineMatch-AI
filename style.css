@@ -834,6 +834,12 @@ button, input, select {
     margin-top: 4px;
 }
 
+.header-right-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
 .results-count-pill {
     padding: 6px 16px;
     background: var(--bg-surface-light);
@@ -844,73 +850,13 @@ button, input, select {
     color: var(--accent-gold);
 }
 
-/* Controls Toolbar */
-.controls-toolbar {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-glass);
-    border-radius: var(--radius-md);
-    padding: 16px 24px;
-    margin-bottom: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-.control-group {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.control-label {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-muted);
-    text-transform: uppercase;
-}
-
-.controls-toolbar select {
-    background: var(--bg-surface-light);
-    border: 1px solid var(--border-glass);
-    padding: 8px 14px;
-    border-radius: var(--radius-sm);
-    color: var(--text-primary);
-    font-size: 13px;
-    cursor: pointer;
-    outline: none;
-}
-
-.rating-filter-buttons {
-    display: flex;
-    gap: 6px;
-}
-
-.filter-btn {
-    background: var(--bg-surface-light);
-    border: 1px solid var(--border-glass);
-    padding: 6px 12px;
-    border-radius: var(--radius-sm);
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: var(--transition-fast);
-}
-
-.filter-btn.active, .filter-btn:hover {
-    background: var(--accent-gold);
-    color: #000;
-    border-color: var(--accent-gold);
-}
-
 /* View Switcher Toggle */
 .view-switcher {
     display: flex;
+    align-items: center;
     background: var(--bg-surface-light);
     border: 1px solid var(--border-glass);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-full);
     padding: 3px;
 }
 
@@ -918,11 +864,19 @@ button, input, select {
     background: transparent;
     border: none;
     padding: 6px 12px;
-    border-radius: 4px;
+    border-radius: var(--radius-full);
     color: var(--text-muted);
     cursor: pointer;
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+}
+
+.view-btn.active, .view-btn:hover {
+    background: var(--accent-gold);
+    color: #000;
+}
     transition: var(--transition-fast);
 }
 
