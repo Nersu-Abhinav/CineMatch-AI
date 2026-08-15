@@ -361,9 +361,9 @@ button, input, select {
 .hero-title {
     font-family: 'Syne', sans-serif;
     font-weight: 800;
-    font-size: clamp(50px, 7vw, 92px);
-    line-height: 1.05;
-    letter-spacing: -2.5px;
+    font-size: clamp(54px, 8.5vw, 98px);
+    line-height: 0.98;
+    letter-spacing: -3px;
     margin-bottom: 24px;
     color: #ffffff;
     text-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
