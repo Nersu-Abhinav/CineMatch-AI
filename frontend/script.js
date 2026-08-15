@@ -120,7 +120,17 @@ async function searchMovie(queryOverride = null) {
 
     try {
         const fetchUrl = `${API_URL}/recommend?movie=${encodeURIComponent(movieName)}&limit=${appState.limit}`;
-        const response = await fetch(fetchUrl);
+        let response;
+        
+        try {
+            response = await fetch(fetchUrl);
+        } catch (initialErr) {
+            // Render free-tier cold-start retry
+            showSearchError("Waking up server engine from sleep... Please wait ~10 seconds.");
+            await new Promise(r => setTimeout(r, 4000));
+            response = await fetch(fetchUrl);
+            hideSearchError();
+        }
 
         if (!response.ok) {
             throw new Error(`Server returned status ${response.status}. Ensure backend is running.`);
@@ -156,7 +166,7 @@ async function searchMovie(queryOverride = null) {
 
     } catch (err) {
         console.error("CineMatch Search Error:", err);
-        showSearchError(err.message || "Unable to fetch recommendations. Please check API server.");
+        showSearchError(err.message || "Unable to fetch recommendations. Please try again in a few seconds.");
     } finally {
         hideLoading();
     }
