@@ -1088,10 +1088,6 @@ function openModal(movie) {
                     <span class="rating-badge" style="background: rgba(6, 182, 212, 0.2); color: var(--accent-cyan);">${matchPct}% Match</span>
                     ${genres}
                 </div>
-                <div style="background: rgba(245, 197, 24, 0.1); border-left: 4px solid var(--accent-gold); padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-size: 14px;">
-                    <strong style="color: var(--accent-gold);">Why Recommended:</strong>
-                    <span style="color: #e2e8f0; display: block; margin-top: 4px;">${escapeHtml(whyText)}</span>
-                </div>
                 <p>${escapeHtml(movie.overview || "No overview available.")}</p>
                 <div style="display: flex; gap: 14px; flex-wrap: wrap;">
                     <button class="chain-discover-btn">
