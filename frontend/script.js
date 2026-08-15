@@ -472,7 +472,7 @@ async function fetchTMDBClientFallback(query, limit = 40) {
                 genre_matches: genreMatches,
                 interest_matches: interestMatches,
                 content_matches: contentMatches,
-                cinematch_picks: cinematchPicks
+            cinematch_picks: cinematchPicks
             },
             recommendations: allRecommendations
         };
@@ -483,37 +483,31 @@ async function fetchTMDBClientFallback(query, limit = 40) {
 }
 
 const STANDALONE_MOVIE_DATABASE = [
-    { id: 266396, title: "Race Gurram", rating: 7.2, release_date: "2014-04-11", genres: ["Action", "Comedy"], overview: "Two brothers with opposing personalities clash with a corrupt politician who threatens their family.", poster_url: "https://image.tmdb.org/t/p/w500/z0S3Qc30D8c0.jpg" },
-    { id: 444319, title: "Julayi", rating: 7.3, release_date: "2012-08-09", genres: ["Action", "Comedy"], overview: "A carefree youth gets involved in a bank robbery scheme and engages in a game of cat and mouse with a ruthless gangster.", poster_url: "https://image.tmdb.org/t/p/w500/u16w3u.jpg" },
-    { id: 624779, title: "Ala Vaikunthapurramuloo", rating: 7.6, release_date: "2020-01-12", genres: ["Action", "Comedy", "Drama"], overview: "Bantu grows up being constantly degraded by his father, until he learns that he was swapped at birth with a wealthy businessman's son.", poster_url: "https://image.tmdb.org/t/p/w500/p2b1.jpg" },
-    { id: 396803, title: "Sarrainodu", rating: 6.9, release_date: "2016-04-22", genres: ["Action", "Drama"], overview: "An ex-military officer takes matters into his own hands when a corrupt politician's son escapes justice.", poster_url: "https://image.tmdb.org/t/p/w500/s3b2.jpg" },
-    { id: 614911, title: "Pushpa: The Rise", rating: 7.6, release_date: "2021-12-17", genres: ["Action", "Crime", "Drama"], overview: "A laborer rises through the ranks of a red sandalwood smuggling syndicate.", poster_url: "https://image.tmdb.org/t/p/w500/p7b3.jpg" },
-    { id: 256040, title: "Baahubali: The Beginning", rating: 8.0, release_date: "2015-07-10", genres: ["Action", "Adventure", "Drama"], overview: "An adventurous man learns about his royal heritage and the heroic battle fought by his father to protect his kingdom.", poster_url: "https://image.tmdb.org/t/p/w500/b1b4.jpg" },
-    { id: 350312, title: "Baahubali 2: The Conclusion", rating: 8.2, release_date: "2017-04-27", genres: ["Action", "Adventure", "Drama"], overview: "Shivudu discovers his legacy as Mahendra Baahubali and sets out to reclaim the throne of Mahishmati.", poster_url: "https://image.tmdb.org/t/p/w500/b2b5.jpg" },
-    { id: 579974, title: "RRR", rating: 7.8, release_date: "2022-03-24", genres: ["Action", "Drama"], overview: "A fearless revolutionary and an officer in the British army forge an unbreakable friendship.", poster_url: "https://image.tmdb.org/t/p/w500/rrrb6.jpg" },
-    { id: 24344, title: "Magadheera", rating: 7.7, release_date: "2009-07-31", genres: ["Action", "Drama", "Fantasy"], overview: "A bike stuntman realizes he was a warrior in his previous life 400 years ago.", poster_url: "https://image.tmdb.org/t/p/w500/m1b7.jpg" },
-    { id: 75780, title: "Dookudu", rating: 7.4, release_date: "2011-09-23", genres: ["Action", "Comedy"], overview: "An undercover cop creates an elaborate fake environment to keep his father happy while hunting down corrupt politicians.", poster_url: "https://image.tmdb.org/t/p/w500/d1b8.jpg" },
-    { id: 104712, title: "Eega", rating: 7.6, release_date: "2012-07-06", genres: ["Action", "Fantasy", "Comedy"], overview: "A murdered man is reincarnated as a housefly and seeks revenge on his killer.", poster_url: "https://image.tmdb.org/t/p/w500/e1b9.jpg" },
-    { id: 27205, title: "Inception", rating: 8.4, release_date: "2010-07-16", genres: ["Action", "Science Fiction", "Adventure"], overview: "Cobb, a skilled thief who steals corporate secrets through dream-sharing technology, is given the inverse task of planting an idea into the mind of a C.E.O.", poster_url: "https://image.tmdb.org/t/p/w500/oYuLEW9W2Bmo2B2F8WoiBUdqT2a.jpg" },
-    { id: 157336, title: "Interstellar", rating: 8.4, release_date: "2014-11-05", genres: ["Adventure", "Drama", "Science Fiction"], overview: "The adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel.", poster_url: "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg" },
-    { id: 155, title: "The Dark Knight", rating: 8.5, release_date: "2008-07-16", genres: ["Drama", "Action", "Crime", "Thriller"], overview: "Batman raises the stakes in his war on crime with the help of Lt. Jim Gordon and District Attorney Harvey Dent.", poster_url: "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg" },
-    { id: 680, title: "Pulp Fiction", rating: 8.5, release_date: "1994-09-10", genres: ["Thriller", "Crime"], overview: "A burger-loving hitman, his philosophical partner, a drug-addled gangster's moll and a washed-up boxer intersect in four tales of violence and redemption.", poster_url: "https://image.tmdb.org/t/p/w500/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg" },
-    { id: 603, title: "The Matrix", rating: 8.2, release_date: "1999-03-30", genres: ["Action", "Science Fiction"], overview: "Set in the 22nd century, The Matrix tells the story of a computer hacker who joins a group of underground insurgents fighting the 3D world.", poster_url: "https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg" },
-    { id: 550, title: "Fight Club", rating: 8.4, release_date: "1999-10-15", genres: ["Drama"], overview: "A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy.", poster_url: "https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg" },
-    { id: 2874, title: "Gladiator", rating: 8.2, release_date: "2000-05-01", genres: ["Action", "Drama", "Adventure"], overview: "In the year 180, the death of Emperor Marcus Aurelius throws the Roman Empire into chaos. Maximus is a beloved general.", poster_url: "https://image.tmdb.org/t/p/w500/ty8TG51RSp211-1Z5.jpg" },
-    { id: 286217, title: "The Martian", rating: 7.7, release_date: "2015-09-30", genres: ["Drama", "Adventure", "Science Fiction"], overview: "During a manned mission to Mars, Astronaut Mark Watney is presumed dead after a fierce storm and left behind by his crew.", poster_url: "https://image.tmdb.org/t/p/w500/5HexmYGDWvWOvYyU0DpE4ABUj2b.jpg" },
-    { id: 19995, title: "Avatar", rating: 7.6, release_date: "2009-12-15", genres: ["Action", "Adventure", "Fantasy", "Science Fiction"], overview: "In the 22nd century, a paraplegic Marine is dispatched to the moon Pandora on a unique mission.", poster_url: "https://image.tmdb.org/t/p/w500/kyeqWdyUXW60W28xBBXZjdoLA1C.jpg" },
-    { id: 872585, title: "Oppenheimer", rating: 8.1, release_date: "2023-07-19", genres: ["Drama", "History"], overview: "The story of J. Robert Oppenheimer's role in the development of the atomic bomb during World War II.", poster_url: "https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg" },
-    { id: 438631, title: "Dune", rating: 7.8, release_date: "2021-09-15", genres: ["Science Fiction", "Adventure"], overview: "Paul Atreides leads nomadic tribes in a battle to control the desert planet Arrakis.", poster_url: "https://image.tmdb.org/t/p/w500/d5NGo2F33PZ32.jpg" },
-    { id: 634649, title: "Spider-Man: No Way Home", rating: 8.0, release_date: "2021-12-15", genres: ["Action", "Adventure", "Science Fiction"], overview: "Peter Parker asks Doctor Strange to restore his secret identity with magic.", poster_url: "https://image.tmdb.org/t/p/w500/1g0dhYtq4irW12.jpg" },
-    { id: 299536, title: "Avengers: Infinity War", rating: 8.3, release_date: "2018-04-25", genres: ["Action", "Adventure", "Science Fiction"], overview: "The Avengers and their allies must be willing to sacrifice all in an attempt to defeat Thanos.", poster_url: "https://image.tmdb.org/t/p/w500/7WsyChLLEzFi6a.jpg" },
-    { id: 475557, title: "Joker", rating: 8.2, release_date: "2019-10-02", genres: ["Crime", "Thriller", "Drama"], overview: "During the 1980s, a failed stand-up comedian is driven insane and turns to a life of crime in Gotham City.", poster_url: "https://image.tmdb.org/t/p/w500/udDclMM8ibW.jpg" },
-    { id: 278, title: "The Shawshank Redemption", rating: 8.7, release_date: "1994-09-23", genres: ["Drama", "Crime"], overview: "Framed in the 1940s for double murder, banker Andy Dufresne begins a new life at Shawshank prison.", poster_url: "https://image.tmdb.org/t/p/w500/q6y0Go1tsGE.jpg" },
-    { id: 238, title: "The Godfather", rating: 8.7, release_date: "1972-03-14", genres: ["Drama", "Crime"], overview: "Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family.", poster_url: "https://image.tmdb.org/t/p/w500/3bhkrj58Vtu.jpg" },
-    { id: 496243, title: "Parasite", rating: 8.5, release_date: "2019-05-30", genres: ["Comedy", "Thriller", "Drama"], overview: "All unemployed, Ki-taek's family takes peculiar interest in the wealthy Parks.", poster_url: "https://image.tmdb.org/t/p/w500/7IiT.jpg" },
-    { id: 244786, title: "Whiplash", rating: 8.4, release_date: "2014-10-10", genres: ["Drama", "Music"], overview: "Under the direction of a ruthless instructor, a talented young drummer begins to pursue perfection.", poster_url: "https://image.tmdb.org/t/p/w500/7fn4.jpg" },
-    { id: 68718, title: "Django Unchained", rating: 8.1, release_date: "2012-12-25", genres: ["Drama", "Western"], overview: "With the help of a German bounty hunter, a freed slave sets out to rescue his wife.", poster_url: "https://image.tmdb.org/t/p/w500/7o.jpg" },
-    { id: 597, title: "Titanic", rating: 7.9, release_date: "1997-11-18", genres: ["Drama", "Romance"], overview: "101-year-old Rose DeWitt Bukater tells the story of her life aboard the Titanic.", poster_url: "https://image.tmdb.org/t/p/w500/9xjz.jpg" }
+    { id: 262227, title: "Race Gurram", rating: 7.2, release_date: "2014-04-11", original_language: "te", genres: ["Action", "Comedy"], overview: "Two brothers with opposing personalities clash with a corrupt politician who threatens their family.", poster_url: "https://image.tmdb.org/t/p/w500/gu3bzAFuQH3fZEFnCsj9uWGZH0v.jpg" },
+    { id: 610482, title: "Agent Sai Srinivasa Athreya", rating: 7.4, release_date: "2019-06-21", original_language: "te", genres: ["Comedy", "Crime", "Mystery"], overview: "An authentic Andhra detective who operates his own agency investigates a mysterious dead body found on a railway track.", poster_url: "https://image.tmdb.org/t/p/w500/jMVfhhWfHLawVp3kd55KBy3VBsW.jpg" },
+    { id: 125835, title: "Julayi", rating: 7.3, release_date: "2012-08-09", original_language: "te", genres: ["Action", "Comedy"], overview: "A carefree youth gets involved in a bank robbery scheme and engages in a game of cat and mouse with a ruthless gangster.", poster_url: "https://image.tmdb.org/t/p/w500/tIUBifudyRCKhF1utslaDoDRteW.jpg" },
+    { id: 628241, title: "Ala Vaikunthapurramuloo", rating: 7.6, release_date: "2020-01-12", original_language: "te", genres: ["Action", "Comedy", "Drama"], overview: "Bantu grows up being constantly degraded by his father, until he learns that he was swapped at birth with a wealthy businessman's son.", poster_url: "https://image.tmdb.org/t/p/w500/50cWZdbrmptTRKCAIfx7lSTj12z.jpg" },
+    { id: 374954, title: "Sarrainodu", rating: 6.9, release_date: "2016-04-08", original_language: "te", genres: ["Action", "Drama"], overview: "An ex-military officer takes matters into his own hands when a corrupt politician's son escapes justice.", poster_url: "https://image.tmdb.org/t/p/w500/dYOlnzv8LmirzwtbXTU4ROGIebv.jpg" },
+    { id: 690957, title: "Pushpa: The Rise", rating: 7.6, release_date: "2021-12-16", original_language: "te", genres: ["Action", "Crime", "Drama"], overview: "A laborer rises through the ranks of a red sandalwood smuggling syndicate.", poster_url: "https://image.tmdb.org/t/p/w500/4DpNRjV7ITZ1GzCvrvCk86th0w.jpg" },
+    { id: 256040, title: "Baahubali: The Beginning", rating: 8.0, release_date: "2015-07-10", original_language: "te", genres: ["Action", "Adventure", "Drama"], overview: "An adventurous man learns about his royal heritage and the heroic battle fought by his father to protect his kingdom.", poster_url: "https://image.tmdb.org/t/p/w500/9BAjt8nSSms62uOVYn1t3C3dVto.jpg" },
+    { id: 350312, title: "Baahubali 2: The Conclusion", rating: 8.2, release_date: "2017-04-27", original_language: "te", genres: ["Action", "Adventure", "Drama"], overview: "Shivudu discovers his legacy as Mahendra Baahubali and sets out to reclaim the throne of Mahishmati.", poster_url: "https://image.tmdb.org/t/p/w500/21sC2assImQIYCEDA84Qh9d1RsK.jpg" },
+    { id: 579974, title: "RRR", rating: 7.8, release_date: "2022-03-24", original_language: "te", genres: ["Action", "Drama"], overview: "A fearless revolutionary and an officer in the British army forge an unbreakable friendship.", poster_url: "https://image.tmdb.org/t/p/w500/u0XUBNQWlOvrh0Gd97ARGpIkL0.jpg" },
+    { id: 23790, title: "Magadheera", rating: 7.7, release_date: "2009-07-31", original_language: "te", genres: ["Action", "Drama", "Fantasy"], overview: "A bike stuntman realizes he was a warrior in his previous life 400 years ago.", poster_url: "https://image.tmdb.org/t/p/w500/xK7MEV56GF291VG0U5XnVJuvNv3.jpg" },
+    { id: 80276, title: "Dookudu", rating: 7.4, release_date: "2011-09-23", original_language: "te", genres: ["Action", "Comedy"], overview: "An undercover cop creates an elaborate fake environment to keep his father happy while hunting down corrupt politicians.", poster_url: "https://image.tmdb.org/t/p/w500/e9uffrN9z22uuiBF9B0bTDDvbjz.jpg" },
+    { id: 148265, title: "Eega", rating: 7.6, release_date: "2012-07-05", original_language: "te", genres: ["Action", "Fantasy", "Comedy"], overview: "A murdered man is reincarnated as a housefly and seeks revenge on his killer.", poster_url: "https://image.tmdb.org/t/p/w500/pX7fn4EZrg2YFlV4GNMIfHDOQZ6.jpg" },
+    { id: 224061, title: "Atharintiki Daaredi", rating: 7.0, release_date: "2013-09-27", original_language: "te", genres: ["Action", "Comedy", "Drama"], overview: "Gautham promises his grandfather that he will bring his estranged aunt back into their family.", poster_url: "https://image.tmdb.org/t/p/w500/htv7AcIhJc94dPmbkhVdZ5tFET7.jpg" },
+    { id: 23381, title: "Pokiri", rating: 7.5, release_date: "2006-04-27", original_language: "te", genres: ["Action", "Crime", "Thriller"], overview: "A ruthless hitman joins a rival gang to eliminate all underworld crime bosses.", poster_url: "https://image.tmdb.org/t/p/w500/rQ8NH5f3CxRrmqZWMZNYPwLmjDS.jpg" },
+    { id: 868660, title: "Guntur Kaaram", rating: 6.8, release_date: "2024-01-11", original_language: "te", genres: ["Action", "Drama"], overview: "Years after his mother abandoned him, a fierce underworld Don is forced to sign a legal disclaimer.", poster_url: "https://image.tmdb.org/t/p/w500/qvBt4YLy274ZmoMAfVlwmHkjVkq.jpg" },
+    { id: 1039482, title: "Tillu Square", rating: 7.2, release_date: "2024-03-29", original_language: "te", genres: ["Comedy", "Crime"], overview: "DJ Tillu finds himself entangled in yet another chaotic romantic thriller mystery.", poster_url: "https://image.tmdb.org/t/p/w500/unRseguQgs9YQbzSHTZKIE3qXa7.jpg" },
+    { id: 869760, title: "Hanu-Man", rating: 7.5, release_date: "2024-01-11", original_language: "te", genres: ["Action", "Adventure", "Fantasy"], overview: "An ordinary young man gains the superpowers of Lord Hanuman and protects his village.", poster_url: "https://image.tmdb.org/t/p/w500/m1zq48rWSXxplzoJR8YtbXWnnHM.jpg" },
+    { id: 564147, title: "K.G.F: Chapter 1", rating: 7.5, release_date: "2018-12-20", original_language: "kn", genres: ["Action", "Crime", "Drama"], overview: "A high-stakes mercenary disguises himself as a slave in the Kolar Gold Fields.", poster_url: "https://image.tmdb.org/t/p/w500/ltHlJwvxKv7d0ooCiKSAvfwV9tX.jpg" },
+    { id: 858485, title: "Kantara", rating: 7.6, release_date: "2022-09-30", original_language: "kn", genres: ["Action", "Adventure", "Drama"], overview: "A human vs nature conflict where a champion clashes with a forest officer.", poster_url: "https://image.tmdb.org/t/p/w500/jIsKmkxMzdCZ0Ux1GVSnu8m6Na6.jpg" },
+    { id: 27205, title: "Inception", rating: 8.4, release_date: "2010-07-16", original_language: "en", genres: ["Action", "Science Fiction", "Adventure"], overview: "Cobb, a skilled thief who steals corporate secrets through dream-sharing technology, is given the inverse task of planting an idea into the mind of a C.E.O.", poster_url: "https://image.tmdb.org/t/p/w500/oYuLEW9W2Bmo2B2F8WoiBUdqT2a.jpg" },
+    { id: 157336, title: "Interstellar", rating: 8.4, release_date: "2014-11-05", original_language: "en", genres: ["Adventure", "Drama", "Science Fiction"], overview: "The adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel.", poster_url: "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg" },
+    { id: 155, title: "The Dark Knight", rating: 8.5, release_date: "2008-07-16", original_language: "en", genres: ["Drama", "Action", "Crime", "Thriller"], overview: "Batman raises the stakes in his war on crime with the help of Lt. Jim Gordon and District Attorney Harvey Dent.", poster_url: "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg" },
+    { id: 680, title: "Pulp Fiction", rating: 8.5, release_date: "1994-09-10", original_language: "en", genres: ["Thriller", "Crime"], overview: "A burger-loving hitman, his philosophical partner, a drug-addled gangster's moll and a washed-up boxer intersect in four tales of violence and redemption.", poster_url: "https://image.tmdb.org/t/p/w500/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg" },
+    { id: 603, title: "The Matrix", rating: 8.2, release_date: "1999-03-30", original_language: "en", genres: ["Action", "Science Fiction"], overview: "Set in the 22nd century, The Matrix tells the story of a computer hacker who joins a group of underground insurgents fighting the 3D world.", poster_url: "https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg" },
+    { id: 550, title: "Fight Club", rating: 8.4, release_date: "1999-10-15", original_language: "en", genres: ["Drama"], overview: "A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy.", poster_url: "https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg" }
 ];
 
 function generateOfflineFallback(query, limit = 40) {
@@ -527,15 +521,22 @@ function generateOfflineFallback(query, limit = 40) {
         target = {
             id: 999901,
             title: qClean,
-            rating: 8.4,
+            rating: 7.6,
             release_date: "2020-01-01",
-            genres: ["Action", "Drama", "Science Fiction"],
+            original_language: "te",
+            genres: ["Action", "Comedy", "Drama"],
             overview: `High-dimensional similarity vector match computed for "${qClean}".`,
             poster_url: createFallbackPoster(qClean)
         };
     }
 
-    const recCandidates = STANDALONE_MOVIE_DATABASE.filter(m => m.id !== target.id);
+    const targetLang = target.original_language || "te";
+
+    // Strict language matching: recommend movies in same language first
+    let recCandidates = STANDALONE_MOVIE_DATABASE.filter(m => m.id !== target.id && (m.original_language === targetLang || targetLang === "en"));
+    if (recCandidates.length < 10) {
+        recCandidates = STANDALONE_MOVIE_DATABASE.filter(m => m.id !== target.id);
+    }
 
     const genreMatches = [];
     const interestMatches = [];
@@ -562,13 +563,13 @@ function generateOfflineFallback(query, limit = 40) {
         const itemG = recCandidates[idx % recCandidates.length];
         genreMatches.push(formatObj(itemG, idx, "Genre Matches", "🎭", "Genre Match — Shares primary genre classification, character tropes & thematic style"));
 
-        const itemI = recCandidates[(idx + 5) % recCandidates.length];
+        const itemI = recCandidates[(idx + 2) % recCandidates.length];
         interestMatches.push(formatObj(itemI, idx, "Interest Matches", "⭐", "Interest Match — High audience rating consensus, user reviews & popularity score"));
 
-        const itemC = recCandidates[(idx + 10) % recCandidates.length];
+        const itemC = recCandidates[(idx + 4) % recCandidates.length];
         contentMatches.push(formatObj(itemC, idx, "Content Matches", "🎬", "Content Match — High narrative, storyline & plot theme vector overlap"));
 
-        const itemP = recCandidates[(idx + 15) % recCandidates.length];
+        const itemP = recCandidates[(idx + 6) % recCandidates.length];
         cinematchPicks.push(formatObj(itemP, idx, "CineMatch Picks", "💎", "CineMatch Pick — Curated k-NN algorithmic vector match & critical recommendation"));
     }
 
