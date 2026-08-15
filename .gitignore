@@ -1,0 +1,29 @@
+# Virtual Environment
+venv/
+ENV/
+env/
+
+# Environment Variables & Secrets
+.env
+.env.local
+.env.*.local
+
+# Python Cache & Bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Large Datasets (>100MB blocked by GitHub)
+data/ratings.csv
+data/ratings_filtered.csv
+data/tags.csv
+
+# Heavy Serialized ML Models (>100MB blocked by GitHub)
+model/*.pkl
+
+# OS Metadata Files
+.DS_Store
+Thumbs.db
+*.lnk
