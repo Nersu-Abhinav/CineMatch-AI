@@ -210,12 +210,16 @@ async function fetchTMDBClientFallback(query, limit = 40) {
         const detailsRes = await fetch(`https://api.themoviedb.org/3/movie/${tmdbId}?api_key=${TMDB_CLIENT_KEY}`);
         const detailsData = detailsRes.ok ? await detailsRes.json() : mainMovie;
 
-        // Fetch Recommendations Page 1 & Page 2 + Similar Movies Page 1 & Page 2
-        const [recs1, recs2, sim1, sim2] = await Promise.all([
+        // Fetch Recommendations Page 1, 2, 3 + Similar Movies Page 1, 2, 3 + Discover Page 1, 2
+        const [recs1, recs2, recs3, sim1, sim2, sim3, disc1, disc2] = await Promise.all([
             fetch(`https://api.themoviedb.org/3/movie/${tmdbId}/recommendations?api_key=${TMDB_CLIENT_KEY}&page=1`).then(r => r.ok ? r.json() : null),
             fetch(`https://api.themoviedb.org/3/movie/${tmdbId}/recommendations?api_key=${TMDB_CLIENT_KEY}&page=2`).then(r => r.ok ? r.json() : null),
+            fetch(`https://api.themoviedb.org/3/movie/${tmdbId}/recommendations?api_key=${TMDB_CLIENT_KEY}&page=3`).then(r => r.ok ? r.json() : null),
             fetch(`https://api.themoviedb.org/3/movie/${tmdbId}/similar?api_key=${TMDB_CLIENT_KEY}&page=1`).then(r => r.ok ? r.json() : null),
-            fetch(`https://api.themoviedb.org/3/movie/${tmdbId}/similar?api_key=${TMDB_CLIENT_KEY}&page=2`).then(r => r.ok ? r.json() : null)
+            fetch(`https://api.themoviedb.org/3/movie/${tmdbId}/similar?api_key=${TMDB_CLIENT_KEY}&page=2`).then(r => r.ok ? r.json() : null),
+            fetch(`https://api.themoviedb.org/3/movie/${tmdbId}/similar?api_key=${TMDB_CLIENT_KEY}&page=3`).then(r => r.ok ? r.json() : null),
+            fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_CLIENT_KEY}&sort_by=popularity.desc&page=1`).then(r => r.ok ? r.json() : null),
+            fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_CLIENT_KEY}&sort_by=popularity.desc&page=2`).then(r => r.ok ? r.json() : null)
         ]);
 
         let candidatePool = [];
@@ -233,8 +237,10 @@ async function fetchTMDBClientFallback(query, limit = 40) {
 
         addCandidates(recs1?.results);
         addCandidates(recs2?.results);
+        addCandidates(recs3?.results);
         addCandidates(sim1?.results);
         addCandidates(sim2?.results);
+        addCandidates(sim3?.results);
 
         // Include other search results matching title
         results.forEach(r => {
@@ -244,15 +250,8 @@ async function fetchTMDBClientFallback(query, limit = 40) {
             }
         });
 
-        // Backup fetch if candidate count is below 50
-        if (candidatePool.length < 50) {
-            const genreId = (detailsData.genres && detailsData.genres[0]) ? detailsData.genres[0].id : 28;
-            const extraRes = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_CLIENT_KEY}&with_genres=${genreId}&sort_by=popularity.desc&page=1`);
-            if (extraRes.ok) {
-                const extraData = await extraRes.json();
-                addCandidates(extraData.results);
-            }
-        }
+        addCandidates(disc1?.results);
+        addCandidates(disc2?.results);
 
         const genresMap = {
             28: "Action", 12: "Adventure", 16: "Animation", 35: "Comedy", 80: "Crime",

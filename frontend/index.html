@@ -108,13 +108,10 @@
                     </div>
 
                     <div class="search-controls-right">
-                        <div class="limit-selector" title="Number of recommendations">
+                        <div class="limit-selector" title="Strictly 40 Movies Recommendation Engine">
                             <label for="limitSelect">Results:</label>
-                            <select id="limitSelect" onchange="updateLimit(this.value)">
-                                <option value="40" selected>40 Movies</option>
-                                <option value="60">60 Movies</option>
-                                <option value="80">80 Movies</option>
-                                <option value="20">20 Movies</option>
+                            <select id="limitSelect" onchange="updateLimit(40)">
+                                <option value="40" selected>40 Movies (Strict)</option>
                             </select>
                         </div>
 
@@ -480,7 +477,7 @@
     <!-- ======================================
          JAVASCRIPT ENGINE
     ======================================= -->
-    <script src="script.js?v=50.0"></script>
+    <script src="script.js?v=60.0"></script>
 
 
 
