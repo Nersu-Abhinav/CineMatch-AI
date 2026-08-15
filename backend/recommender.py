@@ -172,9 +172,10 @@ def get_recommendations(movie_title, number_of_recommendations=10):
     # ------------------------------------------------------------------
     benchmark_key = None
     for k in BENCHMARK_MOVIES:
-        if k in movie_title_clean or movie_title_clean in k or k in fuzzy_title or fuzzy_title in k:
+        if k == movie_title_clean or k == fuzzy_title:
             benchmark_key = k
             break
+
 
     if benchmark_key:
         cfg = BENCHMARK_MOVIES[benchmark_key]

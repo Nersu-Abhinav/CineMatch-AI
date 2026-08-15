@@ -525,7 +525,16 @@ async function fetchTMDBClientFallback(query, limit = 10) {
 // 04. CORE SEARCH & API FETCHING PIPELINE
 // --------------------------------------------------------------------------
 async function searchMovie(queryOverride = null) {
-    const movieName = (queryOverride || (searchInput ? searchInput.value : "") || (navSearchInput ? navSearchInput.value : "")).trim();
+    let movieName = "";
+    if (queryOverride) {
+        movieName = String(queryOverride).trim();
+    } else if (document.activeElement === navSearchInput && navSearchInput && navSearchInput.value.trim()) {
+        movieName = navSearchInput.value.trim();
+    } else if (searchInput && searchInput.value.trim()) {
+        movieName = searchInput.value.trim();
+    } else if (navSearchInput && navSearchInput.value.trim()) {
+        movieName = navSearchInput.value.trim();
+    }
 
     if (!movieName) {
         showSearchError("Please enter a movie title to discover recommendations.", "");
@@ -540,14 +549,15 @@ async function searchMovie(queryOverride = null) {
     const lowerQuery = movieName.toLowerCase();
     const lowerCleaned = cleanedQuery.toLowerCase();
 
-    // Check benchmark client mapping (raw or typo-cleaned)
+    // Check benchmark client mapping (strict exact match)
     let matchedBenchmarkKey = null;
     for (const key in CLIENT_BENCHMARKS) {
-        if (key.includes(lowerQuery) || lowerQuery.includes(key) || key.includes(lowerCleaned) || lowerCleaned.includes(key)) {
+        if (key === lowerQuery || key === lowerCleaned) {
             matchedBenchmarkKey = key;
             break;
         }
     }
+
 
     try {
         let data = null;
