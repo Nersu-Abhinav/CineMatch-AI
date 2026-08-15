@@ -122,6 +122,18 @@ function focusSearch() {
     }
 }
 
+function scrollToSection(id, event) {
+    if (event) event.preventDefault();
+    if (!id || id === 'home' || id === 'top') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+    }
+    const el = document.getElementById(id);
+    if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
 function clearSearch() {
     if (searchInput) searchInput.value = "";
     if (navSearchInput) navSearchInput.value = "";

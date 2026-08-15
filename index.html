@@ -47,7 +47,7 @@
          NAVIGATION BAR
     ======================================= -->
     <header class="navbar">
-        <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <div class="logo" onclick="scrollToSection('home', event)">
             <div class="logo-icon">
                 <span>C</span>
             </div>
@@ -58,12 +58,11 @@
         </div>
 
         <nav class="nav-links">
-            <a href="#" class="nav-back-link">← Landing Page</a>
-            <a href="#home" class="active">Engine Console</a>
-            <a href="#spotlight">Spotlight</a>
-            <a href="#recommendations">Recommendations</a>
-            <a href="#moods">Moods</a>
-            <a href="#" onclick="openArchitectureModal(event)">Architecture</a>
+            <a href="javascript:void(0)" onclick="scrollToSection('home', event)" class="active">Home</a>
+            <a href="javascript:void(0)" onclick="scrollToSection('spotlight', event)">Spotlight</a>
+            <a href="javascript:void(0)" onclick="scrollToSection('recommendations', event)">Recommendations</a>
+            <a href="javascript:void(0)" onclick="scrollToSection('moods', event)">Moods</a>
+            <a href="javascript:void(0)" onclick="openArchitectureModal(event)">Architecture</a>
         </nav>
 
         <div class="nav-actions">
@@ -90,8 +89,7 @@
                 </div>
 
                 <h1 class="hero-title">
-                    Discover Movies<br>
-                    Beyond <span class="gradient-text">Ordinary<br>Algorithms.</span>
+                    Discover Movies Beyond <span class="gradient-text">Ordinary Algorithms.</span>
                 </h1>
 
                 <p class="hero-description">
@@ -364,7 +362,7 @@
 
             <div class="footer-bottom">
                 <p>© 2026 CineMatch AI. Built for movie lovers. Powered by MovieLens & TMDB.</p>
-                <a href="#home" class="back-to-top">Back to top ↑</a>
+                <a href="javascript:void(0)" onclick="scrollToSection('home', event)" class="back-to-top">Back to top ↑</a>
             </div>
         </div>
     </footer>
