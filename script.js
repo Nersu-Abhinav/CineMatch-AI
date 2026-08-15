@@ -472,7 +472,7 @@ function cleanTypos(text) {
     return s2.trim();
 }
 
-const TMDB_CLIENT_KEY = "15d2ce67547089e02406b16ad6f04d57";
+const TMDB_CLIENT_KEY = "437007ac895c0e5767f5b85e69435d24";
 
 async function fetchTMDBClientFallback(query, limit = 10) {
     try {
