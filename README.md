@@ -2,181 +2,183 @@
 
 # 🎬 CineMatch AI — Next-Gen Movie Recommendation Engine
 
-> **High-Dimensional Item-Item Collaborative Filtering & Real-Time TMDB Metadata Enrichment**
+<a href="https://readme-typing-svg.herokuapp.com">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Outfit&weight=800&size=26&duration=2500&pause=800&color=F5C518&center=true&vCenter=true&width=800&lines=%F0%9F%8F%AC+CINEMATCH+AI+%E2%80%94+DISCOVER+MOVIES+BEYOND+ORDINARY+ALGORITHMS;%F0%9F%8C%8C+Item-Item+Collaborative+Filtering+Vector+Space;%F0%9F%9A%80+Real-Time+TMDB+v3+4K+Poster+%26+Metadata+Enrichment;%E2%9C%A8+High-Dimensional+Nearest-Neighbors+Matrix+Math" alt="Typing SVG" />
+</a>
 
-[![Live Web Application](https://img.shields.io/badge/🌐_Live_Demo-https%3A%2F%2Fnersu--abhinav.github.io%2FCineMatch--AI%2F-f5c518?style=for-the-badge&logo=googlechrome&logoColor=black)](https://nersu-abhinav.github.io/CineMatch-AI/)
-[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
-[![scikit-learn](https://img.shields.io/badge/scikit--learn-1.3+-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
+<br><br>
+
+[![Live Web Application](https://img.shields.io/badge/🌐_LIVE_SITE-ONLINE-f5c518?style=for-the-badge&logo=googlechrome&logoColor=black)](https://nersu-abhinav.github.io/CineMatch-AI/)
+[![Python](https://img.shields.io/badge/PYTHON-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FASTAPI-0.100+-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![scikit-learn](https://img.shields.io/badge/SCIKIT--LEARN-1.3+-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
 [![TMDB API](https://img.shields.io/badge/TMDB_API-v3-01b4e4?style=for-the-badge&logo=themoviedb&logoColor=white)](https://www.themoviedb.org/)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
+[![License](https://img.shields.io/badge/LICENSE-MIT-blue.svg?style=for-the-badge)](LICENSE)
 
-[🌐 Live Demo](https://nersu-abhinav.github.io/CineMatch-AI/) • [✨ Features](#-key-features) • [🏗️ Architecture](#%EF%B8%8F-architecture--data-pipeline) • [🛠️ Tech Stack](#%EF%B8%8F-tech-stack) • [🚀 Quick Start](#-quick-start)
+<br>
+
+[🌐 Live Application](https://nersu-abhinav.github.io/CineMatch-AI/) • [🔮 Features](#-quantum-engine-features) • [🏗️ Architecture](#%EF%B8%8F-futuristic-system-architecture) • [🛠️ Tech Stack](#%EF%B8%8F-high-tech-matrix) • [🚀 Launch Engine](#-launch-engine-quick-start)
 
 ---
 
 </div>
 
-> [!NOTE]
-> **Experience CineMatch AI Online**: Access the deployed single-page discovery web app instantly at **[https://nersu-abhinav.github.io/CineMatch-AI/](https://nersu-abhinav.github.io/CineMatch-AI/)**. No installation required!
+> [!IMPORTANT]
+> 🍿 **EXPERIENCE THE LIVE DISCOVERY ENGINE**: Launch the web application right now in your browser at **[https://nersu-abhinav.github.io/CineMatch-AI/](https://nersu-abhinav.github.io/CineMatch-AI/)**. No setup or installation required!
 
 ---
 
-## 🌟 Overview
+## 🍿 The Cinematic Experience
 
-**CineMatch AI** is a state-of-the-art movie discovery platform engineered with **Item-Item Collaborative Filtering** ($k$-Nearest Neighbors over a 29+ million user rating matrix). It seamlessly fuses machine learning recommendation vectors with **TMDB API v3** real-time metadata enrichment to deliver hyper-personalized movie recommendations instantly.
-
----
-
-## ✨ Key Features
-
-| Feature | Description |
-| :--- | :--- |
-| ⚡ **Vector Space Similarity** | High-performance $k$-NN Cosine Distance computations via `scikit-learn` `NearestNeighbors(metric="cosine")`. |
-| 📊 **Sparse CSR Pipeline** | Memory-optimized chunked processing of 29M+ ratings into SciPy Sparse CSR matrices without memory overflow. |
-| 🖼️ **Real-Time TMDB Posters** | Dynamic live fetching of 4K backdrops, high-res posters, vote metrics, genres, and synopses. |
-| 🎨 **Glassmorphic UI** | Responsive dark-mode interface built with modern CSS custom tokens, glass overlays, and smooth animations. |
-| 🔍 **Discovery Controls** | In-memory dynamic sorting (Similarity, Rating, Release Year, Title) and real-time genre/rating filters. |
-| ⚡ **Chain Discovery** | Interactive 1-click discovery chain: click any movie card to instantly spawn recommendations for that film. |
-| 🚀 **1-Click Automation** | Included Windows PowerShell launcher script (`start_project.ps1`) to run API & UI servers concurrently. |
+**CineMatch AI** is a futuristic movie recommendation engine built with **Item-Item Collaborative Filtering** ($k$-Nearest Neighbors across a 29+ million user rating matrix). It seamlessly blends machine learning vector calculations with live **TMDB API v3** metadata to deliver instantaneous, high-precision recommendations in a glassmorphic single-page web environment.
 
 ---
 
-## 🏗️ Architecture & Data Pipeline
+## 🔮 Quantum Engine Features
+
+<table width="100%">
+  <tr>
+    <td width="50%">
+      <h3>🌌 Vector Space Similarity</h3>
+      <p>High-dimensional cosine distance similarity vectors computed over 29M+ ratings using <code>scikit-learn</code> <code>NearestNeighbors</code>.</p>
+    </td>
+    <td width="50%">
+      <h3>⚡ Sparse CSR Pipeline</h3>
+      <p>Memory-optimized chunked processing pipeline transforming raw rating datasets into compressed sparse CSR matrices without RAM exhaustion.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <h3>🖼️ TMDB Live Metadata 4K</h3>
+      <p>Dynamic live fetching of high-res 4K backdrops, poster artwork, vote metrics, genre tags, and official synopses via TMDB API v3.</p>
+    </td>
+    <td width="50%">
+      <h3>🎨 Glassmorphic Interface</h3>
+      <p>State-of-the-art dark mode single-page application featuring glowing neon accents, dynamic backdrop blurs, and liquid smooth transitions.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <h3>💎 Chain Discovery Engine</h3>
+      <p>Interactive 1-click discovery loop: click any movie card to instantly spawn fresh recommendations for that title on the fly.</p>
+    </td>
+    <td width="50%">
+      <h3>🚀 1-Click Launch Automation</h3>
+      <p>Includes an automated PowerShell launcher script (<code>start_project.ps1</code>) to start the API backend & UI frontend in parallel.</p>
+    </td>
+  </tr>
+</table>
+
+---
+
+## 🏗️ Futuristic System Architecture
 
 ```mermaid
 sequenceDiagram
     autonumber
-    actor User as 👤 Movie Lover
-    participant UI as 🎨 Frontend (index.html / script.js)
-    participant API as ⚡ FastAPI Backend (main.py)
-    participant Rec as 🧠 Recommender Core (recommender.py)
+    actor User as 👤 Movie Enthusiast
+    participant UI as 🎨 Glassmorphic UI (index.html / script.js)
+    participant API as ⚡ FastAPI Core (main.py)
+    participant Rec as 🧠 Recommender Matrix (recommender.py)
     participant Model as 📐 Sparse k-NN (collaborative_model.pkl)
     participant TMDB as 🎬 TMDB API v3
 
-    User->>UI: Types title (e.g. "Interstellar") & clicks Discover
-    UI->>API: GET /recommend?movie=Interstellar&limit=10
-    API->>Rec: get_recommendations("Interstellar", 10)
-    Rec->>Rec: find_movie("Interstellar") -> MovieLens ID (59315)
-    Rec->>TMDB: get_movie_metadata(59315)
-    TMDB-->>Rec: Poster, backdrop, overview, rating
-    Rec->>Model: kneighbors(vector_59315, n_neighbors=11)
-    Model-->>Rec: Returns nearest neighbor indices & cosine distances
+    User->>UI: Types title ("Dark Knight") & clicks Discover
+    UI->>API: GET /recommend?movie=Dark%20Knight&limit=10
+    API->>Rec: get_recommendations("Dark Knight", 10)
+    Rec->>Rec: Map title -> MovieLens ID (58559)
+    Rec->>TMDB: Fetch metadata & high-res posters
+    TMDB-->>Rec: Poster, backdrop, overview, ratings
+    Rec->>Model: Compute Cosine Distance (n_neighbors=11)
+    Model-->>Rec: Nearest neighbor indices & distances
     loop For each recommended movie
-        Rec->>TMDB: get_movie_metadata(neighbor_id)
-        TMDB-->>Rec: Enriched metadata & poster URL
+        Rec->>TMDB: Live metadata & poster fetch
+        TMDB-->>Rec: Enriched metadata object
     end
-    Rec-->>API: Returns JSON payload
+    Rec-->>API: JSON recommendation payload
     API-->>UI: HTTP 200 OK JSON Response
     UI->>UI: Renders Spotlight & Recommendations Grid
 ```
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ High-Tech Matrix
 
-```
-   ┌─────────────────────────────────────────────────────────────┐
-   │                        CINEMATCH AI                         │
-   └──────────────┬───────────────────────────────┬──────────────┘
-                  │                               │
-       ┌──────────┴───────────┐       ┌───────────┴──────────┐
-       │   BACKEND ENGINE     │       │   FRONTEND ENGINE    │
-       ├──────────────────────┤       ├──────────────────────┤
-       │  • Python 3.10+      │       │  • HTML5 Semantic    │
-       │  • FastAPI           │       │  • Vanilla JS (ES6+) │
-       │  • Uvicorn           │       │  • Glassmorphic CSS  │
-       │  • Scikit-Learn k-NN │       │  • Google Outfit Font│
-       │  • SciPy Sparse CSR  │       │  • Responsive Grid   │
-       │  • Pandas / NumPy    │       └──────────────────────┘
-       │  • TMDB API v3 Client│
-       └──────────────────────┘
-```
+| Layer | Technologies |
+| :--- | :--- |
+| **Backend Engine** | ![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat-square&logo=python&logoColor=white) ![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688?style=flat-square&logo=fastapi&logoColor=white) ![Uvicorn](https://img.shields.io/badge/Uvicorn-0.22+-499848?style=flat-square) ![Scikit-Learn](https://img.shields.io/badge/Scikit_Learn-1.3+-F7931E?style=flat-square&logo=scikit-learn&logoColor=white) ![Pandas](https://img.shields.io/badge/Pandas-2.0+-150458?style=flat-square&logo=pandas&logoColor=white) |
+| **Frontend UI** | ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=flat-square&logo=javascript&logoColor=black) ![CSS3](https://img.shields.io/badge/CSS3_Glassmorphism-1572B6?style=flat-square&logo=css3&logoColor=white) ![Google Outfit](https://img.shields.io/badge/Google_Fonts-Outfit-4285F4?style=flat-square&logo=google&logoColor=white) |
+| **Data Enrichment** | ![TMDB](https://img.shields.io/badge/TMDB_API-v3-01b4e4?style=flat-square&logo=themoviedb&logoColor=white) ![MovieLens](https://img.shields.io/badge/MovieLens-29M+_Ratings-FF6F00?style=flat-square) |
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Launch Engine (Quick Start)
 
 ### 1. Prerequisites
-- **Python 3.10** or higher installed
-- Free TMDB API Key / Access Token ([Get key from TMDB](https://www.themoviedb.org/settings/api))
+- **Python 3.10** or higher
+- Free TMDB API Access Token ([Get Token](https://www.themoviedb.org/settings/api))
 
-### 2. Installation & Environment Setup
+### 2. Environment Setup
 
 ```bash
-# 1. Clone the repository
+# Clone repository
 git clone https://github.com/Nersu-Abhinav/CineMatch-AI.git
 cd CineMatch-AI
 
-# 2. Create virtual environment
+# Create virtual environment
 python -m venv venv
 
-# On Windows:
+# Activate Virtual Environment
+# Windows:
 .\venv\Scripts\activate
-# On macOS/Linux:
+# macOS/Linux:
 source venv/bin/activate
 
-# 3. Install core dependencies
+# Install dependencies
 pip install fastapi uvicorn pandas numpy scipy scikit-learn joblib requests python-dotenv
 ```
 
-### 3. Configure Environment Variables
-Copy `.env.example` to `.env` and insert your TMDB Read Access Token:
+### 3. Environment Variables
+Copy `.env.example` to `.env` and set your TMDB API Token:
 
 ```bash
 cp .env.example .env
 ```
 
-Edit `.env`:
 ```env
 TMDB_API_TOKEN=your_tmdb_read_access_token_here
 ```
 
-### 4. Prepare Data & Train Model
+### 4. Train Model & Launch
 
 ```bash
-# Step 1: Filter raw ratings down to top 5,000 catalog items
+# 1. Filter raw ratings to top 5,000 catalog items
 python prepare_data.py
 
-# Step 2: Train Item-Item Nearest-Neighbors collaborative model
+# 2. Train Collaborative Nearest-Neighbors Model
 python train_collaborative.py
 ```
 
-### 5. Launch Application
-
 > [!TIP]
-> **Windows PowerShell Users**: Run the included 1-click launcher script to spin up both backend and frontend servers simultaneously!
+> **1-Click Launch (Windows PowerShell)**:
 > ```powershell
 > .\start_project.ps1
 > ```
 
-**Manual Launch**:
-
-- **Terminal 1 (FastAPI Backend)**:
-  ```bash
-  python -m uvicorn backend.main:app --reload --port 8000
-  ```
-- **Terminal 2 (Frontend Local Server)**:
-  ```bash
-  cd frontend
-  python -m http.server 5500
-  ```
-- Open browser at: **`http://127.0.0.1:5500`**
-
 ---
 
-## 📁 Repository Structure
+## 📁 Cyber File Matrix
 
 ```
 CineMatch-AI/
 ├── 📁 backend/
-│   ├── main.py                # FastAPI app routes, CORS, /recommend endpoint
+│   ├── main.py                # FastAPI routes & CORS setup
 │   └── recommender.py         # 3-tier recommendation cascade engine
 ├── 📁 data/                      # MovieLens links & dataset files
 ├── 📁 frontend/
-│   ├── index.html             # Application markup & glassmorphic layout
-│   ├── script.js              # State management & dynamic TMDB fallback pipeline
-│   └── style.css              # Dark-mode design system & visual tokens
+│   ├── index.html             # Application structure & glass layout
+│   ├── script.js              # State engine & dynamic TMDB pipeline
+│   └── style.css              # Custom dark-mode glassmorphic styling
 ├── 📁 model/                     # Serialized k-NN model artifacts (.pkl)
 ├── movie_metadata.py          # MovieLens ID to TMDB API bridge
 ├── prepare_data.py            # Chunked data filtering pipeline
@@ -196,16 +198,24 @@ CineMatch-AI/
 
 If you enjoy using **CineMatch AI**, please consider giving this repository a ⭐ **Star** on GitHub!
 
-[![GitHub Stars](https://img.shields.io/github/stars/Nersu-Abhinav/CineMatch-AI?style=social)](https://github.com/Nersu-Abhinav/CineMatch-AI/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/Nersu-Abhinav/CineMatch-AI?style=social)](https://github.com/Nersu-Abhinav/CineMatch-AI/network/members)
-
 <br>
 
-<a href="#top">
-  <img src="https://img.shields.io/badge/⬆_Back_To_Top-f5c518?style=for-the-badge&logoColor=black" alt="Back to Top">
+<a href="https://github.com/Nersu-Abhinav/CineMatch-AI/stargazers">
+  <img src="https://img.shields.io/github/stars/Nersu-Abhinav/CineMatch-AI?style=for-the-badge&color=f5c518&logo=github&logoColor=black" alt="GitHub Stars" />
+</a>
+<a href="https://github.com/Nersu-Abhinav/CineMatch-AI/network/members">
+  <img src="https://img.shields.io/github/forks/Nersu-Abhinav/CineMatch-AI?style=for-the-badge&color=06b6d4&logo=github&logoColor=black" alt="GitHub Forks" />
 </a>
 
 <br><br>
+
+<a href="#top">
+  <img src="https://img.shields.io/badge/🚀_LAUNCH_TO_TOP-f5c518?style=for-the-badge&logoColor=black" alt="Back to Top" />
+</a>
+
+<br><br>
+
+> *"May the recommendations be with you."* 🍿
 
 **Crafted with ❤️ for movie lovers worldwide.**
 
