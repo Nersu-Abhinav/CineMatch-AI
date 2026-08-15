@@ -311,16 +311,16 @@ button, input, select {
    05. HERO SECTION & CONSOLE
    -------------------------------------------------------------------------- */
 .hero {
-    min-height: 80vh;
+    min-height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 140px 6vw 80px;
+    padding: 105px 6vw 35px;
     position: relative;
 }
 
 .hero-content {
-    max-width: 860px;
+    max-width: 800px;
     width: 100%;
     text-align: center;
     margin: 0 auto;
@@ -330,11 +330,11 @@ button, input, select {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    padding: 6px 16px;
+    padding: 5px 14px;
     background: rgba(245, 197, 24, 0.08);
     border: 1px solid rgba(245, 197, 24, 0.25);
     border-radius: var(--radius-full);
-    margin-bottom: 24px;
+    margin-bottom: 14px;
 }
 
 .pulse {
@@ -353,7 +353,7 @@ button, input, select {
 
 .eyebrow-text {
     color: var(--accent-gold);
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
     letter-spacing: 1.5px;
 }
@@ -361,10 +361,10 @@ button, input, select {
 .hero-title {
     font-family: 'Syne', sans-serif;
     font-weight: 800;
-    font-size: clamp(40px, 5.5vw, 72px);
-    line-height: 1.05;
-    letter-spacing: -1.5px;
-    margin-bottom: 20px;
+    font-size: clamp(30px, 3.8vw, 52px);
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
 }
 
 .gradient-text {
@@ -374,12 +374,13 @@ button, input, select {
 }
 
 .hero-description {
-    font-size: clamp(15px, 1.8vw, 18px);
+    font-size: clamp(14px, 1.4vw, 16px);
     color: var(--text-secondary);
-    max-width: 660px;
-    margin: 0 auto 38px;
-    line-height: 1.7;
+    max-width: 600px;
+    margin: 0 auto 22px;
+    line-height: 1.6;
 }
+
 
 /* Glass Search Console (Sticky Navigation) */
 .search-console {
