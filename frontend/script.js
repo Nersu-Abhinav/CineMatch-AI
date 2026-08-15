@@ -672,6 +672,7 @@ function clearSessionHistory() {
 // 06. IN-MEMORY FILTERING & SORTING LOGIC
 // --------------------------------------------------------------------------
 function populateGenreDropdown() {
+    if (!genreFilterSelect) return;
     const genresSet = new Set();
     appState.recommendations.forEach(m => {
         if (Array.isArray(m.genres)) {
@@ -918,14 +919,15 @@ function createMovieCard(movie) {
 
 function switchView(mode) {
     appState.viewMode = mode;
+    if (!movieGrid) return;
     if (mode === "grid") {
         movieGrid.className = "movie-grid grid-mode";
-        gridViewBtn.classList.add("active");
-        listViewBtn.classList.remove("active");
+        if (gridViewBtn) gridViewBtn.classList.add("active");
+        if (listViewBtn) listViewBtn.classList.remove("active");
     } else {
         movieGrid.className = "movie-grid list-mode";
-        listViewBtn.classList.add("active");
-        gridViewBtn.classList.remove("active");
+        if (listViewBtn) listViewBtn.classList.add("active");
+        if (gridViewBtn) gridViewBtn.classList.remove("active");
     }
 }
 
