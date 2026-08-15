@@ -67,6 +67,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 clearSearchBtn.classList.add("hidden");
             }
         });
+
+        searchInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                searchMovie();
+            }
+        });
     }
 
     if (navSearchInput) {
@@ -159,9 +166,7 @@ function quickSearch(title) {
 // 04. CORE SEARCH & API FETCHING PIPELINE
 // --------------------------------------------------------------------------
 // CLIENT-SIDE BENCHMARK ACCURACY ENGINE
-// --------------------------------------------------------------------------const CLIENT_BENCHMARKS = {};
-
-};
+const CLIENT_BENCHMARKS = {};
 
 function cleanTypos(text) {
     if (!text) return "";
@@ -182,18 +187,25 @@ async function fetchTMDBClientFallback(query, limit = 10) {
 
         const qLower = query.trim().toLowerCase();
 
-        // 1. Pick exact title match if available
-        let exactMatches = results.filter(r =>
-            (r.title && r.title.trim().toLowerCase() === qLower) ||
-            (r.original_title && r.original_title.trim().toLowerCase() === qLower)
-        );
+        // Sort results by popularity and vote count so major movies always rank first
+        const sortedResults = [...results].sort((a, b) => {
+            const scoreA = (a.vote_count || 0) * (a.popularity || 1);
+            const scoreB = (b.vote_count || 0) * (b.popularity || 1);
+            return scoreB - scoreA;
+        });
+
+        // 1. Pick exact title match if available (including "the " prefix matching)
+        let exactMatches = sortedResults.filter(r => {
+            const t = (r.title || "").trim().toLowerCase();
+            const ot = (r.original_title || "").trim().toLowerCase();
+            return t === qLower || ot === qLower || t === `the ${qLower}` || ot === `the ${qLower}`;
+        });
 
         let mainMovie = null;
         if (exactMatches.length > 0) {
-            exactMatches.sort((a, b) => (b.vote_count * (b.popularity || 1)) - (a.vote_count * (a.popularity || 1)));
             mainMovie = exactMatches[0];
         } else {
-            mainMovie = results[0];
+            mainMovie = sortedResults[0];
         }
 
         const tmdbId = mainMovie.id;
@@ -281,11 +293,9 @@ async function searchMovie(queryOverride = null) {
     let movieName = "";
     if (queryOverride) {
         movieName = String(queryOverride).trim();
-    } else if (document.activeElement === navSearchInput && navSearchInput && navSearchInput.value.trim()) {
-        movieName = navSearchInput.value.trim();
-    } else if (searchInput && searchInput.value.trim()) {
+    } else if (searchInput && searchInput.value && searchInput.value.trim()) {
         movieName = searchInput.value.trim();
-    } else if (navSearchInput && navSearchInput.value.trim()) {
+    } else if (navSearchInput && navSearchInput.value && navSearchInput.value.trim()) {
         movieName = navSearchInput.value.trim();
     }
 
