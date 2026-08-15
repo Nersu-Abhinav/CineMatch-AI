@@ -381,19 +381,23 @@ button, input, select {
     line-height: 1.7;
 }
 
-/* Glass Search Console */
+/* Glass Search Console (Sticky Navigation) */
 .search-console {
-    background: var(--bg-glass);
-    backdrop-filter: blur(24px);
+    position: sticky;
+    top: 85px;
+    z-index: 99;
+    background: rgba(14, 15, 23, 0.92);
+    backdrop-filter: blur(28px);
     border: 1px solid var(--border-glass-bright);
     border-radius: var(--radius-lg);
     padding: 10px 10px 10px 22px;
     display: flex;
     align-items: center;
     gap: 14px;
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
     transition: var(--transition-normal);
 }
+
 
 .search-console:focus-within {
     border-color: var(--accent-gold);

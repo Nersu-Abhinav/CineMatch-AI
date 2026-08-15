@@ -410,10 +410,15 @@ async function searchMovie(queryOverride = null) {
         renderSelectedMovie();
         updateBackdrop(data.selected_movie.backdrop_url);
 
-        // Smooth scroll to results
+        // Smooth scroll to results while keeping search console visible
         setTimeout(() => {
-            selectedSection.scrollIntoView({ behavior: "smooth", block: "start" });
+            if (selectedSection) {
+                const yOffset = -160;
+                const y = selectedSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({ top: y, behavior: "smooth" });
+            }
         }, 150);
+
 
     } catch (err) {
         console.error("CineMatch Search Error:", err);
