@@ -229,6 +229,23 @@ button, input, select {
     color: var(--text-primary);
 }
 
+.nav-back-link {
+    background: rgba(168, 85, 247, 0.15);
+    border: 1px solid rgba(168, 85, 247, 0.4);
+    color: #a855f7 !important;
+    padding: 6px 14px;
+    border-radius: 9999px;
+    font-weight: 600 !important;
+    transition: all 0.2s ease !important;
+}
+
+.nav-back-link:hover {
+    background: rgba(168, 85, 247, 0.3);
+    color: #fff !important;
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+    transform: translateY(-1px);
+}
+
 .nav-links a.active::after {
     content: '';
     position: absolute;
