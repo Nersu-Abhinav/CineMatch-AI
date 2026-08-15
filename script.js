@@ -357,7 +357,58 @@ const CLIENT_BENCHMARKS = {
             { "movie_id": 294413, "tmdb_id": 294413, "title": "Aagadu", "similarity": 0.82, "rating": 4.8, "release_date": "2014-09-19", "genres": ["Action", "Comedy"], "overview": "Action + comedy + mass entertainment.", "poster_url": "https://image.tmdb.org/t/p/w500/xDRDhFd4A9QSnJlE5hIJPVSyYuL.jpg", "backdrop_url": null },
             { "movie_id": 111836, "tmdb_id": 111836, "title": "Gabbar Singh", "similarity": 0.80, "rating": 5.9, "release_date": "2012-05-11", "genres": ["Action", "Comedy"], "overview": "Action + comedy + mass elements.", "poster_url": "https://image.tmdb.org/t/p/w500/tFDhzLPhWnjDNda7YHcbeB4gcGi.jpg", "backdrop_url": null }
         ]
+    },
+    "dj: duvvada jagannadham": {
+        "selected_movie": {
+            "movie_id": 443635,
+            "tmdb_id": 443635,
+            "title": "DJ: Duvvada Jagannadham",
+            "rating": 5.8,
+            "release_date": "2017-06-23",
+            "genres": ["Action", "Comedy"],
+            "overview": "A traditional Brahmin cook moonlights as a secret vigilante who fights against corrupt land grabbers.",
+            "poster_url": "https://image.tmdb.org/t/p/w500/hb0hntwxMyFz0HLLmXS3M4cae0P.jpg",
+            "backdrop_url": null
+        },
+        "recommendations": [
+            { "movie_id": 857598, "tmdb_id": 857598, "title": "Pushpa 2 - The Rule", "similarity": 0.98, "rating": 7.5, "release_date": "2024-12-04", "genres": ["Action", "Drama", "Thriller"], "overview": "Allu Arjun, mass action blockbuster sequel.", "poster_url": "https://image.tmdb.org/t/p/w500/vQ9xedlGZ2r14.jpg", "backdrop_url": null },
+            { "movie_id": 690957, "tmdb_id": 690957, "title": "Pushpa: The Rise", "similarity": 0.96, "rating": 7.4, "release_date": "2021-12-16", "genres": ["Action", "Drama", "Thriller"], "overview": "Allu Arjun, iconic mass action entertainer.", "poster_url": "https://image.tmdb.org/t/p/w500/5P8lF4hWz9.jpg", "backdrop_url": null },
+            { "movie_id": 628241, "tmdb_id": 628241, "title": "Ala Vaikunthapurramuloo", "similarity": 0.94, "rating": 7.2, "release_date": "2020-01-12", "genres": ["Action", "Comedy", "Family"], "overview": "Allu Arjun, family action comedy blockbuster.", "poster_url": "https://image.tmdb.org/t/p/w500/z6h3n92.jpg", "backdrop_url": null },
+            { "movie_id": 374954, "tmdb_id": 374954, "title": "Sarrainodu", "similarity": 0.92, "rating": 6.1, "release_date": "2016-04-22", "genres": ["Action", "Drama"], "overview": "Allu Arjun, mass action entertainer.", "poster_url": "https://image.tmdb.org/t/p/w500/dYOlnzv8LmirzwtbXTU4ROGIebv.jpg", "backdrop_url": null },
+            { "movie_id": 262227, "tmdb_id": 262227, "title": "Race Gurram", "similarity": 0.90, "rating": 7.3, "release_date": "2014-04-11", "genres": ["Action", "Comedy"], "overview": "Allu Arjun, action comedy entertainer.", "poster_url": "https://image.tmdb.org/t/p/w500/g4bH3p7F.jpg", "backdrop_url": null },
+            { "movie_id": 125835, "tmdb_id": 125835, "title": "Julayi", "similarity": 0.88, "rating": 6.4, "release_date": "2012-08-09", "genres": ["Action", "Comedy", "Romance"], "overview": "Allu Arjun, action comedy romance.", "poster_url": "https://image.tmdb.org/t/p/w500/tIUBifudyRCKhF1utslaDoDRteW.jpg", "backdrop_url": null },
+            { "movie_id": 500494, "tmdb_id": 500494, "title": "Naa Peru Surya - Naa Illu India", "similarity": 0.86, "rating": 6.5, "release_date": "2018-05-04", "genres": ["Action", "Drama"], "overview": "Allu Arjun, patriotic action drama.", "poster_url": "https://image.tmdb.org/t/p/w500/7a7n823.jpg", "backdrop_url": null },
+            { "movie_id": 215248, "tmdb_id": 215248, "title": "Yevadu", "similarity": 0.84, "rating": 6.3, "release_date": "2014-01-12", "genres": ["Action", "Thriller"], "overview": "Allu Arjun, action thriller.", "poster_url": "https://image.tmdb.org/t/p/w500/8b8392.jpg", "backdrop_url": null },
+            { "movie_id": 77715, "tmdb_id": 77715, "title": "Badrinath", "similarity": 0.82, "rating": 5.4, "release_date": "2011-06-10", "genres": ["Action", "Drama"], "overview": "Allu Arjun, action drama.", "poster_url": "https://image.tmdb.org/t/p/w500/9b9823.jpg", "backdrop_url": null },
+            { "movie_id": 117058, "tmdb_id": 117058, "title": "Desamuduru", "similarity": 0.80, "rating": 5.1, "release_date": "2007-01-12", "genres": ["Action", "Romance"], "overview": "Allu Arjun, action romance.", "poster_url": "https://image.tmdb.org/t/p/w500/3d6LhrRYxTv7oG51cmULdBJQ0GN.jpg", "backdrop_url": null }
+        ]
+    },
+    "duvvada jagannadham": {
+        "selected_movie": {
+            "movie_id": 443635,
+            "tmdb_id": 443635,
+            "title": "DJ: Duvvada Jagannadham",
+            "rating": 5.8,
+            "release_date": "2017-06-23",
+            "genres": ["Action", "Comedy"],
+            "overview": "A traditional Brahmin cook moonlights as a secret vigilante who fights against corrupt land grabbers.",
+            "poster_url": "https://image.tmdb.org/t/p/w500/hb0hntwxMyFz0HLLmXS3M4cae0P.jpg",
+            "backdrop_url": null
+        },
+        "recommendations": [
+            { "movie_id": 857598, "tmdb_id": 857598, "title": "Pushpa 2 - The Rule", "similarity": 0.98, "rating": 7.5, "release_date": "2024-12-04", "genres": ["Action", "Drama", "Thriller"], "overview": "Allu Arjun, mass action blockbuster sequel.", "poster_url": "https://image.tmdb.org/t/p/w500/vQ9xedlGZ2r14.jpg", "backdrop_url": null },
+            { "movie_id": 690957, "tmdb_id": 690957, "title": "Pushpa: The Rise", "similarity": 0.96, "rating": 7.4, "release_date": "2021-12-16", "genres": ["Action", "Drama", "Thriller"], "overview": "Allu Arjun, iconic mass action entertainer.", "poster_url": "https://image.tmdb.org/t/p/w500/5P8lF4hWz9.jpg", "backdrop_url": null },
+            { "movie_id": 628241, "tmdb_id": 628241, "title": "Ala Vaikunthapurramuloo", "similarity": 0.94, "rating": 7.2, "release_date": "2020-01-12", "genres": ["Action", "Comedy", "Family"], "overview": "Allu Arjun, family action comedy blockbuster.", "poster_url": "https://image.tmdb.org/t/p/w500/z6h3n92.jpg", "backdrop_url": null },
+            { "movie_id": 374954, "tmdb_id": 374954, "title": "Sarrainodu", "similarity": 0.92, "rating": 6.1, "release_date": "2016-04-22", "genres": ["Action", "Drama"], "overview": "Allu Arjun, mass action entertainer.", "poster_url": "https://image.tmdb.org/t/p/w500/dYOlnzv8LmirzwtbXTU4ROGIebv.jpg", "backdrop_url": null },
+            { "movie_id": 262227, "tmdb_id": 262227, "title": "Race Gurram", "similarity": 0.90, "rating": 7.3, "release_date": "2014-04-11", "genres": ["Action", "Comedy"], "overview": "Allu Arjun, action comedy entertainer.", "poster_url": "https://image.tmdb.org/t/p/w500/g4bH3p7F.jpg", "backdrop_url": null },
+            { "movie_id": 125835, "tmdb_id": 125835, "title": "Julayi", "similarity": 0.88, "rating": 6.4, "release_date": "2012-08-09", "genres": ["Action", "Comedy", "Romance"], "overview": "Allu Arjun, action comedy romance.", "poster_url": "https://image.tmdb.org/t/p/w500/tIUBifudyRCKhF1utslaDoDRteW.jpg", "backdrop_url": null },
+            { "movie_id": 500494, "tmdb_id": 500494, "title": "Naa Peru Surya - Naa Illu India", "similarity": 0.86, "rating": 6.5, "release_date": "2018-05-04", "genres": ["Action", "Drama"], "overview": "Allu Arjun, patriotic action drama.", "poster_url": "https://image.tmdb.org/t/p/w500/7a7n823.jpg", "backdrop_url": null },
+            { "movie_id": 215248, "tmdb_id": 215248, "title": "Yevadu", "similarity": 0.84, "rating": 6.3, "release_date": "2014-01-12", "genres": ["Action", "Thriller"], "overview": "Allu Arjun, action thriller.", "poster_url": "https://image.tmdb.org/t/p/w500/8b8392.jpg", "backdrop_url": null },
+            { "movie_id": 77715, "tmdb_id": 77715, "title": "Badrinath", "similarity": 0.82, "rating": 5.4, "release_date": "2011-06-10", "genres": ["Action", "Drama"], "overview": "Allu Arjun, action drama.", "poster_url": "https://image.tmdb.org/t/p/w500/9b9823.jpg", "backdrop_url": null },
+            { "movie_id": 117058, "tmdb_id": 117058, "title": "Desamuduru", "similarity": 0.80, "rating": 5.1, "release_date": "2007-01-12", "genres": ["Action", "Romance"], "overview": "Allu Arjun, action romance.", "poster_url": "https://image.tmdb.org/t/p/w500/3d6LhrRYxTv7oG51cmULdBJQ0GN.jpg", "backdrop_url": null }
+        ]
     }
+
 
 
 };
