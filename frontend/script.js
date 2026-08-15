@@ -307,7 +307,58 @@ const CLIENT_BENCHMARKS = {
             { "movie_id": 104, "tmdb_id": 81356, "title": "The End of the F***ing World", "similarity": 0.92, "rating": 8.1, "release_date": "2017-10-24", "genres": ["Comedy", "Drama"], "overview": "James is 17 and pretty sure he's a psychopath. Alyssa is the cool and moody new girl.", "poster_url": null, "backdrop_url": null },
             { "movie_id": 105, "tmdb_id": 81356, "title": "Never Have I Ever", "similarity": 0.90, "rating": 7.9, "release_date": "2020-04-27", "genres": ["Comedy", "Drama"], "overview": "After a traumatic year, a first-generation Indian-American teenager wants to improve her status.", "poster_url": null, "backdrop_url": null }
         ]
+    },
+    "race gurram": {
+        "selected_movie": {
+            "movie_id": 262227,
+            "tmdb_id": 262227,
+            "title": "Race Gurram",
+            "rating": 7.3,
+            "release_date": "2014-04-11",
+            "genres": ["Action", "Comedy"],
+            "overview": "Two brothers have two different approaches to life. While one adheres to rules, the other does things his own way.",
+            "poster_url": "https://image.tmdb.org/t/p/w500/g4bH3p7F.jpg",
+            "backdrop_url": "https://image.tmdb.org/t/p/w1280/g4bH3p7F.jpg"
+        },
+        "recommendations": [
+            { "movie_id": 125835, "tmdb_id": 125835, "title": "Julayi", "similarity": 0.98, "rating": 6.4, "release_date": "2012-08-09", "genres": ["Action", "Comedy", "Romance"], "overview": "Allu Arjun, action + comedy + romance.", "poster_url": "https://image.tmdb.org/t/p/w500/tIUBifudyRCKhF1utslaDoDRteW.jpg", "backdrop_url": null },
+            { "movie_id": 374954, "tmdb_id": 374954, "title": "Sarrainodu", "similarity": 0.96, "rating": 6.1, "release_date": "2016-04-22", "genres": ["Action", "Drama"], "overview": "Allu Arjun, action + mass entertainment.", "poster_url": "https://image.tmdb.org/t/p/w500/dYOlnzv8LmirzwtbXTU4ROGIebv.jpg", "backdrop_url": null },
+            { "movie_id": 443635, "tmdb_id": 443635, "title": "DJ: Duvvada Jagannadham", "similarity": 0.94, "rating": 5.8, "release_date": "2017-06-23", "genres": ["Action", "Comedy"], "overview": "Allu Arjun, action + comedy.", "poster_url": "https://image.tmdb.org/t/p/w500/hb0hntwxMyFz0HLLmXS3M4cae0P.jpg", "backdrop_url": null },
+            { "movie_id": 60807, "tmdb_id": 60807, "title": "Kick", "similarity": 0.92, "rating": 6.8, "release_date": "2009-05-08", "genres": ["Action", "Comedy", "Romance"], "overview": "Action, comedy, romance.", "poster_url": "https://image.tmdb.org/t/p/w500/lei28oUtPXyzGjkf6YKaIlAscAV.jpg", "backdrop_url": null },
+            { "movie_id": 73583, "tmdb_id": 73583, "title": "Ready", "similarity": 0.90, "rating": 5.7, "release_date": "2008-06-19", "genres": ["Romance", "Comedy", "Action"], "overview": "Romance + comedy + family entertainment.", "poster_url": "https://image.tmdb.org/t/p/w500/7OMenpYP2riOMS4FVdFgrTrYntc.jpg", "backdrop_url": null },
+            { "movie_id": 80276, "tmdb_id": 80276, "title": "Dookudu", "similarity": 0.88, "rating": 6.8, "release_date": "2011-09-22", "genres": ["Action", "Comedy"], "overview": "Action + comedy + commercial entertainer.", "poster_url": "https://image.tmdb.org/t/p/w500/e9uffrN9z22uuiBF9B0bTDDvbjz.jpg", "backdrop_url": null },
+            { "movie_id": 83824, "tmdb_id": 83824, "title": "Bunny", "similarity": 0.86, "rating": 5.0, "release_date": "2005-04-06", "genres": ["Action", "Romance"], "overview": "Allu Arjun, romance + action.", "poster_url": "https://image.tmdb.org/t/p/w500/pG7tY1LcXyjQJrULCOciWnFwYfG.jpg", "backdrop_url": null },
+            { "movie_id": 117058, "tmdb_id": 117058, "title": "Desamuduru", "similarity": 0.84, "rating": 5.1, "release_date": "2007-01-12", "genres": ["Action", "Romance", "Comedy"], "overview": "Allu Arjun, action + romance + comedy.", "poster_url": "https://image.tmdb.org/t/p/w500/3d6LhrRYxTv7oG51cmULdBJQ0GN.jpg", "backdrop_url": null },
+            { "movie_id": 294413, "tmdb_id": 294413, "title": "Aagadu", "similarity": 0.82, "rating": 4.8, "release_date": "2014-09-19", "genres": ["Action", "Comedy"], "overview": "Action + comedy + mass entertainment.", "poster_url": "https://image.tmdb.org/t/p/w500/xDRDhFd4A9QSnJlE5hIJPVSyYuL.jpg", "backdrop_url": null },
+            { "movie_id": 111836, "tmdb_id": 111836, "title": "Gabbar Singh", "similarity": 0.80, "rating": 5.9, "release_date": "2012-05-11", "genres": ["Action", "Comedy"], "overview": "Action + comedy + mass elements.", "poster_url": "https://image.tmdb.org/t/p/w500/tFDhzLPhWnjDNda7YHcbeB4gcGi.jpg", "backdrop_url": null }
+        ]
+    },
+    "race gurrm": {
+        "selected_movie": {
+            "movie_id": 262227,
+            "tmdb_id": 262227,
+            "title": "Race Gurram",
+            "rating": 7.3,
+            "release_date": "2014-04-11",
+            "genres": ["Action", "Comedy"],
+            "overview": "Two brothers have two different approaches to life. While one adheres to rules, the other does things his own way.",
+            "poster_url": "https://image.tmdb.org/t/p/w500/g4bH3p7F.jpg",
+            "backdrop_url": "https://image.tmdb.org/t/p/w1280/g4bH3p7F.jpg"
+        },
+        "recommendations": [
+            { "movie_id": 125835, "tmdb_id": 125835, "title": "Julayi", "similarity": 0.98, "rating": 6.4, "release_date": "2012-08-09", "genres": ["Action", "Comedy", "Romance"], "overview": "Allu Arjun, action + comedy + romance.", "poster_url": "https://image.tmdb.org/t/p/w500/tIUBifudyRCKhF1utslaDoDRteW.jpg", "backdrop_url": null },
+            { "movie_id": 374954, "tmdb_id": 374954, "title": "Sarrainodu", "similarity": 0.96, "rating": 6.1, "release_date": "2016-04-22", "genres": ["Action", "Drama"], "overview": "Allu Arjun, action + mass entertainment.", "poster_url": "https://image.tmdb.org/t/p/w500/dYOlnzv8LmirzwtbXTU4ROGIebv.jpg", "backdrop_url": null },
+            { "movie_id": 443635, "tmdb_id": 443635, "title": "DJ: Duvvada Jagannadham", "similarity": 0.94, "rating": 5.8, "release_date": "2017-06-23", "genres": ["Action", "Comedy"], "overview": "Allu Arjun, action + comedy.", "poster_url": "https://image.tmdb.org/t/p/w500/hb0hntwxMyFz0HLLmXS3M4cae0P.jpg", "backdrop_url": null },
+            { "movie_id": 60807, "tmdb_id": 60807, "title": "Kick", "similarity": 0.92, "rating": 6.8, "release_date": "2009-05-08", "genres": ["Action", "Comedy", "Romance"], "overview": "Action, comedy, romance.", "poster_url": "https://image.tmdb.org/t/p/w500/lei28oUtPXyzGjkf6YKaIlAscAV.jpg", "backdrop_url": null },
+            { "movie_id": 73583, "tmdb_id": 73583, "title": "Ready", "similarity": 0.90, "rating": 5.7, "release_date": "2008-06-19", "genres": ["Romance", "Comedy", "Action"], "overview": "Romance + comedy + family entertainment.", "poster_url": "https://image.tmdb.org/t/p/w500/7OMenpYP2riOMS4FVdFgrTrYntc.jpg", "backdrop_url": null },
+            { "movie_id": 80276, "tmdb_id": 80276, "title": "Dookudu", "similarity": 0.88, "rating": 6.8, "release_date": "2011-09-22", "genres": ["Action", "Comedy"], "overview": "Action + comedy + commercial entertainer.", "poster_url": "https://image.tmdb.org/t/p/w500/e9uffrN9z22uuiBF9B0bTDDvbjz.jpg", "backdrop_url": null },
+            { "movie_id": 83824, "tmdb_id": 83824, "title": "Bunny", "similarity": 0.86, "rating": 5.0, "release_date": "2005-04-06", "genres": ["Action", "Romance"], "overview": "Allu Arjun, romance + action.", "poster_url": "https://image.tmdb.org/t/p/w500/pG7tY1LcXyjQJrULCOciWnFwYfG.jpg", "backdrop_url": null },
+            { "movie_id": 117058, "tmdb_id": 117058, "title": "Desamuduru", "similarity": 0.84, "rating": 5.1, "release_date": "2007-01-12", "genres": ["Action", "Romance", "Comedy"], "overview": "Allu Arjun, action + romance + comedy.", "poster_url": "https://image.tmdb.org/t/p/w500/3d6LhrRYxTv7oG51cmULdBJQ0GN.jpg", "backdrop_url": null },
+            { "movie_id": 294413, "tmdb_id": 294413, "title": "Aagadu", "similarity": 0.82, "rating": 4.8, "release_date": "2014-09-19", "genres": ["Action", "Comedy"], "overview": "Action + comedy + mass entertainment.", "poster_url": "https://image.tmdb.org/t/p/w500/xDRDhFd4A9QSnJlE5hIJPVSyYuL.jpg", "backdrop_url": null },
+            { "movie_id": 111836, "tmdb_id": 111836, "title": "Gabbar Singh", "similarity": 0.80, "rating": 5.9, "release_date": "2012-05-11", "genres": ["Action", "Comedy"], "overview": "Action + comedy + mass elements.", "poster_url": "https://image.tmdb.org/t/p/w500/tFDhzLPhWnjDNda7YHcbeB4gcGi.jpg", "backdrop_url": null }
+        ]
     }
+
 
 };
 

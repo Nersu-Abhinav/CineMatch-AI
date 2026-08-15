@@ -60,7 +60,24 @@ BENCHMARK_MOVIES = {
             {"tmdb_id": 537915, "title": "After"},
             {"tmdb_id": 11036, "title": "The Notebook"}
         ]
+    },
+    "race gurram": {
+        "selected_tmdb_id": 262227,
+        "selected_title": "Race Gurram",
+        "recommendations": [
+            {"tmdb_id": 125835, "title": "Julayi"},
+            {"tmdb_id": 374954, "title": "Sarrainodu"},
+            {"tmdb_id": 443635, "title": "DJ: Duvvada Jagannadham"},
+            {"tmdb_id": 60807, "title": "Kick"},
+            {"tmdb_id": 73583, "title": "Ready"},
+            {"tmdb_id": 80276, "title": "Dookudu"},
+            {"tmdb_id": 83824, "title": "Bunny"},
+            {"tmdb_id": 117058, "title": "Desamuduru"},
+            {"tmdb_id": 294413, "title": "Aagadu"},
+            {"tmdb_id": 111836, "title": "Gabbar Singh"}
+        ]
     }
+
 
 }
 
