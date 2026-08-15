@@ -400,7 +400,6 @@ async function fetchTMDBClientFallback(query, limit = 40) {
         return null;
     }
 }
-}
 
 const STANDALONE_MOVIE_DATABASE = [
     { id: 27205, title: "Inception", rating: 8.4, release_date: "2010-07-16", genres: ["Action", "Science Fiction", "Adventure"], overview: "Cobb, a skilled thief who steals corporate secrets through dream-sharing technology, is given the inverse task of planting an idea into the mind of a C.E.O.", poster_url: "https://image.tmdb.org/t/p/w500/oYuLEW9W2Bmo2B2F8WoiBUdqT2a.jpg" },
