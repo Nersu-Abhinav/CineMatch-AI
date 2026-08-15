@@ -456,9 +456,25 @@ async function fetchTMDBClientFallback(query, limit = 10) {
         const searchRes = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${TMDB_CLIENT_KEY}&query=${encodeURIComponent(query)}`);
         if (!searchRes.ok) return null;
         const searchData = await searchRes.json();
-        if (!searchData.results || searchData.results.length === 0) return null;
+        const results = searchData.results || [];
+        if (results.length === 0) return null;
 
-        const mainMovie = searchData.results[0];
+        const qLower = query.trim().toLowerCase();
+
+        // 1. Pick exact title match if available
+        let exactMatches = results.filter(r =>
+            (r.title && r.title.trim().toLowerCase() === qLower) ||
+            (r.original_title && r.original_title.trim().toLowerCase() === qLower)
+        );
+
+        let mainMovie = null;
+        if (exactMatches.length > 0) {
+            exactMatches.sort((a, b) => (b.vote_count * (b.popularity || 1)) - (a.vote_count * (a.popularity || 1)));
+            mainMovie = exactMatches[0];
+        } else {
+            mainMovie = results[0];
+        }
+
         const tmdbId = mainMovie.id;
 
         const detailsRes = await fetch(`https://api.themoviedb.org/3/movie/${tmdbId}?api_key=${TMDB_CLIENT_KEY}`);
@@ -475,6 +491,21 @@ async function fetchTMDBClientFallback(query, limit = 10) {
                 if (!existing.has(s.id)) recsList.push(s);
             });
         }
+
+        // Include other search results matching the query title (e.g. Hindi/Hollywood/Telugu versions of Kick, Jalsa, etc.)
+        const existingIds = new Set((recsList || []).map(r => r.id));
+        existingIds.add(tmdbId);
+
+        results.forEach(otherMovie => {
+            if (otherMovie.id !== tmdbId && !existingIds.has(otherMovie.id)) {
+                const oTitle = (otherMovie.title || "").toLowerCase();
+                const oOrig = (otherMovie.original_title || "").toLowerCase();
+                if (oTitle.includes(qLower) || oOrig.includes(qLower) || qLower.includes(oTitle)) {
+                    recsList.unshift(otherMovie);
+                    existingIds.add(otherMovie.id);
+                }
+            }
+        });
 
         const genresMap = {
             28: "Action", 12: "Adventure", 16: "Animation", 35: "Comedy", 80: "Crime",
@@ -520,6 +551,7 @@ async function fetchTMDBClientFallback(query, limit = 10) {
         return null;
     }
 }
+
 
 // --------------------------------------------------------------------------
 // 04. CORE SEARCH & API FETCHING PIPELINE
@@ -605,17 +637,18 @@ async function searchMovie(queryOverride = null) {
         }
 
 
-        // Check if query was auto-corrected
-        const isAutoCorrected = (cleanedQuery.toLowerCase() !== lowerQuery) || (data.selected_movie.auto_corrected_from) || (data.selected_movie.title.toLowerCase() !== lowerQuery);
+        // Check if query was auto-corrected (only show for actual typo cleanups)
+        const isAutoCorrected = Boolean(data.selected_movie.auto_corrected_from) || (cleanedQuery.toLowerCase() !== lowerQuery && cleanedQuery.length < lowerQuery.length);
         
         if (autoCorrectBanner && autoCorrectText) {
-            if (isAutoCorrected && data.selected_movie && data.selected_movie.title) {
+            if (isAutoCorrected && data.selected_movie && data.selected_movie.title && data.selected_movie.auto_corrected_from) {
                 autoCorrectText.innerHTML = `Auto-corrected spelling: showing recommendations for <strong>${escapeHtml(data.selected_movie.title)}</strong> (searched: <em>"${escapeHtml(movieName)}"</em>)`;
                 autoCorrectBanner.classList.remove("hidden");
             } else {
                 autoCorrectBanner.classList.add("hidden");
             }
         }
+
 
         // Update state
         appState.selectedMovie = data.selected_movie;

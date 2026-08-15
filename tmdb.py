@@ -86,10 +86,29 @@ def search_tmdb_movie(title):
     if not title:
         return None
 
-    def pick_best(results_list):
+    def pick_best(results_list, query_title=title):
         if not results_list:
             return None
-        # Rank by combination of vote count and popularity to select genuine blockbuster matches
+        q_clean = (query_title or "").strip().lower()
+        
+        # 1. Exact title matches (title or original_title)
+        exact_matches = [
+            r for r in results_list
+            if (r.get("title") and r.get("title").strip().lower() == q_clean) or
+               (r.get("original_title") and r.get("original_title").strip().lower() == q_clean)
+        ]
+        if exact_matches:
+            return sorted(exact_matches, key=lambda x: (x.get("vote_count", 0) * x.get("popularity", 0)), reverse=True)[0]
+
+        # 2. Substring matches
+        partial_matches = [
+            r for r in results_list
+            if q_clean in (r.get("title", "") or "").lower() or q_clean in (r.get("original_title", "") or "").lower()
+        ]
+        if partial_matches:
+            return sorted(partial_matches, key=lambda x: (x.get("vote_count", 0) * x.get("popularity", 0)), reverse=True)[0]
+
+        # 3. Fallback: highest popularity & vote count
         return sorted(results_list, key=lambda x: (x.get("vote_count", 0) * x.get("popularity", 0)), reverse=True)[0]
 
     # Try raw search first
@@ -98,7 +117,7 @@ def search_tmdb_movie(title):
     data = safe_get(url_movie, params)
     results = data.get("results", [])
     if results:
-        return pick_best(results)
+        return pick_best(results, title)
 
     # Try cleaned query (typo auto-correction)
     cleaned = clean_typos(title)
@@ -106,11 +125,12 @@ def search_tmdb_movie(title):
         data_clean = safe_get(url_movie, {"query": cleaned, "language": "en-US", "include_adult": False})
         results_clean = data_clean.get("results", [])
         if results_clean:
-            item = pick_best(results_clean)
+            item = pick_best(results_clean, cleaned)
             if item:
                 item["auto_corrected_from"] = title
                 item["corrected_query"] = cleaned
                 return item
+
 
     # Try multi search (for shows like Sex Education or movies with alternative naming)
     url_multi = f"{TMDB_BASE_URL}/search/multi"
