@@ -24,6 +24,7 @@ const appState = {
 // 02. DOM ELEMENT REFERENCES
 // --------------------------------------------------------------------------
 const searchInput = document.getElementById("movieSearch");
+const navSearchInput = document.getElementById("navSearchInput");
 const searchButton = document.getElementById("searchButton");
 const clearSearchBtn = document.getElementById("clearSearchBtn");
 const searchError = document.getElementById("searchError");
@@ -53,21 +54,42 @@ const recentChips = document.getElementById("recentChips");
 // 03. EVENT LISTENERS & INITIALIZATION
 // --------------------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", () => {
-    // Input listener to toggle clear button visibility
-    searchInput.addEventListener("input", (e) => {
-        if (e.target.value.trim().length > 0) {
-            clearSearchBtn.classList.remove("hidden");
-        } else {
-            clearSearchBtn.classList.add("hidden");
-        }
-    });
+    // Input listener to toggle clear button visibility & sync inputs
+    if (searchInput) {
+        searchInput.addEventListener("input", (e) => {
+            const val = e.target.value;
+            if (navSearchInput) navSearchInput.value = val;
+            if (val.trim().length > 0) {
+                clearSearchBtn.classList.remove("hidden");
+            } else {
+                clearSearchBtn.classList.add("hidden");
+            }
+        });
+    }
+
+    if (navSearchInput) {
+        navSearchInput.addEventListener("input", (e) => {
+            const val = e.target.value;
+            if (searchInput) searchInput.value = val;
+            if (val.trim().length > 0) {
+                clearSearchBtn.classList.remove("hidden");
+            } else {
+                clearSearchBtn.classList.add("hidden");
+            }
+        });
+
+        navSearchInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                searchMovie();
+            }
+        });
+    }
 
     // Keydown listener for Enter search & Keyboard '/' shortcut
     document.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" && document.activeElement === searchInput) {
+        if (e.key === "Enter" && (document.activeElement === searchInput || document.activeElement === navSearchInput)) {
             searchMovie();
-        } else if (e.key === "/" && document.activeElement !== searchInput) {
-            // Prevent forward slash typing into focus
+        } else if (e.key === "/" && document.activeElement !== searchInput && document.activeElement !== navSearchInput) {
             e.preventDefault();
             focusSearch();
         } else if (e.key === "Escape") {
@@ -78,27 +100,32 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function focusSearch() {
-    searchInput.focus();
-    searchInput.select();
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (navSearchInput) {
+        navSearchInput.focus();
+        navSearchInput.select();
+    } else if (searchInput) {
+        searchInput.focus();
+        searchInput.select();
+    }
 }
 
 function clearSearch() {
-    searchInput.value = "";
+    if (searchInput) searchInput.value = "";
+    if (navSearchInput) navSearchInput.value = "";
     clearSearchBtn.classList.add("hidden");
-    searchInput.focus();
+    focusSearch();
 }
 
 function updateLimit(val) {
     appState.limit = parseInt(val, 10) || 10;
-    // Re-run search if a movie is currently displayed
     if (appState.selectedMovie) {
         searchMovie(appState.selectedMovie.title);
     }
 }
 
 function quickSearch(title) {
-    searchInput.value = title;
+    if (searchInput) searchInput.value = title;
+    if (navSearchInput) navSearchInput.value = title;
     clearSearchBtn.classList.remove("hidden");
     searchMovie(title);
 }
@@ -107,7 +134,7 @@ function quickSearch(title) {
 // 04. CORE SEARCH & API FETCHING PIPELINE
 // --------------------------------------------------------------------------
 async function searchMovie(queryOverride = null) {
-    const movieName = (queryOverride || searchInput.value).trim();
+    const movieName = (queryOverride || (searchInput ? searchInput.value : "") || (navSearchInput ? navSearchInput.value : "")).trim();
 
     if (!movieName) {
         showSearchError("Please enter a movie title to discover recommendations.");

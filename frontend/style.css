@@ -267,21 +267,35 @@ button, input, select {
     box-shadow: 0 0 10px #10b981;
 }
 
-.nav-search-btn {
+.nav-search-box {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 9px 16px;
+    padding: 7px 14px;
     background: var(--bg-surface-light);
-    border: 1px solid var(--border-glass);
+    border: 1px solid var(--border-glass-bright);
     border-radius: var(--radius-md);
-    cursor: pointer;
     transition: var(--transition-fast);
+    width: 220px;
 }
 
-.nav-search-btn:hover {
-    border-color: var(--border-glass-bright);
-    background: rgba(255, 255, 255, 0.08);
+.nav-search-box:focus-within {
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 20px var(--accent-gold-glow);
+    width: 280px;
+}
+
+.nav-search-box input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-primary);
+    font-size: 13px;
+    width: 100%;
+}
+
+.nav-search-box input::placeholder {
+    color: var(--text-muted);
 }
 
 .shortcut-key {
