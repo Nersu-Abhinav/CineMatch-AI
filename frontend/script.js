@@ -268,6 +268,26 @@ const CLIENT_BENCHMARKS = {
             }
         ]
     },
+    "education": {
+        "selected_movie": {
+            "movie_id": 81356,
+            "tmdb_id": 81356,
+            "title": "Sex Education",
+            "rating": 8.3,
+            "release_date": "2019-01-11",
+            "genres": ["Comedy", "Drama"],
+            "overview": "Inexperienced Otis has the answers when it comes to sex advice, thanks to his therapist mom. So rebel Maeve proposes a school sex-therapy clinic.",
+            "poster_url": "https://image.tmdb.org/t/p/w500/8j128.jpg",
+            "backdrop_url": "https://image.tmdb.org/t/p/w1280/8j129.jpg"
+        },
+        "recommendations": [
+            { "movie_id": 101, "tmdb_id": 81356, "title": "Skins", "similarity": 0.98, "rating": 8.2, "release_date": "2007-01-25", "genres": ["Drama", "Comedy"], "overview": "The story of a group of British teens who are trying to grow up and find love and happiness.", "poster_url": null, "backdrop_url": null },
+            { "movie_id": 102, "tmdb_id": 81356, "title": "Heartstopper", "similarity": 0.96, "rating": 8.6, "release_date": "2022-04-22", "genres": ["Drama", "Romance"], "overview": "Teens Charlie and Nick discover their unlikely friendship might be something more.", "poster_url": null, "backdrop_url": null },
+            { "movie_id": 103, "tmdb_id": 81356, "title": "Atypical", "similarity": 0.94, "rating": 8.3, "release_date": "2017-08-11", "genres": ["Comedy", "Drama"], "overview": "Sam, an 18-year-old on the autism spectrum, decides it's time to find a girlfriend.", "poster_url": null, "backdrop_url": null },
+            { "movie_id": 104, "tmdb_id": 81356, "title": "The End of the F***ing World", "similarity": 0.92, "rating": 8.1, "release_date": "2017-10-24", "genres": ["Comedy", "Drama"], "overview": "James is 17 and pretty sure he's a psychopath. Alyssa is the cool and moody new girl.", "poster_url": null, "backdrop_url": null },
+            { "movie_id": 105, "tmdb_id": 81356, "title": "Never Have I Ever", "similarity": 0.90, "rating": 7.9, "release_date": "2020-04-27", "genres": ["Comedy", "Drama"], "overview": "After a traumatic year, a first-generation Indian-American teenager wants to improve her status.", "poster_url": null, "backdrop_url": null }
+        ]
+    },
     "sex education": {
         "selected_movie": {
             "movie_id": 81356,
@@ -288,6 +308,7 @@ const CLIENT_BENCHMARKS = {
             { "movie_id": 105, "tmdb_id": 81356, "title": "Never Have I Ever", "similarity": 0.90, "rating": 7.9, "release_date": "2020-04-27", "genres": ["Comedy", "Drama"], "overview": "After a traumatic year, a first-generation Indian-American teenager wants to improve her status.", "poster_url": null, "backdrop_url": null }
         ]
     }
+
 };
 
 function cleanTypos(text) {
