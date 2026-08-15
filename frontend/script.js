@@ -1041,6 +1041,8 @@ function openModal(movie) {
     const poster = movie.poster_url || createFallbackPoster(movie.title);
     const year = movie.release_date ? movie.release_date.substring(0, 4) : "N/A";
     const rating = movie.rating ? Number(movie.rating).toFixed(1) : "N/A";
+    const genres = (movie.genres || []).map(g => `<span class="genre-pill">${escapeHtml(g)}</span>`).join("");
+    
     let matchPct = 85;
     if (typeof movie.similarity === "number" && !isNaN(movie.similarity)) {
         matchPct = movie.similarity <= 1 ? Math.round(movie.similarity * 100) : Math.round(movie.similarity);
