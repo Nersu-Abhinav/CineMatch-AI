@@ -86,13 +86,19 @@ def search_tmdb_movie(title):
     if not title:
         return None
 
+    def pick_best(results_list):
+        if not results_list:
+            return None
+        # Rank by combination of vote count and popularity to select genuine blockbuster matches
+        return sorted(results_list, key=lambda x: (x.get("vote_count", 0) * x.get("popularity", 0)), reverse=True)[0]
+
     # Try raw search first
     url_movie = f"{TMDB_BASE_URL}/search/movie"
     params = {"query": title, "language": "en-US", "include_adult": False}
     data = safe_get(url_movie, params)
     results = data.get("results", [])
     if results:
-        return results[0]
+        return pick_best(results)
 
     # Try cleaned query (typo auto-correction)
     cleaned = clean_typos(title)
@@ -100,10 +106,11 @@ def search_tmdb_movie(title):
         data_clean = safe_get(url_movie, {"query": cleaned, "language": "en-US", "include_adult": False})
         results_clean = data_clean.get("results", [])
         if results_clean:
-            item = results_clean[0]
-            item["auto_corrected_from"] = title
-            item["corrected_query"] = cleaned
-            return item
+            item = pick_best(results_clean)
+            if item:
+                item["auto_corrected_from"] = title
+                item["corrected_query"] = cleaned
+                return item
 
     # Try multi search (for shows like Sex Education or movies with alternative naming)
     url_multi = f"{TMDB_BASE_URL}/search/multi"
@@ -113,16 +120,17 @@ def search_tmdb_movie(title):
         data_multi = safe_get(url_multi, {"query": q, "language": "en-US", "include_adult": False})
         multi_results = [r for r in data_multi.get("results", []) if r.get("media_type") in ["movie", "tv"]]
         if multi_results:
-            item = multi_results[0]
-            # Standardize title for TV series
-            if "name" in item and "title" not in item:
-                item["title"] = item["name"]
-            if q.lower() != title.lower():
-                item["auto_corrected_from"] = title
-                item["corrected_query"] = q
-            return item
+            item = pick_best(multi_results)
+            if item:
+                if "name" in item and "title" not in item:
+                    item["title"] = item["name"]
+                if q.lower() != title.lower():
+                    item["auto_corrected_from"] = title
+                    item["corrected_query"] = q
+                return item
 
     return None
+
 
 
 
