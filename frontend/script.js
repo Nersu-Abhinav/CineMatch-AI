@@ -2,7 +2,7 @@
 // CINEMATCH AI — FRONTEND APPLICATION ENGINE (PURE IN-MEMORY STATE)
 // ==========================================================================
 
-const API_URL = "http://127.0.0.1:8000";
+const API_URL = "https://cinematch-ai-7kcr.onrender.com";
 
 // --------------------------------------------------------------------------
 // 01. APPLICATION IN-MEMORY STATE (STRICTLY NO LOCALSTORAGE)
