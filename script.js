@@ -1040,10 +1040,10 @@ function switchView(mode) {
 function openModal(movie) {
     try {
         if (!movie) return;
-        const modalMovieBody = document.getElementById("modalMovieBody") || document.getElementById("modalMovie");
+        const modalMovieBody = document.getElementById("modalMovie") || document.getElementById("modalMovieBody");
         const movieModal = document.getElementById("movieModal");
         if (!modalMovieBody || !movieModal) {
-            console.error("Modal elements not found in DOM");
+            console.error("Modal elements missing from DOM");
             return;
         }
 
