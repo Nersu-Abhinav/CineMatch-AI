@@ -315,12 +315,12 @@ button, input, select {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 120px 6vw 60px;
+    padding: 140px 6vw 70px;
     position: relative;
 }
 
 .hero-content {
-    max-width: 860px;
+    max-width: 900px;
     width: 100%;
     text-align: center;
     margin: 0 auto;
@@ -330,11 +330,11 @@ button, input, select {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    padding: 6px 16px;
+    padding: 6px 18px;
     background: rgba(245, 197, 24, 0.08);
     border: 1px solid rgba(245, 197, 24, 0.25);
     border-radius: var(--radius-full);
-    margin-bottom: 20px;
+    margin-bottom: 22px;
 }
 
 .pulse {
@@ -361,10 +361,10 @@ button, input, select {
 .hero-title {
     font-family: 'Syne', sans-serif;
     font-weight: 800;
-    font-size: clamp(38px, 5.2vw, 68px);
+    font-size: clamp(44px, 6vw, 76px);
     line-height: 1.05;
     letter-spacing: -1.5px;
-    margin-bottom: 18px;
+    margin-bottom: 22px;
 }
 
 .gradient-text {
@@ -374,12 +374,13 @@ button, input, select {
 }
 
 .hero-description {
-    font-size: clamp(15px, 1.8vw, 18px);
+    font-size: clamp(16px, 2vw, 19px);
     color: var(--text-secondary);
-    max-width: 660px;
-    margin: 0 auto 36px;
-    line-height: 1.7;
+    max-width: 720px;
+    margin: 0 auto 40px;
+    line-height: 1.75;
 }
+
 
 
 
