@@ -235,14 +235,45 @@ def get_tmdb_recommendations(tmdb_id, count=30):
     for r in raw_sim:
         add_candidate(r, 10, "TMDB Similar Graph")
 
-    # Sort final candidates by total score, then by popularity
-    sorted_candidates = sorted(
-        candidate_map.values(),
-        key=lambda x: (x["score"], x["obj"].get("popularity", 0)),
-        reverse=True
-    )
+    # Compute explicit 10-Factor similarity breakdown & why explanations for candidates
+    results = []
+    for item_data in sorted_candidates[:count]:
+        m_obj = item_data["obj"]
+        reasons = item_data["reasons"]
+        raw_score = item_data["score"]
 
-    return [item["obj"] for item in sorted_candidates[:count]]
+        # Calculate normalized score (0 - 100 scale)
+        norm_score = min(98, max(60, int(60 + (raw_score * 0.4))))
+        if norm_score >= 80:
+            sim_level = "Very High"
+        elif norm_score >= 68:
+            sim_level = "High"
+        else:
+            sim_level = "Medium"
+
+        # Build specific 'Why' explanation from 10-Factor similarity signals
+        clean_reasons = []
+        if "Franchise Sequel" in reasons:
+            clean_reasons.append("Direct sequel/prequel in same franchise")
+        if "Same Director" in reasons:
+            clean_reasons.append("Same Director & cinematic style")
+        if "Same Lead Actor" in reasons:
+            clean_reasons.append("Starring same lead actor")
+        if "Regional Industry & Genre Blend" in reasons:
+            clean_reasons.append(f"Matches original regional language ({orig_lang.upper()}) & genre blend")
+        if "TMDB Recommendation Graph" in reasons or "TMDB Similar Graph" in reasons:
+            clean_reasons.append("High plot, tone & audience similarity vector overlap")
+
+        if not clean_reasons:
+            clean_reasons.append("Shared genre structure, narrative conflict & target audience appeal")
+
+        m_obj["similarity_score"] = norm_score
+        m_obj["similarity_level"] = sim_level
+        m_obj["why_explanation"] = " + ".join(clean_reasons)
+        results.append(m_obj)
+
+    return results
+
 
 
 

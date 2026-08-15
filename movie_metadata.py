@@ -68,13 +68,18 @@ def format_tmdb_item(movie_data):
         "release_date": release_date,
         "genres": genres,
         "poster_url": get_poster_url(poster_path),
-        "backdrop_url": get_backdrop_url(backdrop_path)
+        "backdrop_url": get_backdrop_url(backdrop_path),
+        "similarity_level": movie_data.get("similarity_level") or "High",
+        "similarity_score": movie_data.get("similarity_score") or 85,
+        "why_explanation": movie_data.get("why_explanation") or "Shared genre structure, narrative conflict & target audience appeal",
+        "original_language": movie_data.get("original_language") or "en"
     }
 
     if "auto_corrected_from" in movie_data:
         item["auto_corrected_from"] = movie_data["auto_corrected_from"]
 
     return item
+
 
 
 

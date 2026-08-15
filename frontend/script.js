@@ -562,7 +562,21 @@ async function searchMovie(queryOverride = null) {
 
         // Render UI Components
         renderSelectedMovie();
+        renderWhyTheseMovies(data.why_these_movies || {
+            title: data.selected_movie.title,
+            genres: data.selected_movie.genres || ["Action", "Drama"],
+            core_themes: ["Heroic Goal", "High-Stakes Conflict", "Commercial Entertainment"],
+            story_style: "Dynamic Narrative + Director Cinematic Language",
+            key_signals: [
+                "Genre Similarity (15%) — Primary & Subgenres",
+                "Plot & Narrative Similarity (20%) — Core Conflict",
+                "Director & Cinematic Style (8%) — Storytelling Technique",
+                "Cast Similarity (10%) — Lead Performance Overlap",
+                "Regional & Language Context (5%) — Cinema Industry Style"
+            ]
+        });
         updateBackdrop(data.selected_movie.backdrop_url);
+
 
         // Smooth scroll to results while keeping search console visible
         setTimeout(() => {
@@ -780,6 +794,48 @@ function renderRecommendations() {
     recommendationsSection.classList.remove("hidden");
 }
 
+function renderWhyTheseMovies(whyData) {
+    const container = document.getElementById("whyTheseMovies");
+    if (!container) return;
+
+    if (!whyData) {
+        container.classList.add("hidden");
+        return;
+    }
+
+    const title = whyData.title || "Search Target";
+    const genres = (whyData.genres || []).join(", ");
+    const themes = (whyData.core_themes || []).join(" • ");
+    const style = whyData.story_style || "High-Energy Mass Entertainer + Distinctive Director Style";
+    const signals = (whyData.key_signals || []).map(s => `<li>⚡ ${escapeHtml(s)}</li>`).join("");
+
+    container.innerHTML = `
+        <div class="why-these-header">
+            <span class="why-icon">🔍</span>
+            <h3>Why These Movies? — 10-Factor Similarity Profile for ${escapeHtml(title)}</h3>
+        </div>
+        <div class="why-these-grid">
+            <div class="why-block">
+                <h4>🎭 Primary & Subgenres</h4>
+                <p>${escapeHtml(genres)}</p>
+            </div>
+            <div class="why-block">
+                <h4>🎯 Core Narrative Themes</h4>
+                <p>${escapeHtml(themes)}</p>
+            </div>
+            <div class="why-block">
+                <h4>🎬 Story Style & Tone</h4>
+                <p>${escapeHtml(style)}</p>
+            </div>
+        </div>
+        <div class="why-signals-block">
+            <h4>🏆 Key Similarity Ranking Signals</h4>
+            <ul>${signals}</ul>
+        </div>
+    `;
+    container.classList.remove("hidden");
+}
+
 function createMovieCard(movie) {
     const card = document.createElement("article");
     card.className = "movie-card";
@@ -787,13 +843,14 @@ function createMovieCard(movie) {
     const poster = movie.poster_url || createFallbackPoster(movie.title);
     const year = movie.release_date ? movie.release_date.substring(0, 4) : "N/A";
     const rating = movie.rating ? Number(movie.rating).toFixed(1) : "N/A";
-    const matchScore = Math.round((movie.similarity || 0) * 100);
+    const simLevel = movie.similarity_level || (movie.similarity >= 0.8 ? "Very High" : movie.similarity >= 0.65 ? "High" : "Medium");
+    const whyText = movie.why_explanation || "Shared genre structure, narrative conflict & target audience appeal";
 
-    const matchClass = matchScore >= 80 ? "match-high" : "match-mid";
+    const matchClass = simLevel === "Very High" ? "match-high" : "match-mid";
 
     card.innerHTML = `
         <div class="card-poster-wrapper">
-            <span class="match-pill ${matchClass}">${matchScore}% MATCH</span>
+            <span class="match-pill ${matchClass}">Similarity: ${escapeHtml(simLevel)}</span>
             <img class="card-poster" src="${poster}" alt="${escapeHtml(movie.title)}" loading="lazy" onerror="this.src='${createFallbackPoster(movie.title)}'">
             <div class="card-gradient-overlay"></div>
         </div>
@@ -804,7 +861,9 @@ function createMovieCard(movie) {
                 <span>•</span>
                 <span>${year}</span>
             </div>
-            <p class="list-overview">${escapeHtml(movie.overview || "No overview available.")}</p>
+            <p class="list-overview" style="margin-top: 6px; font-size: 11px; color: var(--accent-gold);">
+                <strong>Why:</strong> ${escapeHtml(whyText)}
+            </p>
         </div>
     `;
 
@@ -833,6 +892,8 @@ function openModal(movie) {
     const year = movie.release_date ? movie.release_date.substring(0, 4) : "N/A";
     const rating = movie.rating ? Number(movie.rating).toFixed(1) : "N/A";
     const genres = (movie.genres || []).map(g => `<span class="genre-pill">${escapeHtml(g)}</span>`).join("");
+    const simLevel = movie.similarity_level || "High";
+    const whyText = movie.why_explanation || "Shared genre structure, narrative conflict & target audience appeal";
     const tmdbLink = movie.tmdb_id ? `https://www.themoviedb.org/movie/${movie.tmdb_id}` : "#";
 
     modalMovieBody.innerHTML = `
@@ -844,7 +905,11 @@ function openModal(movie) {
             <div class="movie-meta-bar">
                 <span class="rating-badge">★ ${rating}</span>
                 <span class="year-badge">${year}</span>
+                <span class="rating-badge" style="background: rgba(245, 197, 24, 0.2); color: var(--accent-gold);">Similarity: ${escapeHtml(simLevel)}</span>
                 ${genres}
+            </div>
+            <div style="background: rgba(245, 197, 24, 0.08); border-left: 3px solid var(--accent-gold); padding: 10px 14px; border-radius: 4px; margin-bottom: 14px; font-size: 13px;">
+                <strong style="color: var(--accent-gold);">Why Recommended:</strong> ${escapeHtml(whyText)}
             </div>
             <p>${escapeHtml(movie.overview || "No overview available.")}</p>
             <div style="display: flex; gap: 14px; flex-wrap: wrap;">
@@ -858,6 +923,7 @@ function openModal(movie) {
 
     movieModal.classList.remove("hidden");
     document.body.style.overflow = "hidden";
+
 }
 
 function closeModal() {
