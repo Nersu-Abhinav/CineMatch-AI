@@ -1076,20 +1076,38 @@ function openModal(movie) {
         }
         const tmdbLink = movie.tmdb_id ? `https://www.themoviedb.org/movie/${movie.tmdb_id}` : "#";
 
+        const langName = (movie.original_language || "en").toUpperCase();
+
         modalMovieBody.innerHTML = `
             <div>
                 <img class="modal-poster" src="${poster}" alt="${escapeHtml(movie.title)}" onerror="this.src='${createFallbackPoster(movie.title)}'">
             </div>
             <div class="modal-info">
-                <h2>${escapeHtml(movie.title)}</h2>
-                <div class="movie-meta-bar">
-                    <span class="rating-badge">★ ${rating}</span>
-                    <span class="year-badge">${year}</span>
-                    <span class="rating-badge" style="background: rgba(6, 182, 212, 0.2); color: var(--accent-cyan);">${matchPct}% Match</span>
-                    ${genres}
+                <div>
+                    <h2>${escapeHtml(movie.title)}</h2>
+                    <div class="movie-meta-bar">
+                        <span class="rating-badge">★ ${rating}</span>
+                        <span class="year-badge">${year}</span>
+                        <span class="rating-badge" style="background: rgba(6, 182, 212, 0.2); color: var(--accent-cyan);">${matchPct}% Match</span>
+                        ${genres}
+                    </div>
+                    <div class="modal-stats-grid">
+                        <div class="stat-box">
+                            <span class="stat-label">Vector Match</span>
+                            <span class="stat-val" style="color: var(--accent-gold);">${matchPct}% Proximity</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">User Consensus</span>
+                            <span class="stat-val">★ ${rating} / 10</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Original Language</span>
+                            <span class="stat-val">${escapeHtml(langName)}</span>
+                        </div>
+                    </div>
+                    <p>${escapeHtml(movie.overview || "No overview available.")}</p>
                 </div>
-                <p>${escapeHtml(movie.overview || "No overview available.")}</p>
-                <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+                <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 20px;">
                     <button class="chain-discover-btn">
                         ⚡ Discover Movies Similar to This
                     </button>

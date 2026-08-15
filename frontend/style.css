@@ -1287,10 +1287,10 @@ button, input, select {
 
 .modal-movie-body {
     display: grid;
-    grid-template-columns: 340px 1fr;
-    gap: 44px;
-    padding: 48px;
-    align-items: start;
+    grid-template-columns: 320px 1fr;
+    gap: 36px;
+    padding: 40px;
+    align-items: stretch;
 }
 
 .modal-poster {
@@ -1298,31 +1298,70 @@ button, input, select {
     border-radius: 20px;
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 30px rgba(245, 197, 24, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.08);
+    object-fit: cover;
+}
+
+.modal-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100%;
 }
 
 .modal-info h2 {
     font-family: 'Syne', sans-serif;
-    font-size: 40px;
+    font-size: 36px;
     font-weight: 800;
     letter-spacing: -0.5px;
     line-height: 1.15;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     color: #ffffff;
 }
 
 .modal-info .movie-meta-bar {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     flex-wrap: wrap;
-    margin-bottom: 24px;
+    margin-bottom: 18px;
+}
+
+.modal-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 12px;
+    margin: 18px 0;
+}
+
+.stat-box {
+    background: var(--bg-surface-light);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.stat-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-val {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
 }
 
 .modal-info p {
     color: #cbd5e1;
-    font-size: 16px;
-    line-height: 1.85;
-    margin: 22px 0 32px;
+    font-size: 15px;
+    line-height: 1.8;
+    margin: 16px 0 24px;
 }
 
 .chain-discover-btn {
