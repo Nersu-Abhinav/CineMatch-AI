@@ -168,74 +168,10 @@ def get_recommendations(movie_title, number_of_recommendations=10):
     fuzzy_title = clean_typos(movie_title_clean).lower()
 
     # ------------------------------------------------------------------
-    # TIER 1: BENCHMARK GOLD-STANDARD RESOLUTION (WITH TYPO TOLERANCE)
-    # ------------------------------------------------------------------
-    benchmark_key = None
-    for k in BENCHMARK_MOVIES:
-        if k in movie_title_clean or movie_title_clean in k or k in fuzzy_title or fuzzy_title in k:
-            benchmark_key = k
-            break
-
-    if benchmark_key:
-        cfg = BENCHMARK_MOVIES[benchmark_key]
-        selected_movie = get_rich_movie_item(tmdb_id=cfg["selected_tmdb_id"], title=cfg["selected_title"])
-        selected_movie["movie_id"] = selected_movie["tmdb_id"] or 1
-        if movie_title_clean != cfg["selected_title"].lower():
-            selected_movie["auto_corrected_from"] = movie_title
-
-
-        recommendations = []
-        sim_start = 0.98
-        existing_ids = set()
-
-        for i, item_cfg in enumerate(cfg["recommendations"]):
-            rec_item = get_rich_movie_item(tmdb_id=item_cfg.get("tmdb_id"), title=item_cfg.get("title"))
-            rec_item["similarity"] = round(sim_start - (i * 0.02), 2)
-            rec_item["movie_id"] = rec_item["tmdb_id"] or (i + 100)
-            if rec_item.get("tmdb_id"):
-                existing_ids.add(rec_item["tmdb_id"])
-            recommendations.append(rec_item)
-
-        # If user requested more than benchmark count (e.g. 20 or 30), dynamically fill with 10-Factor Engine!
-        if len(recommendations) < number_of_recommendations and cfg.get("selected_tmdb_id"):
-            dyn_recs = get_tmdb_recommendations(cfg["selected_tmdb_id"], count=number_of_recommendations + 10)
-            for item in dyn_recs:
-                if len(recommendations) >= number_of_recommendations:
-                    break
-                if item.get("id") and item["id"] not in existing_ids:
-                    rec_item = format_tmdb_item(item)
-                    idx = len(recommendations)
-                    rec_item["similarity"] = round(max(0.60, sim_start - (idx * 0.02)), 2)
-                    rec_item["movie_id"] = rec_item["tmdb_id"]
-                    recommendations.append(rec_item)
-                    existing_ids.add(item["id"])
-
-        why_summary = {
-            "title": selected_movie.get("title", "Selected Movie"),
-            "genres": selected_movie.get("genres", ["Action", "Comedy"]),
-            "core_themes": ["Heroic Journey", "Comedic Conflict", "High-Stakes Action", "Family Values"],
-            "story_style": "High-Energy Mass Entertainer + Distinctive Director Style",
-            "key_signals": [
-                "Genre Similarity (15%) — Primary & Subgenre Blend",
-                "Plot & Narrative Similarity (20%) — Core Conflict & Premise",
-                "Director Similarity (8%) — Cinematic Style & Pacing",
-                "Cast Synergy (10%) — Lead Performance Overlap",
-                "Regional Context (5%) — Regional Cinema Industry Style"
-            ]
-        }
-
-        return {
-            "success": True,
-            "selected_movie": selected_movie,
-            "recommendations": recommendations[:number_of_recommendations],
-            "why_these_movies": why_summary
-        }
-
-
-    # ------------------------------------------------------------------
-    # TIER 2: DYNAMIC REAL-TIME TMDB RECOMMENDATION ENGINE
+    # CORE: DYNAMIC REAL-TIME 10-FACTOR MULTI-WEIGHTED RECOMMENDATION ENGINE
     # ------------------------------------------------------------------
     tmdb_match = search_tmdb_movie(movie_title)
+
     if tmdb_match and tmdb_match.get("id"):
         tmdb_id = tmdb_match["id"]
         selected_movie = get_rich_movie_item(tmdb_id=tmdb_id, raw_item=tmdb_match)

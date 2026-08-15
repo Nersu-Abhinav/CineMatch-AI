@@ -520,11 +520,7 @@ async function searchMovie(queryOverride = null) {
             } catch (e) {}
         }
 
-        // Attempt 3: Client Benchmark Fallback
-        if (matchedBenchmarkKey && (!data || !data.success || !data.recommendations || data.recommendations.length === 0 || data.selected_movie.title.toLowerCase().includes("grey, the"))) {
-            data = JSON.parse(JSON.stringify(CLIENT_BENCHMARKS[matchedBenchmarkKey]));
-            data.success = true;
-        }
+
 
         if (!data || !data.success || !data.selected_movie) {
             throw new Error(`No title matching "${movieName}" could be found.`);

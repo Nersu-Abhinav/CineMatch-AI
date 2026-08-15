@@ -235,9 +235,17 @@ def get_tmdb_recommendations(tmdb_id, count=30):
     for r in raw_sim:
         add_candidate(r, 10, "TMDB Similar Graph")
 
+    # Sort final candidates by total 10-Factor score, then by popularity
+    sorted_candidates = sorted(
+        candidate_map.values(),
+        key=lambda x: (x["score"], x["obj"].get("popularity", 0)),
+        reverse=True
+    )
+
     # Compute explicit 10-Factor similarity breakdown & why explanations for candidates
     results = []
     for item_data in sorted_candidates[:count]:
+
         m_obj = item_data["obj"]
         reasons = item_data["reasons"]
         raw_score = item_data["score"]
