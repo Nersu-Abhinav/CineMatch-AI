@@ -361,16 +361,19 @@ button, input, select {
 .hero-title {
     font-family: 'Syne', sans-serif;
     font-weight: 800;
-    font-size: clamp(44px, 6vw, 76px);
+    font-size: clamp(50px, 7vw, 92px);
     line-height: 1.05;
-    letter-spacing: -1.5px;
-    margin-bottom: 22px;
+    letter-spacing: -2.5px;
+    margin-bottom: 24px;
+    color: #ffffff;
+    text-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
 }
 
 .gradient-text {
-    background: linear-gradient(135deg, var(--accent-gold) 0%, #ff8a00 100%);
+    background: linear-gradient(135deg, #f5c518 0%, #ffaa00 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    display: inline-block;
 }
 
 .hero-description {
