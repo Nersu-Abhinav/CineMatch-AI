@@ -186,17 +186,36 @@ def get_recommendations(movie_title, number_of_recommendations=10):
 
         recommendations = []
         sim_start = 0.98
-        for i, item_cfg in enumerate(cfg["recommendations"][:number_of_recommendations]):
+        existing_ids = set()
+
+        for i, item_cfg in enumerate(cfg["recommendations"]):
             rec_item = get_rich_movie_item(tmdb_id=item_cfg.get("tmdb_id"), title=item_cfg.get("title"))
             rec_item["similarity"] = round(sim_start - (i * 0.02), 2)
             rec_item["movie_id"] = rec_item["tmdb_id"] or (i + 100)
+            if rec_item.get("tmdb_id"):
+                existing_ids.add(rec_item["tmdb_id"])
             recommendations.append(rec_item)
+
+        # If user requested more than benchmark count (e.g. 20 or 30), dynamically fill with 10-Factor Engine!
+        if len(recommendations) < number_of_recommendations and cfg.get("selected_tmdb_id"):
+            dyn_recs = get_tmdb_recommendations(cfg["selected_tmdb_id"], count=number_of_recommendations + 10)
+            for item in dyn_recs:
+                if len(recommendations) >= number_of_recommendations:
+                    break
+                if item.get("id") and item["id"] not in existing_ids:
+                    rec_item = format_tmdb_item(item)
+                    idx = len(recommendations)
+                    rec_item["similarity"] = round(max(0.60, sim_start - (idx * 0.02)), 2)
+                    rec_item["movie_id"] = rec_item["tmdb_id"]
+                    recommendations.append(rec_item)
+                    existing_ids.add(item["id"])
 
         return {
             "success": True,
             "selected_movie": selected_movie,
-            "recommendations": recommendations
+            "recommendations": recommendations[:number_of_recommendations]
         }
+
 
     # ------------------------------------------------------------------
     # TIER 2: DYNAMIC REAL-TIME TMDB RECOMMENDATION ENGINE
@@ -207,7 +226,8 @@ def get_recommendations(movie_title, number_of_recommendations=10):
         selected_movie = get_rich_movie_item(tmdb_id=tmdb_id, raw_item=tmdb_match)
         selected_movie["movie_id"] = selected_movie["tmdb_id"]
 
-        raw_recs = get_tmdb_recommendations(tmdb_id)
+        raw_recs = get_tmdb_recommendations(tmdb_id, count=number_of_recommendations)
+
         if not raw_recs or len(raw_recs) < 5:
             similar_recs = get_tmdb_similar(tmdb_id)
             existing_ids = {r["id"] for r in raw_recs if "id" in r}

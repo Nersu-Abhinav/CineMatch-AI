@@ -151,7 +151,8 @@ def get_movie_details(tmdb_id):
 # GET TMDB RECOMMENDATIONS (10-FACTOR ALGORITHMIC ENGINE)
 # ==========================================
 
-def get_tmdb_recommendations(tmdb_id):
+def get_tmdb_recommendations(tmdb_id, count=30):
+
     if not tmdb_id:
         return []
 
@@ -218,14 +219,21 @@ def get_tmdb_recommendations(tmdb_id):
         for r in res_lg:
             add_candidate(r, 20, "Regional Industry & Genre Blend")
 
-    # Factor 5: Raw Recommendations / Similar Graph (Weight +15)
-    url_recs = f"{TMDB_BASE_URL}/movie/{tmdb_id}/recommendations"
-    raw_recs = safe_get(url_recs, {"language": "en-US", "page": 1}).get("results", [])
-    for r in raw_recs:
-        w = 15
-        if r.get("original_language") == orig_lang:
-            w += 10
-        add_candidate(r, w, "TMDB Recommendation Graph")
+    # Factor 6: Fetch Page 2 of discover / similar if candidate pool needs filling
+    if len(candidate_map) < count and orig_lang and genres:
+        res_p2 = safe_get(url_discover, {
+            "with_original_language": orig_lang,
+            "sort_by": "popularity.desc",
+            "page": 2,
+            "language": "en-US"
+        }).get("results", [])
+        for r in res_p2:
+            add_candidate(r, 10, "Genre / Industry Fallback")
+
+    url_sim = f"{TMDB_BASE_URL}/movie/{tmdb_id}/similar"
+    raw_sim = safe_get(url_sim, {"language": "en-US", "page": 1}).get("results", [])
+    for r in raw_sim:
+        add_candidate(r, 10, "TMDB Similar Graph")
 
     # Sort final candidates by total score, then by popularity
     sorted_candidates = sorted(
@@ -234,7 +242,8 @@ def get_tmdb_recommendations(tmdb_id):
         reverse=True
     )
 
-    return [item["obj"] for item in sorted_candidates[:12]]
+    return [item["obj"] for item in sorted_candidates[:count]]
+
 
 
 
