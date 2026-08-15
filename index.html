@@ -4,288 +4,461 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CineMatch AI — Next-Gen AI Movie Recommendation Engine</title>
+    <title>CineMatch AI — Next-Gen Movie Discovery Engine</title>
 
-    <meta name="description" content="Discover movies beyond ordinary algorithms with CineMatch AI. Powered by 29M+ MovieLens ratings, item-item collaborative vector space, and real-time TMDB v3 API metadata.">
+    <link rel="stylesheet" href="style.css?v=20.0">
 
-    <!-- Fonts -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="landing.css?v=1.0">
 </head>
 
 <body>
 
     <!-- ======================================
-         DYNAMIC BACKGROUND & LIGHTING MESH
+         DYNAMIC BACKDROP & AMBIENT GLOW
     ======================================= -->
-    <div class="bg-ambient">
-        <div class="glow-orb glow-orb-1"></div>
-        <div class="glow-orb glow-orb-2"></div>
-        <div class="glow-orb glow-orb-3"></div>
-        <div class="grid-pattern"></div>
-    </div>
+    <div id="backdrop" class="backdrop"></div>
+    <div id="ambientOverlay" class="backdrop-overlay"></div>
+    <div class="ambient-glow glow-top-left"></div>
+    <div class="ambient-glow glow-bottom-right"></div>
+
 
     <!-- ======================================
          NAVIGATION BAR
     ======================================= -->
-    <nav class="navbar" id="navbar">
-        <div class="container nav-container">
-            <a href="#" class="logo">
-                <div class="logo-badge">C</div>
-                <div class="logo-text">CineMatch <span class="text-gradient">AI</span></div>
-            </a>
-
-            <ul class="nav-links">
-                <li><a href="#features" class="nav-link">Features</a></li>
-                <li><a href="#architecture" class="nav-link">Architecture</a></li>
-                <li><a href="#vibes" class="nav-link">Cinematic Vibes</a></li>
-            </ul>
-
-            <button onclick="launchSearchFromLanding()" class="btn-launch">
-                <span>Enter CineMatch AI</span>
-                <span class="arrow">→</span>
-            </button>
+    <header class="navbar">
+        <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+            <div class="logo-icon">
+                <span>C</span>
+            </div>
+            <div class="logo-text">
+                <span class="brand-name">CineMatch</span>
+                <span class="ai-badge">AI</span>
+            </div>
         </div>
-    </nav>
+
+        <nav class="nav-links">
+            <a href="#home" class="active">Home</a>
+            <a href="#spotlight">Spotlight</a>
+            <a href="#recommendations">Recommendations</a>
+            <a href="#moods">Moods</a>
+            <a href="#" onclick="openArchitectureModal(event)">Architecture</a>
+        </nav>
+
+        <div class="nav-actions">
+            <div class="status-indicator">
+                <span class="status-dot"></span>
+                <span class="status-text">Engine Online</span>
+            </div>
+        </div>
+    </header>
+
 
     <!-- ======================================
-         HERO SECTION
+         MAIN CONTENT AREA
     ======================================= -->
-    <main class="container">
+    <main id="home">
+
+        <!-- HERO CONSOLE SECTION -->
         <section class="hero">
-            <div class="hero-left">
-                <div class="hero-tag">
-                    <span class="pulse-dot"></span>
-                    <span>29M+ Ratings Vector Space</span>
+            <div class="hero-content">
+
+                <div class="eyebrow">
+                    <span class="pulse"></span>
+                    <span class="eyebrow-text">NEXT-GEN COLLABORATIVE FILTERING ENGINE</span>
                 </div>
 
                 <h1 class="hero-title">
-                    Discover Movies Beyond <span class="text-gradient">Ordinary Algorithms.</span>
+                    Discover Movies Beyond <span class="gradient-text">Ordinary Algorithms.</span>
                 </h1>
 
-                <p class="hero-sub">
-                    Unlock deep, personalized movie recommendations powered by high-dimensional nearest-neighbor vectors computed over 29+ million user ratings and enriched in real time.
+                <p class="hero-description">
+                    Unlock deep, personalized movie recommendations powered by high-dimensional nearest-neighbor vectors computed over 29+ million user ratings.
                 </p>
 
-                <!-- Interactive Search Launcher Teaser -->
-                <div class="teaser-search-box">
-                    <input type="text" id="landingSearchInput" class="teaser-input" placeholder="Type a movie title (e.g., Inception, Interstellar)...">
-                    <button class="teaser-btn" onclick="launchSearchFromLanding()">
-                        <span>Discover</span>
-                        <span class="arrow">→</span>
-                    </button>
+
+
+
+                <!-- SEARCH CONSOLE -->
+                <div class="search-console" id="searchContainer">
+                    <div class="search-input-wrapper">
+                        <span class="search-icon">⌕</span>
+                        <input type="text" id="movieSearch" placeholder="Type a movie title (e.g. Inception, The Dark Knight)..." autocomplete="off" spellcheck="false">
+                        <button id="clearSearchBtn" class="clear-btn hidden" onclick="clearSearch()" title="Clear text">×</button>
+                    </div>
+
+                    <div class="search-controls-right">
+                        <div class="limit-selector" title="Number of recommendations">
+                            <label for="limitSelect">Results:</label>
+                            <select id="limitSelect" onchange="updateLimit(this.value)">
+                                <option value="5">5 Movies</option>
+                                <option value="10" selected>10 Movies</option>
+                                <option value="15">15 Movies</option>
+                                <option value="20">20 Movies</option>
+                            </select>
+                        </div>
+
+                        <button id="searchButton" onclick="searchMovie()">
+                            <span>Discover</span>
+                            <span class="arrow">→</span>
+                        </button>
+                    </div>
                 </div>
 
-                <!-- Preset Chips -->
-                <div class="preset-tags">
-                    <span class="preset-label">Popular Queries:</span>
-                    <button class="chip-btn" onclick="launchSearchFromLanding('Inception')">Inception</button>
-                    <button class="chip-btn" onclick="launchSearchFromLanding('The Dark Knight')">The Dark Knight</button>
-                    <button class="chip-btn" onclick="launchSearchFromLanding('Interstellar')">Interstellar</button>
-                    <button class="chip-btn" onclick="launchSearchFromLanding('Pulp Fiction')">Pulp Fiction</button>
+                <div id="autoCorrectBanner" class="autocorrect-banner hidden">
+                    <span class="sparkle">✨</span>
+                    <span id="autoCorrectText">Auto-corrected query: showing recommendations for <strong>Interstellar</strong></span>
                 </div>
+
+                <div id="searchError" class="search-error hidden"></div>
+
+
+
+                <!-- QUICK DISCOVERY PRESETS -->
+                <div class="quick-presets">
+                    <span class="presets-label">Popular Presets:</span>
+                    <div class="chips-wrapper">
+                        <button class="preset-chip" onclick="quickSearch('Inception')">Inception</button>
+                        <button class="preset-chip" onclick="quickSearch('The Dark Knight')">The Dark Knight</button>
+                        <button class="preset-chip" onclick="quickSearch('Interstellar')">Interstellar</button>
+                        <button class="preset-chip" onclick="quickSearch('Pulp Fiction')">Pulp Fiction</button>
+                        <button class="preset-chip" onclick="quickSearch('Avatar')">Avatar</button>
+                        <button class="preset-chip" onclick="quickSearch('The Matrix')">The Matrix</button>
+                        <button class="preset-chip" onclick="quickSearch('Fight Club')">Fight Club</button>
+                        <button class="preset-chip" onclick="quickSearch('Gladiator')">Gladiator</button>
+                    </div>
+                </div>
+
+                <!-- RECENT IN-MEMORY SEARCH TRAY -->
+                <div id="recentSearchSection" class="recent-search-section hidden">
+                    <span class="recent-label">Session History:</span>
+                    <div id="recentChips" class="recent-chips"></div>
+                    <button class="clear-history-btn" onclick="clearSessionHistory()">Clear</button>
+                </div>
+
             </div>
+        </section>
 
-            <!-- Hero Stack Visual Showcase -->
-            <div class="hero-visual">
-                <div class="card-stack">
-                    <div class="stack-card stack-card-1" style="background-image: url('https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg');">
-                        <div class="card-overlay">
-                            <span class="card-badge">Sci-Fi Masterpiece</span>
-                            <h3 class="card-title">The Dark Knight</h3>
-                            <div class="card-meta"><span class="rating-star">★</span> 9.0 Rating</div>
+
+        <!-- SELECTED MOVIE SPOTLIGHT SECTION -->
+        <section id="selectedMovieSection" class="spotlight-section hidden">
+            <div class="section-container">
+                <div class="section-badge">
+                    <span class="badge-icon">✦</span>
+                    <span>SEARCH TARGET SPOTLIGHT</span>
+                </div>
+
+                <div id="selectedMovie" class="spotlight-card"></div>
+            </div>
+        </section>
+
+
+
+
+        <!-- RECOMMENDATIONS HUB SECTION -->
+        <section id="recommendations" class="recommendations-section hidden">
+            <div class="section-container">
+
+                <!-- RECOMMENDATION HEADER & CONTROLS TOOLBAR -->
+                <div class="recommendation-header">
+                    <div class="header-titles">
+                        <div class="section-badge">
+                            <span class="badge-icon">⚡</span>
+                            <span>AI CURATED DISCOVERY HUB</span>
+                        </div>
+                        <h2>Recommended For You</h2>
+                        <p class="header-subtitle">Matched via vector proximity in ratings space</p>
+                    </div>
+
+                    <div id="recommendationCount" class="results-count-pill">0 Matches</div>
+                </div>
+
+                <!-- CONTROLS TOOLBAR (SORT, FILTER, VIEW SWITCHER) -->
+                <div class="controls-toolbar">
+
+                    <!-- SORT CONTROL -->
+                    <div class="control-group">
+                        <label class="control-label">Sort By:</label>
+                        <select id="sortSelect" onchange="handleSortChange(this.value)">
+                            <option value="match" selected>Match Score (Highest)</option>
+                            <option value="rating">TMDB Rating (Highest)</option>
+                            <option value="year_desc">Release Year (Newest)</option>
+                            <option value="year_asc">Release Year (Oldest)</option>
+                            <option value="title">Title (A-Z)</option>
+                        </select>
+                    </div>
+
+                    <!-- MINIMUM RATING FILTER -->
+                    <div class="control-group">
+                        <label class="control-label">Min Rating:</label>
+                        <div class="rating-filter-buttons">
+                            <button class="filter-btn active" data-rating="0" onclick="handleRatingFilter(0, this)">All</button>
+                            <button class="filter-btn" data-rating="7.0" onclick="handleRatingFilter(7.0, this)">7.0+ ★</button>
+                            <button class="filter-btn" data-rating="8.0" onclick="handleRatingFilter(8.0, this)">8.0+ ★</button>
                         </div>
                     </div>
-                    <div class="stack-card stack-card-2" style="background-image: url('https://image.tmdb.org/t/p/w500/edv5CZvWj09upOsy2Y6IwDhK8bt.jpg');">
-                        <div class="card-overlay">
-                            <span class="card-badge">Cosmic Epic</span>
-                            <h3 class="card-title">Inception</h3>
-                            <div class="card-meta"><span class="rating-star">★</span> 8.8 Rating</div>
+
+                    <!-- GENRE FILTER PILLS -->
+                    <div class="control-group genre-group">
+                        <label class="control-label">Genre:</label>
+                        <select id="genreFilterSelect" onchange="handleGenreFilter(this.value)">
+                            <option value="all" selected>All Genres</option>
+                        </select>
+                    </div>
+
+                    <!-- VIEW SWITCHER TOGGLE -->
+                    <div class="view-switcher">
+                        <button id="gridViewBtn" class="view-btn active" onclick="switchView('grid')" title="Grid View">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                        </button>
+                        <button id="listViewBtn" class="view-btn" onclick="switchView('list')" title="List View">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                        </button>
+                    </div>
+
+                </div>
+
+
+                <!-- MOVIE CARDS CONTAINER (GRID OR LIST) -->
+                <div id="movieGrid" class="movie-grid grid-mode"></div>
+
+                <!-- NO MATCHING RESULTS ALERT -->
+                <div id="noResultsAlert" class="no-results-alert hidden">
+                    <div class="alert-icon">🔍</div>
+                    <h3>No Movies Match Your Active Filters</h3>
+                    <p>Try resetting the genre or minimum rating filter to view more recommendations.</p>
+                    <button class="reset-filters-btn" onclick="resetFilters()">Reset All Filters</button>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- LOADING STATE -->
+        <div id="loading" class="loading-overlay hidden">
+            <div class="spinner-container">
+                <div class="glow-spinner"></div>
+                <div class="inner-spinner"></div>
+            </div>
+            <p class="loading-text">Vectorizing & Searching Nearest Neighbors...</p>
+            <span class="loading-subtext">Fetching metadata from TMDB</span>
+        </div>
+
+
+        <!-- MOOD & GENRE EXPLORER SECTION -->
+        <section id="moods" class="moods-section">
+            <div class="section-container">
+                <div class="section-header-center">
+                    <div class="section-badge">
+                        <span class="badge-icon">🎬</span>
+                        <span>CURATED MOOD EXPLORER</span>
+                    </div>
+                    <h2>Explore By Cinematic Vibe</h2>
+                    <p>Select a curated mood to launch an instant AI recommendation pipeline</p>
+                </div>
+
+                <div class="mood-cards-grid">
+                    <div class="mood-card" onclick="quickSearch('Inception')">
+                        <div class="mood-bg sci-fi"></div>
+                        <div class="mood-content">
+                            <span class="mood-tag">Sci-Fi & Reality</span>
+                            <h3>Mind-Bending Realities</h3>
+                            <p>High-concept thrillers, dream layers, space exploration, and temporal paradoxes.</p>
+                            <span class="mood-action">Launch Match →</span>
                         </div>
                     </div>
-                    <div class="stack-card stack-card-3" style="background-image: url('https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg');">
-                        <div class="card-overlay">
-                            <span class="card-badge">Top Recommendation</span>
-                            <h3 class="card-title">Interstellar</h3>
-                            <div class="card-meta"><span class="rating-star">★</span> 8.7 Rating • 98% Vector Match</div>
+
+                    <div class="mood-card" onclick="quickSearch('The Dark Knight')">
+                        <div class="mood-bg dark-hero"></div>
+                        <div class="mood-content">
+                            <span class="mood-tag">Gritty & Crime</span>
+                            <h3>Dark Gotham Realism</h3>
+                            <p>Complex antiheroes, psychological crime sagas, and intense drama.</p>
+                            <span class="mood-action">Launch Match →</span>
+                        </div>
+                    </div>
+
+                    <div class="mood-card" onclick="quickSearch('Interstellar')">
+                        <div class="mood-bg cosmic"></div>
+                        <div class="mood-content">
+                            <span class="mood-tag">Cosmic Spectacle</span>
+                            <h3>Deep Space Journeys</h3>
+                            <p>Visceral astronomical journeys, emotional stakes, and sweeping scores.</p>
+                            <span class="mood-action">Launch Match →</span>
+                        </div>
+                    </div>
+
+                    <div class="mood-card" onclick="quickSearch('Pulp Fiction')">
+                        <div class="mood-bg cult"></div>
+                        <div class="mood-content">
+                            <span class="mood-tag">Cult & Dialogue</span>
+                            <h3>Non-Linear Neo-Noir</h3>
+                            <p>Stylized narratives, sharp dialogue, and memorable ensemble casts.</p>
+                            <span class="mood-action">Launch Match →</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ======================================
-             LIVE STATS BANNER
-        ======================================= -->
-        <section class="stats-banner">
-            <div class="glass-panel stats-grid">
-                <div class="stat-card">
-                    <div class="stat-val text-gradient">29M+</div>
-                    <div class="stat-desc">User Ratings Trained</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-val text-gradient">5,000</div>
-                    <div class="stat-desc">Top Catalog Movies</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-val text-gradient">&lt;50ms</div>
-                    <div class="stat-desc">Vector Search Latency</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-val text-gradient">10-Factor</div>
-                    <div class="stat-desc">Algorithmic Scoring</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ======================================
-             FEATURES SECTION
-        ======================================= -->
-        <section class="section" id="features">
-            <div class="section-header">
-                <span class="section-tag">ENGINE FEATURES</span>
-                <h2 class="section-title">Built for Real Movie Lovers</h2>
-                <p class="section-desc">Driven by deep vector math and real-time TMDB metadata, CineMatch AI provides recommendations that actually make sense.</p>
-            </div>
-
-            <div class="features-grid">
-                <div class="glass-panel feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3 class="feature-title">Item-Item Collaborative k-NN</h3>
-                    <p class="feature-text">High-dimensional cosine distance vector space mapping user preference patterns directly into exact movie similarity clusters.</p>
-                </div>
-
-                <div class="glass-panel feature-card">
-                    <div class="feature-icon">✨</div>
-                    <h3 class="feature-title">Typo Auto-Correction</h3>
-                    <p class="feature-text">Smart regex string normalizer cleans search inputs on the fly (e.g. "interstellarrr" automatically maps to "Interstellar").</p>
-                </div>
-
-                <div class="glass-panel feature-card">
-                    <div class="feature-icon">🎬</div>
-                    <h3 class="feature-title">Real-Time TMDB Metadata</h3>
-                    <p class="feature-text">Instantly fetches high-resolution posters, backdrops, vote averages, genres, and cast details directly from TMDB v3 API.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ======================================
-             ARCHITECTURE SECTION
-        ======================================= -->
-        <section class="section" id="architecture">
-            <div class="section-header">
-                <span class="section-tag">SYSTEM PIPELINE</span>
-                <h2 class="section-title">How CineMatch AI Works</h2>
-                <p class="section-desc">From 29 million ratings down to your next favorite movie in milliseconds.</p>
-            </div>
-
-            <div class="glass-panel arch-showcase">
-                <div class="arch-pipeline">
-                    <div class="arch-step-card">
-                        <div class="arch-num">01</div>
-                        <h4 class="arch-step-title">Data Ingestion</h4>
-                        <p class="arch-step-desc">Aggregates MovieLens 29M dataset via chunked pandas filtering.</p>
-                    </div>
-                    <div class="arch-step-card">
-                        <div class="arch-num">02</div>
-                        <h4 class="arch-step-title">Sparse CSR Matrix</h4>
-                        <p class="arch-step-desc">Constructs compressed user-item ratings vector matrices.</p>
-                    </div>
-                    <div class="arch-step-card">
-                        <div class="arch-num">03</div>
-                        <h4 class="arch-step-title">Nearest Neighbors</h4>
-                        <p class="arch-step-desc">Computes angular cosine distances to determine vector clusters.</p>
-                    </div>
-                    <div class="arch-step-card">
-                        <div class="arch-num">04</div>
-                        <h4 class="arch-step-title">TMDB API Hub</h4>
-                        <p class="arch-step-desc">Enriches results with posters, backdrops, and 10-factor explanations.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ======================================
-             CINEMATIC VIBES EXPLORER
-        ======================================= -->
-        <section class="section" id="vibes">
-            <div class="section-header">
-                <span class="section-tag">CURATED VIBES</span>
-                <h2 class="section-title">Explore by Cinematic Mood</h2>
-                <p class="section-desc">Click any vibe to launch CineMatch AI pre-configured with recommendations.</p>
-            </div>
-
-            <div class="vibe-grid">
-                <div class="vibe-card" onclick="launchSearchFromLanding('Inception')">
-                    <div class="vibe-bg" style="background-image: url('https://image.tmdb.org/t/p/w500/edv5CZvWj09upOsy2Y6IwDhK8bt.jpg');"></div>
-                    <div class="vibe-overlay">
-                        <span class="vibe-tag">Sci-Fi & Reality</span>
-                        <h3 class="vibe-name">Mind-Bending Thrillers</h3>
-                        <span class="vibe-cta">Explore Recommendations →</span>
-                    </div>
-                </div>
-
-                <div class="vibe-card" onclick="launchSearchFromLanding('The Dark Knight')">
-                    <div class="vibe-bg" style="background-image: url('https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg');"></div>
-                    <div class="vibe-overlay">
-                        <span class="vibe-tag">Gritty & Crime</span>
-                        <h3 class="vibe-name">Dark Gotham Realism</h3>
-                        <span class="vibe-cta">Explore Recommendations →</span>
-                    </div>
-                </div>
-
-                <div class="vibe-card" onclick="launchSearchFromLanding('Interstellar')">
-                    <div class="vibe-bg" style="background-image: url('https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg');"></div>
-                    <div class="vibe-overlay">
-                        <span class="vibe-tag">Cosmic Spectacle</span>
-                        <h3 class="vibe-name">Deep Space Odysseys</h3>
-                        <span class="vibe-cta">Explore Recommendations →</span>
-                    </div>
-                </div>
-
-                <div class="vibe-card" onclick="launchSearchFromLanding('Pulp Fiction')">
-                    <div class="vibe-bg" style="background-image: url('https://image.tmdb.org/t/p/w500/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg');"></div>
-                    <div class="vibe-overlay">
-                        <span class="vibe-tag">Cult Classic</span>
-                        <h3 class="vibe-name">Non-Linear Neo-Noir</h3>
-                        <span class="vibe-cta">Explore Recommendations →</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ======================================
-             CALL TO ACTION BANNER
-        ======================================= -->
-        <section class="glass-panel cta-banner">
-            <h2 class="cta-title">Ready to Experience <span class="text-gradient">CineMatch AI</span>?</h2>
-            <p class="cta-text">Enter the next-gen movie discovery portal now and find your next favorite film.</p>
-            <button onclick="launchSearchFromLanding()" class="btn-launch" style="padding: 1rem 2.5rem; font-size: 1.1rem;">
-                <span>Launch Recommendation Engine</span>
-                <span class="arrow">→</span>
-            </button>
-        </section>
     </main>
 
+
     <!-- ======================================
-         FOOTER
+         LIVE STATS FOOTER
     ======================================= -->
-    <footer class="footer">
-        <div class="container footer-content">
-            <div class="logo">
-                <div class="logo-badge" style="width: 32px; height: 32px; font-size: 1rem;">C</div>
-                <span class="logo-text" style="font-size: 1.1rem;">CineMatch AI</span>
+    <footer class="site-footer">
+        <div class="section-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <div class="logo-icon"><span>C</span></div>
+                        <span class="brand-name">CineMatch AI</span>
+                    </div>
+                    <p class="footer-desc">
+                        State-of-the-art item-item collaborative recommendation system built with Python, scikit-learn sparse matrices, and TMDB metadata integration.
+                    </p>
+                </div>
+
+                <div class="footer-stats-list">
+                    <div class="footer-stat">
+                        <span class="stat-number">29M+</span>
+                        <span class="stat-label">User Ratings Trained</span>
+                    </div>
+                    <div class="footer-stat">
+                        <span class="stat-number">5,000</span>
+                        <span class="stat-label">Top Catalog Movies</span>
+                    </div>
+                    <div class="footer-stat">
+                        <span class="stat-number">k-NN</span>
+                        <span class="stat-label">Cosine Distance Vector Space</span>
+                    </div>
+                    <div class="footer-stat">
+                        <span class="stat-number">TMDB</span>
+                        <span class="stat-label">Real-time Poster Metadata</span>
+                    </div>
+                </div>
             </div>
-            <p>© 2026 CineMatch AI. Built with Python, FastAPI & TMDB API.</p>
+
+            <div class="footer-bottom">
+                <p>© 2026 CineMatch AI. Built for movie lovers. Powered by MovieLens & TMDB.</p>
+                <a href="#home" class="back-to-top">Back to top ↑</a>
+            </div>
         </div>
     </footer>
 
-    <!-- Script -->
-    <script src="landing.js?v=1.0"></script>
+
+    <!-- ======================================
+         ENDLESS DISCOVERY MOVIE MODAL
+    ======================================= -->
+    <div id="movieModal" class="modal hidden">
+        <div class="modal-backdrop" onclick="closeModal()"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()" title="Close Modal (Esc)">×</button>
+            <div id="modalMovie" class="modal-movie-body"></div>
+        </div>
+    </div>
+
+
+    <!-- ======================================
+         ARCHITECTURE OVERVIEW MODAL
+    ======================================= -->
+    <div id="architectureModal" class="modal hidden">
+        <div class="modal-backdrop" onclick="closeArchitectureModal()"></div>
+        <div class="modal-content architecture-modal-content">
+            <button class="modal-close" onclick="closeArchitectureModal()">×</button>
+
+            <div class="arch-header">
+                <span class="badge-icon">⚡</span>
+                <h2>CineMatch AI Architecture</h2>
+                <p>How our recommendation engine computes movie vectors</p>
+            </div>
+
+            <div class="arch-body">
+                <div class="arch-step">
+                    <div class="step-num">01</div>
+                    <div class="step-details">
+                        <h4>Data Preprocessing & Chunking</h4>
+                        <p>Aggregates 29+ million ratings from MovieLens using chunked pandas processing to filter down to the top 5,000 most-rated movies.</p>
+                    </div>
+                </div>
+
+                <div class="arch-step">
+                    <div class="step-num">02</div>
+                    <div class="step-details">
+                        <h4>Sparse CSR User-Movie Matrix</h4>
+                        <p>Constructs a high-dimensional SciPy Compressed Sparse Row (CSR) matrix mapping user ratings into movie feature vectors.</p>
+                    </div>
+                </div>
+
+                <div class="arch-step">
+                    <div class="step-num">03</div>
+                    <div class="step-details">
+                        <h4>Item-Item Cosine Nearest Neighbors</h4>
+                        <p>Trains a scikit-learn <code>NearestNeighbors(metric="cosine", algorithm="brute")</code> model to calculate exact angular similarity between movie vectors.</p>
+                    </div>
+                </div>
+
+                <div class="arch-step">
+                    <div class="step-num">04</div>
+                    <div class="step-details">
+                        <h4>FastAPI Backend & TMDB API Enrichment</h4>
+                        <p>Queries vector indices on-the-fly via FastAPI, resolving movie IDs to rich posters, backdrops, ratings, and genre tags via TMDB v3 API.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="arch-footer">
+                <button class="primary-btn" onclick="closeArchitectureModal()">Got It!</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ======================================
+         JAVASCRIPT ENGINE
+    ======================================= -->
+    <script src="script.js?v=20.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 
 </html>

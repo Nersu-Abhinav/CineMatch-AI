@@ -99,6 +99,17 @@ document.addEventListener("DOMContentLoaded", () => {
             closeArchitectureModal();
         }
     });
+
+    // Automatically check for URL search parameter (e.g. ?search=Inception)
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchParam = urlParams.get('search');
+    if (searchParam && searchParam.trim()) {
+        const query = searchParam.trim();
+        if (searchInput) searchInput.value = query;
+        if (navSearchInput) navSearchInput.value = query;
+        if (clearSearchBtn) clearSearchBtn.classList.remove("hidden");
+        searchMovie(query);
+    }
 });
 
 function focusSearch() {
