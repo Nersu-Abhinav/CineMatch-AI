@@ -877,13 +877,6 @@ button, input, select {
     background: var(--accent-gold);
     color: #000;
 }
-    transition: var(--transition-fast);
-}
-
-.view-btn.active {
-    background: var(--bg-glass-hover);
-    color: var(--accent-gold);
-}
 
 /* --------------------------------------------------------------------------
    08. MOVIE CARDS (GRID VS LIST VIEW)
