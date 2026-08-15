@@ -987,13 +987,22 @@ function createMovieCard(movie) {
     const poster = movie.poster_url || createFallbackPoster(movie.title);
     const year = movie.release_date ? movie.release_date.substring(0, 4) : "N/A";
     const rating = movie.rating ? Number(movie.rating).toFixed(1) : "N/A";
-    const simLevel = movie.similarity_level || (movie.similarity >= 0.8 ? "Very High" : movie.similarity >= 0.65 ? "High" : "Medium");
 
-    const matchClass = simLevel === "Very High" ? "match-high" : "match-mid";
+    let matchPct = 85;
+    if (typeof movie.similarity === "number" && !isNaN(movie.similarity)) {
+        matchPct = movie.similarity <= 1 ? Math.round(movie.similarity * 100) : Math.round(movie.similarity);
+    } else if (movie.similarity_level) {
+        if (movie.similarity_level === "Very High") matchPct = 95;
+        else if (movie.similarity_level === "High") matchPct = 88;
+        else if (movie.similarity_level === "Medium") matchPct = 75;
+        else if (movie.similarity_level === "Low") matchPct = 60;
+    }
+
+    const matchClass = matchPct >= 90 ? "match-high" : "match-mid";
 
     card.innerHTML = `
         <div class="card-poster-wrapper">
-            <span class="match-pill ${matchClass}">Sim: ${escapeHtml(simLevel)}</span>
+            <span class="match-pill ${matchClass}">${matchPct}% Match</span>
             <img class="card-poster" src="${poster}" alt="${escapeHtml(movie.title)}" loading="lazy" onerror="this.src='${createFallbackPoster(movie.title)}'">
             <div class="card-gradient-overlay"></div>
         </div>
@@ -1032,8 +1041,15 @@ function openModal(movie) {
     const poster = movie.poster_url || createFallbackPoster(movie.title);
     const year = movie.release_date ? movie.release_date.substring(0, 4) : "N/A";
     const rating = movie.rating ? Number(movie.rating).toFixed(1) : "N/A";
-    const genres = (movie.genres || []).map(g => `<span class="genre-pill">${escapeHtml(g)}</span>`).join("");
-    const simLevel = movie.similarity_level || (movie.similarity >= 0.8 ? "Very High" : "High");
+    let matchPct = 85;
+    if (typeof movie.similarity === "number" && !isNaN(movie.similarity)) {
+        matchPct = movie.similarity <= 1 ? Math.round(movie.similarity * 100) : Math.round(movie.similarity);
+    } else if (movie.similarity_level) {
+        if (movie.similarity_level === "Very High") matchPct = 95;
+        else if (movie.similarity_level === "High") matchPct = 88;
+        else if (movie.similarity_level === "Medium") matchPct = 75;
+        else if (movie.similarity_level === "Low") matchPct = 60;
+    }
     const catName = movie.category || "CineMatch Pick";
     let whyText = movie.why_explanation;
     if (!whyText || whyText.includes("vector proximity")) {
@@ -1058,7 +1074,7 @@ function openModal(movie) {
             <div class="movie-meta-bar">
                 <span class="rating-badge">★ ${rating}</span>
                 <span class="year-badge">${year}</span>
-                <span class="rating-badge" style="background: rgba(6, 182, 212, 0.2); color: var(--accent-cyan);">Similarity: ${escapeHtml(simLevel)}</span>
+                <span class="rating-badge" style="background: rgba(6, 182, 212, 0.2); color: var(--accent-cyan);">${matchPct}% Match</span>
                 ${genres}
             </div>
             <div style="background: rgba(245, 197, 24, 0.1); border-left: 4px solid var(--accent-gold); padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-size: 14px;">
