@@ -108,10 +108,12 @@
                     </div>
 
                     <div class="search-controls-right">
-                        <div class="limit-selector" title="Strictly 40 Movies Recommendation Engine">
+                        <div class="limit-selector" title="Number of recommendations">
                             <label for="limitSelect">Results:</label>
-                            <select id="limitSelect" onchange="updateLimit(40)">
-                                <option value="40" selected>40 Movies (Strict)</option>
+                            <select id="limitSelect" onchange="updateLimit(this.value)">
+                                <option value="40" selected>40 Movies</option>
+                                <option value="30">30 Movies</option>
+                                <option value="20">20 Movies</option>
                             </select>
                         </div>
 
@@ -195,58 +197,7 @@
                 <!-- CONTROLS TOOLBAR (SORT, FILTER, VIEW SWITCHER) -->
                 <div class="controls-toolbar">
 
-                    <!-- SORT CONTROL -->
-                    <div class="control-group">
-                        <label class="control-label">Sort By:</label>
-                        <select id="sortSelect" onchange="handleSortChange(this.value)">
-                            <option value="match" selected>Match Score (Highest)</option>
-                            <option value="rating">TMDB Rating (Highest)</option>
-                            <option value="year_desc">Release Year (Newest)</option>
-                            <option value="year_asc">Release Year (Oldest)</option>
-                            <option value="title">Title (A-Z)</option>
-                        </select>
-                    </div>
 
-                    <!-- MINIMUM RATING FILTER -->
-                    <div class="control-group">
-                        <label class="control-label">Min Rating:</label>
-                        <div class="rating-filter-buttons">
-                            <button class="filter-btn active" data-rating="0" onclick="handleRatingFilter(0, this)">All</button>
-                            <button class="filter-btn" data-rating="7.0" onclick="handleRatingFilter(7.0, this)">7.0+ ★</button>
-                            <button class="filter-btn" data-rating="8.0" onclick="handleRatingFilter(8.0, this)">8.0+ ★</button>
-                        </div>
-                    </div>
-
-                    <!-- GENRE FILTER -->
-                    <div class="control-group genre-group">
-                        <label class="control-label">Genre:</label>
-                        <select id="genreFilterSelect" onchange="handleGenreFilter(this.value)">
-                            <option value="all" selected>All Genres</option>
-                        </select>
-                    </div>
-
-                    <!-- ERA FILTER -->
-                    <div class="control-group">
-                        <label class="control-label">Era:</label>
-                        <select id="eraFilterSelect" onchange="handleEraFilter(this.value)">
-                            <option value="all" selected>All Eras</option>
-                            <option value="2020s">2020s (Recent)</option>
-                            <option value="2010s">2010s</option>
-                            <option value="2000s">2000s</option>
-                            <option value="classics">Classics (Pre-2000)</option>
-                        </select>
-                    </div>
-
-                    <!-- QUICK TITLE FILTER -->
-                    <div class="control-group search-filter-group">
-                        <label class="control-label">Filter Title:</label>
-                        <input type="text" id="quickFilterInput" placeholder="Filter results..." oninput="handleQuickFilter(this.value)">
-                    </div>
-
-                    <!-- RESET FILTERS BUTTON -->
-                    <div class="control-group">
-                        <button class="toolbar-reset-btn" onclick="resetFilters()" title="Reset all active filters">🔄 Reset</button>
-                    </div>
 
                     <!-- VIEW SWITCHER TOGGLE -->
                     <div class="view-switcher">
@@ -460,7 +411,7 @@
     <!-- ======================================
          JAVASCRIPT ENGINE
     ======================================= -->
-    <script src="script.js?v=110.0"></script>
+    <script src="script.js?v=120.0"></script>
 
 
 
