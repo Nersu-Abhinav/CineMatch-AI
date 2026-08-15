@@ -315,12 +315,12 @@ button, input, select {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 105px 6vw 35px;
+    padding: 100px 6vw 30px;
     position: relative;
 }
 
 .hero-content {
-    max-width: 800px;
+    max-width: 780px;
     width: 100%;
     text-align: center;
     margin: 0 auto;
@@ -353,7 +353,7 @@ button, input, select {
 
 .eyebrow-text {
     color: var(--accent-gold);
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 700;
     letter-spacing: 1.5px;
 }
@@ -361,7 +361,7 @@ button, input, select {
 .hero-title {
     font-family: 'Syne', sans-serif;
     font-weight: 800;
-    font-size: clamp(30px, 3.8vw, 52px);
+    font-size: clamp(28px, 4vw, 50px);
     line-height: 1.1;
     letter-spacing: -1px;
     margin-bottom: 12px;
@@ -376,9 +376,9 @@ button, input, select {
 .hero-description {
     font-size: clamp(14px, 1.4vw, 16px);
     color: var(--text-secondary);
-    max-width: 600px;
-    margin: 0 auto 22px;
-    line-height: 1.6;
+    max-width: 540px;
+    margin: 0 auto 24px;
+    line-height: 1.5;
 }
 
 
