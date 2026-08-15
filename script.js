@@ -848,7 +848,9 @@ function openModal(movie) {
     const rating = movie.rating ? Number(movie.rating).toFixed(1) : "N/A";
     const genres = (movie.genres || []).map(g => `<span class="genre-pill">${escapeHtml(g)}</span>`).join("");
     const simLevel = movie.similarity_level || "High";
-    const whyText = movie.why_explanation || "Shared genre structure, narrative conflict & target audience appeal";
+    const catName = movie.category || "CineMatch Pick";
+    const catIcon = movie.category_icon || "💎";
+    const whyText = movie.why_explanation || `Matched via ${catName} vector analysis`;
     const tmdbLink = movie.tmdb_id ? `https://www.themoviedb.org/movie/${movie.tmdb_id}` : "#";
 
     modalMovieBody.innerHTML = `
@@ -860,11 +862,15 @@ function openModal(movie) {
             <div class="movie-meta-bar">
                 <span class="rating-badge">★ ${rating}</span>
                 <span class="year-badge">${year}</span>
-                <span class="rating-badge" style="background: rgba(245, 197, 24, 0.2); color: var(--accent-gold);">Similarity: ${escapeHtml(simLevel)}</span>
+                <span class="category-modal-pill" style="background: rgba(245, 197, 24, 0.18); color: var(--accent-gold); border: 1px solid rgba(245, 197, 24, 0.4); padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 700;">${catIcon} ${escapeHtml(catName)}</span>
+                <span class="rating-badge" style="background: rgba(6, 182, 212, 0.2); color: var(--accent-cyan);">Similarity: ${escapeHtml(simLevel)}</span>
                 ${genres}
             </div>
-            <div style="background: rgba(245, 197, 24, 0.08); border-left: 3px solid var(--accent-gold); padding: 10px 14px; border-radius: 4px; margin-bottom: 14px; font-size: 13px;">
-                <strong style="color: var(--accent-gold);">Why Recommended:</strong> ${escapeHtml(whyText)}
+            <div style="background: rgba(245, 197, 24, 0.1); border-left: 4px solid var(--accent-gold); padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-size: 14px;">
+                <strong style="color: var(--accent-gold); display: flex; align-items: center; gap: 6px;">
+                    ${catIcon} Why Recommended (${escapeHtml(catName)}):
+                </strong>
+                <span style="color: #e2e8f0; display: block; margin-top: 4px;">${escapeHtml(whyText)}</span>
             </div>
             <p>${escapeHtml(movie.overview || "No overview available.")}</p>
             <div style="display: flex; gap: 14px; flex-wrap: wrap;">
@@ -878,7 +884,6 @@ function openModal(movie) {
 
     movieModal.classList.remove("hidden");
     document.body.style.overflow = "hidden";
-
 }
 
 function closeModal() {
