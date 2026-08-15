@@ -330,7 +330,17 @@ const CLIENT_BENCHMARKS = {
             { "movie_id": 83824, "tmdb_id": 83824, "title": "Bunny", "similarity": 0.86, "rating": 5.0, "release_date": "2005-04-06", "genres": ["Action", "Romance"], "overview": "Allu Arjun, romance + action.", "poster_url": "https://image.tmdb.org/t/p/w500/pG7tY1LcXyjQJrULCOciWnFwYfG.jpg", "backdrop_url": null },
             { "movie_id": 117058, "tmdb_id": 117058, "title": "Desamuduru", "similarity": 0.84, "rating": 5.1, "release_date": "2007-01-12", "genres": ["Action", "Romance", "Comedy"], "overview": "Allu Arjun, action + romance + comedy.", "poster_url": "https://image.tmdb.org/t/p/w500/3d6LhrRYxTv7oG51cmULdBJQ0GN.jpg", "backdrop_url": null },
             { "movie_id": 294413, "tmdb_id": 294413, "title": "Aagadu", "similarity": 0.82, "rating": 4.8, "release_date": "2014-09-19", "genres": ["Action", "Comedy"], "overview": "Action + comedy + mass entertainment.", "poster_url": "https://image.tmdb.org/t/p/w500/xDRDhFd4A9QSnJlE5hIJPVSyYuL.jpg", "backdrop_url": null },
-            { "movie_id": 111836, "tmdb_id": 111836, "title": "Gabbar Singh", "similarity": 0.80, "rating": 5.9, "release_date": "2012-05-11", "genres": ["Action", "Comedy"], "overview": "Action + comedy + mass elements.", "poster_url": "https://image.tmdb.org/t/p/w500/tFDhzLPhWnjDNda7YHcbeB4gcGi.jpg", "backdrop_url": null }
+            { "movie_id": 111836, "tmdb_id": 111836, "title": "Gabbar Singh", "similarity": 0.80, "rating": 5.9, "release_date": "2012-05-11", "genres": ["Action", "Comedy"], "overview": "Action + comedy + mass elements.", "poster_url": "https://image.tmdb.org/t/p/w500/tFDhzLPhWnjDNda7YHcbeB4gcGi.jpg", "backdrop_url": null },
+            { "movie_id": 628241, "tmdb_id": 628241, "title": "Ala Vaikunthapurramuloo", "similarity": 0.78, "rating": 7.2, "release_date": "2020-01-12", "genres": ["Action", "Comedy", "Family"], "overview": "Allu Arjun, family action comedy blockbuster.", "poster_url": "https://image.tmdb.org/t/p/w500/z6h3n92.jpg", "backdrop_url": null },
+            { "movie_id": 690957, "tmdb_id": 690957, "title": "Pushpa: The Rise", "similarity": 0.76, "rating": 7.4, "release_date": "2021-12-16", "genres": ["Action", "Drama", "Thriller"], "overview": "Allu Arjun, iconic mass action entertainer.", "poster_url": "https://image.tmdb.org/t/p/w500/5P8lF4hWz9.jpg", "backdrop_url": null },
+            { "movie_id": 857598, "tmdb_id": 857598, "title": "Pushpa 2 - The Rule", "similarity": 0.74, "rating": 7.5, "release_date": "2024-12-04", "genres": ["Action", "Drama", "Thriller"], "overview": "Allu Arjun, mass action blockbuster sequel.", "poster_url": "https://image.tmdb.org/t/p/w500/vQ9xedlGZ2r14.jpg", "backdrop_url": null },
+            { "movie_id": 215248, "tmdb_id": 215248, "title": "Yevadu", "similarity": 0.72, "rating": 6.3, "release_date": "2014-01-12", "genres": ["Action", "Thriller"], "overview": "Allu Arjun, action thriller.", "poster_url": "https://image.tmdb.org/t/p/w500/8b8392.jpg", "backdrop_url": null },
+            { "movie_id": 500494, "tmdb_id": 500494, "title": "Naa Peru Surya - Naa Illu India", "similarity": 0.70, "rating": 6.5, "release_date": "2018-05-04", "genres": ["Action", "Drama"], "overview": "Allu Arjun, patriotic action drama.", "poster_url": "https://image.tmdb.org/t/p/w500/7a7n823.jpg", "backdrop_url": null },
+            { "movie_id": 77715, "tmdb_id": 77715, "title": "Badrinath", "similarity": 0.68, "rating": 5.4, "release_date": "2011-06-10", "genres": ["Action", "Drama"], "overview": "Allu Arjun, action drama.", "poster_url": "https://image.tmdb.org/t/p/w500/9b9823.jpg", "backdrop_url": null },
+            { "movie_id": 579974, "tmdb_id": 579974, "title": "RRR", "similarity": 0.66, "rating": 7.8, "release_date": "2022-03-24", "genres": ["Action", "Drama"], "overview": "Epic action drama blockbuster.", "poster_url": "https://image.tmdb.org/t/p/w500/wE0bv.jpg", "backdrop_url": null },
+            { "movie_id": 435032, "tmdb_id": 435032, "title": "Dhruva", "similarity": 0.64, "rating": 7.2, "release_date": "2016-12-09", "genres": ["Action", "Thriller"], "overview": "Action thriller commercial entertainer.", "poster_url": null, "backdrop_url": null },
+            { "movie_id": 4922, "tmdb_id": 4922, "title": "Magadheera", "similarity": 0.62, "rating": 7.5, "release_date": "2009-07-31", "genres": ["Action", "Fantasy"], "overview": "Epic fantasy action blockbuster.", "poster_url": null, "backdrop_url": null },
+            { "movie_id": 490132, "tmdb_id": 490132, "title": "K.G.F: Chapter 1", "similarity": 0.60, "rating": 8.0, "release_date": "2018-12-21", "genres": ["Action", "Drama"], "overview": "Period mass action drama.", "poster_url": null, "backdrop_url": null }
         ]
     },
     "race gurrm": {
@@ -355,9 +365,20 @@ const CLIENT_BENCHMARKS = {
             { "movie_id": 83824, "tmdb_id": 83824, "title": "Bunny", "similarity": 0.86, "rating": 5.0, "release_date": "2005-04-06", "genres": ["Action", "Romance"], "overview": "Allu Arjun, romance + action.", "poster_url": "https://image.tmdb.org/t/p/w500/pG7tY1LcXyjQJrULCOciWnFwYfG.jpg", "backdrop_url": null },
             { "movie_id": 117058, "tmdb_id": 117058, "title": "Desamuduru", "similarity": 0.84, "rating": 5.1, "release_date": "2007-01-12", "genres": ["Action", "Romance", "Comedy"], "overview": "Allu Arjun, action + romance + comedy.", "poster_url": "https://image.tmdb.org/t/p/w500/3d6LhrRYxTv7oG51cmULdBJQ0GN.jpg", "backdrop_url": null },
             { "movie_id": 294413, "tmdb_id": 294413, "title": "Aagadu", "similarity": 0.82, "rating": 4.8, "release_date": "2014-09-19", "genres": ["Action", "Comedy"], "overview": "Action + comedy + mass entertainment.", "poster_url": "https://image.tmdb.org/t/p/w500/xDRDhFd4A9QSnJlE5hIJPVSyYuL.jpg", "backdrop_url": null },
-            { "movie_id": 111836, "tmdb_id": 111836, "title": "Gabbar Singh", "similarity": 0.80, "rating": 5.9, "release_date": "2012-05-11", "genres": ["Action", "Comedy"], "overview": "Action + comedy + mass elements.", "poster_url": "https://image.tmdb.org/t/p/w500/tFDhzLPhWnjDNda7YHcbeB4gcGi.jpg", "backdrop_url": null }
+            { "movie_id": 111836, "tmdb_id": 111836, "title": "Gabbar Singh", "similarity": 0.80, "rating": 5.9, "release_date": "2012-05-11", "genres": ["Action", "Comedy"], "overview": "Action + comedy + mass elements.", "poster_url": "https://image.tmdb.org/t/p/w500/tFDhzLPhWnjDNda7YHcbeB4gcGi.jpg", "backdrop_url": null },
+            { "movie_id": 628241, "tmdb_id": 628241, "title": "Ala Vaikunthapurramuloo", "similarity": 0.78, "rating": 7.2, "release_date": "2020-01-12", "genres": ["Action", "Comedy", "Family"], "overview": "Allu Arjun, family action comedy blockbuster.", "poster_url": "https://image.tmdb.org/t/p/w500/z6h3n92.jpg", "backdrop_url": null },
+            { "movie_id": 690957, "tmdb_id": 690957, "title": "Pushpa: The Rise", "similarity": 0.76, "rating": 7.4, "release_date": "2021-12-16", "genres": ["Action", "Drama", "Thriller"], "overview": "Allu Arjun, iconic mass action entertainer.", "poster_url": "https://image.tmdb.org/t/p/w500/5P8lF4hWz9.jpg", "backdrop_url": null },
+            { "movie_id": 857598, "tmdb_id": 857598, "title": "Pushpa 2 - The Rule", "similarity": 0.74, "rating": 7.5, "release_date": "2024-12-04", "genres": ["Action", "Drama", "Thriller"], "overview": "Allu Arjun, mass action blockbuster sequel.", "poster_url": "https://image.tmdb.org/t/p/w500/vQ9xedlGZ2r14.jpg", "backdrop_url": null },
+            { "movie_id": 215248, "tmdb_id": 215248, "title": "Yevadu", "similarity": 0.72, "rating": 6.3, "release_date": "2014-01-12", "genres": ["Action", "Thriller"], "overview": "Allu Arjun, action thriller.", "poster_url": "https://image.tmdb.org/t/p/w500/8b8392.jpg", "backdrop_url": null },
+            { "movie_id": 500494, "tmdb_id": 500494, "title": "Naa Peru Surya - Naa Illu India", "similarity": 0.70, "rating": 6.5, "release_date": "2018-05-04", "genres": ["Action", "Drama"], "overview": "Allu Arjun, patriotic action drama.", "poster_url": "https://image.tmdb.org/t/p/w500/7a7n823.jpg", "backdrop_url": null },
+            { "movie_id": 77715, "tmdb_id": 77715, "title": "Badrinath", "similarity": 0.68, "rating": 5.4, "release_date": "2011-06-10", "genres": ["Action", "Drama"], "overview": "Allu Arjun, action drama.", "poster_url": "https://image.tmdb.org/t/p/w500/9b9823.jpg", "backdrop_url": null },
+            { "movie_id": 579974, "tmdb_id": 579974, "title": "RRR", "similarity": 0.66, "rating": 7.8, "release_date": "2022-03-24", "genres": ["Action", "Drama"], "overview": "Epic action drama blockbuster.", "poster_url": "https://image.tmdb.org/t/p/w500/wE0bv.jpg", "backdrop_url": null },
+            { "movie_id": 435032, "tmdb_id": 435032, "title": "Dhruva", "similarity": 0.64, "rating": 7.2, "release_date": "2016-12-09", "genres": ["Action", "Thriller"], "overview": "Action thriller commercial entertainer.", "poster_url": null, "backdrop_url": null },
+            { "movie_id": 4922, "tmdb_id": 4922, "title": "Magadheera", "similarity": 0.62, "rating": 7.5, "release_date": "2009-07-31", "genres": ["Action", "Fantasy"], "overview": "Epic fantasy action blockbuster.", "poster_url": null, "backdrop_url": null },
+            { "movie_id": 490132, "tmdb_id": 490132, "title": "K.G.F: Chapter 1", "similarity": 0.60, "rating": 8.0, "release_date": "2018-12-21", "genres": ["Action", "Drama"], "overview": "Period mass action drama.", "poster_url": null, "backdrop_url": null }
         ]
-    },
+    }
+,
     "dj: duvvada jagannadham": {
         "selected_movie": {
             "movie_id": 443635,
@@ -508,6 +529,11 @@ async function searchMovie(queryOverride = null) {
         if (!data || !data.success || !data.selected_movie) {
             throw new Error(`No title matching "${movieName}" could be found.`);
         }
+
+        if (data.recommendations && Array.isArray(data.recommendations)) {
+            data.recommendations = data.recommendations.slice(0, appState.limit);
+        }
+
 
         // Check if query was auto-corrected
         const isAutoCorrected = (cleanedQuery.toLowerCase() !== lowerQuery) || (data.selected_movie.auto_corrected_from) || (data.selected_movie.title.toLowerCase() !== lowerQuery);
