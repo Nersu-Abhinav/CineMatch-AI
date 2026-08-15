@@ -1,4 +1,5 @@
 import os
+import time
 from pathlib import Path
 
 import requests
@@ -47,26 +48,76 @@ session.headers.update({
 
 
 # ==========================================
+# HELPER SAFE REQUEST
+# ==========================================
+
+def safe_get(url, params=None):
+    for attempt in range(3):
+        try:
+            response = session.get(url, params=params, timeout=10)
+            if response.status_code == 200:
+                return response.json()
+        except Exception:
+            time.sleep(0.5)
+    return {}
+
+
+# ==========================================
+# SEARCH TMDB MOVIE BY TITLE
+# ==========================================
+
+def search_tmdb_movie(title):
+    url = f"{TMDB_BASE_URL}/search/movie"
+    params = {
+        "query": title,
+        "language": "en-US",
+        "include_adult": False
+    }
+    data = safe_get(url, params)
+    results = data.get("results", [])
+    if results:
+        return results[0]
+    return None
+
+
+# ==========================================
 # GET MOVIE DETAILS
 # ==========================================
 
 def get_movie_details(tmdb_id):
-
     url = f"{TMDB_BASE_URL}/movie/{tmdb_id}"
-
     params = {
         "language": "en-US"
     }
+    return safe_get(url, params)
 
-    response = session.get(
-        url,
-        params=params,
-        timeout=30
-    )
 
-    response.raise_for_status()
+# ==========================================
+# GET TMDB RECOMMENDATIONS
+# ==========================================
 
-    return response.json()
+def get_tmdb_recommendations(tmdb_id):
+    url = f"{TMDB_BASE_URL}/movie/{tmdb_id}/recommendations"
+    params = {
+        "language": "en-US",
+        "page": 1
+    }
+    data = safe_get(url, params)
+    return data.get("results", [])
+
+
+# ==========================================
+# GET TMDB SIMILAR
+# ==========================================
+
+def get_tmdb_similar(tmdb_id):
+    url = f"{TMDB_BASE_URL}/movie/{tmdb_id}/similar"
+    params = {
+        "language": "en-US",
+        "page": 1
+    }
+    data = safe_get(url, params)
+    return data.get("results", [])
 
 
 # ==========================================
@@ -74,14 +125,9 @@ def get_movie_details(tmdb_id):
 # ==========================================
 
 def get_poster_url(poster_path):
-
     if not poster_path:
         return None
-
-    return (
-        "https://image.tmdb.org/t/p/w500"
-        + poster_path
-    )
+    return f"https://image.tmdb.org/t/p/w500{poster_path}"
 
 
 # ==========================================
@@ -89,11 +135,6 @@ def get_poster_url(poster_path):
 # ==========================================
 
 def get_backdrop_url(backdrop_path):
-
     if not backdrop_path:
         return None
-
-    return (
-        "https://image.tmdb.org/t/p/w1280"
-        + backdrop_path
-    )
+    return f"https://image.tmdb.org/t/p/w1280{backdrop_path}"
