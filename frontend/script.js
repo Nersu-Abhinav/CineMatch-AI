@@ -935,9 +935,6 @@ function createMovieCard(movie) {
                 <span>•</span>
                 <span>${year}</span>
             </div>
-            <p class="list-overview" style="margin-top: 6px; font-size: 11px; color: var(--accent-gold);">
-                <strong>Why:</strong> ${escapeHtml(whyText)}
-            </p>
         </div>
     `;
 
