@@ -272,7 +272,10 @@ async function fetchTMDBClientFallback(query, limit = 40) {
         const detailsRes = await fetch(`https://api.themoviedb.org/3/movie/${tmdbId}?api_key=${TMDB_CLIENT_KEY}`);
         const detailsData = detailsRes.ok ? await detailsRes.json() : mainMovie;
 
-        // Fetch Recommendations Page 1, 2, 3 + Similar Movies Page 1, 2, 3 + Discover Page 1, 2
+        const lang = detailsData.original_language || "en";
+        const primaryGenre = (detailsData.genres && detailsData.genres.length > 0) ? detailsData.genres[0].id : "";
+
+        // Fetch Recommendations Page 1, 2, 3 + Similar Movies Page 1, 2, 3 + Language/Genre Discover
         const [recs1, recs2, recs3, sim1, sim2, sim3, disc1, disc2] = await Promise.all([
             fetch(`https://api.themoviedb.org/3/movie/${tmdbId}/recommendations?api_key=${TMDB_CLIENT_KEY}&page=1`).then(r => r.ok ? r.json() : null).catch(() => null),
             fetch(`https://api.themoviedb.org/3/movie/${tmdbId}/recommendations?api_key=${TMDB_CLIENT_KEY}&page=2`).then(r => r.ok ? r.json() : null).catch(() => null),
@@ -280,8 +283,8 @@ async function fetchTMDBClientFallback(query, limit = 40) {
             fetch(`https://api.themoviedb.org/3/movie/${tmdbId}/similar?api_key=${TMDB_CLIENT_KEY}&page=1`).then(r => r.ok ? r.json() : null).catch(() => null),
             fetch(`https://api.themoviedb.org/3/movie/${tmdbId}/similar?api_key=${TMDB_CLIENT_KEY}&page=2`).then(r => r.ok ? r.json() : null).catch(() => null),
             fetch(`https://api.themoviedb.org/3/movie/${tmdbId}/similar?api_key=${TMDB_CLIENT_KEY}&page=3`).then(r => r.ok ? r.json() : null).catch(() => null),
-            fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_CLIENT_KEY}&sort_by=popularity.desc&page=1`).then(r => r.ok ? r.json() : null).catch(() => null),
-            fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_CLIENT_KEY}&sort_by=popularity.desc&page=2`).then(r => r.ok ? r.json() : null).catch(() => null)
+            fetch(lang !== "en" ? `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_CLIENT_KEY}&with_original_language=${lang}&sort_by=popularity.desc&page=1` : `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_CLIENT_KEY}&sort_by=popularity.desc&page=1`).then(r => r.ok ? r.json() : null).catch(() => null),
+            fetch(primaryGenre ? `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_CLIENT_KEY}&with_genres=${primaryGenre}${lang !== "en" ? `&with_original_language=${lang}` : ""}&sort_by=popularity.desc&page=1` : `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_CLIENT_KEY}&sort_by=popularity.desc&page=2`).then(r => r.ok ? r.json() : null).catch(() => null)
         ]);
 
         let candidatePool = [];
@@ -464,6 +467,17 @@ async function fetchTMDBClientFallback(query, limit = 40) {
 }
 
 const STANDALONE_MOVIE_DATABASE = [
+    { id: 266396, title: "Race Gurram", rating: 7.2, release_date: "2014-04-11", genres: ["Action", "Comedy"], overview: "Two brothers with opposing personalities clash with a corrupt politician who threatens their family.", poster_url: "https://image.tmdb.org/t/p/w500/z0S3Qc30D8c0.jpg" },
+    { id: 444319, title: "Julayi", rating: 7.3, release_date: "2012-08-09", genres: ["Action", "Comedy"], overview: "A carefree youth gets involved in a bank robbery scheme and engages in a game of cat and mouse with a ruthless gangster.", poster_url: "https://image.tmdb.org/t/p/w500/u16w3u.jpg" },
+    { id: 624779, title: "Ala Vaikunthapurramuloo", rating: 7.6, release_date: "2020-01-12", genres: ["Action", "Comedy", "Drama"], overview: "Bantu grows up being constantly degraded by his father, until he learns that he was swapped at birth with a wealthy businessman's son.", poster_url: "https://image.tmdb.org/t/p/w500/p2b1.jpg" },
+    { id: 396803, title: "Sarrainodu", rating: 6.9, release_date: "2016-04-22", genres: ["Action", "Drama"], overview: "An ex-military officer takes matters into his own hands when a corrupt politician's son escapes justice.", poster_url: "https://image.tmdb.org/t/p/w500/s3b2.jpg" },
+    { id: 614911, title: "Pushpa: The Rise", rating: 7.6, release_date: "2021-12-17", genres: ["Action", "Crime", "Drama"], overview: "A laborer rises through the ranks of a red sandalwood smuggling syndicate.", poster_url: "https://image.tmdb.org/t/p/w500/p7b3.jpg" },
+    { id: 256040, title: "Baahubali: The Beginning", rating: 8.0, release_date: "2015-07-10", genres: ["Action", "Adventure", "Drama"], overview: "An adventurous man learns about his royal heritage and the heroic battle fought by his father to protect his kingdom.", poster_url: "https://image.tmdb.org/t/p/w500/b1b4.jpg" },
+    { id: 350312, title: "Baahubali 2: The Conclusion", rating: 8.2, release_date: "2017-04-27", genres: ["Action", "Adventure", "Drama"], overview: "Shivudu discovers his legacy as Mahendra Baahubali and sets out to reclaim the throne of Mahishmati.", poster_url: "https://image.tmdb.org/t/p/w500/b2b5.jpg" },
+    { id: 579974, title: "RRR", rating: 7.8, release_date: "2022-03-24", genres: ["Action", "Drama"], overview: "A fearless revolutionary and an officer in the British army forge an unbreakable friendship.", poster_url: "https://image.tmdb.org/t/p/w500/rrrb6.jpg" },
+    { id: 24344, title: "Magadheera", rating: 7.7, release_date: "2009-07-31", genres: ["Action", "Drama", "Fantasy"], overview: "A bike stuntman realizes he was a warrior in his previous life 400 years ago.", poster_url: "https://image.tmdb.org/t/p/w500/m1b7.jpg" },
+    { id: 75780, title: "Dookudu", rating: 7.4, release_date: "2011-09-23", genres: ["Action", "Comedy"], overview: "An undercover cop creates an elaborate fake environment to keep his father happy while hunting down corrupt politicians.", poster_url: "https://image.tmdb.org/t/p/w500/d1b8.jpg" },
+    { id: 104712, title: "Eega", rating: 7.6, release_date: "2012-07-06", genres: ["Action", "Fantasy", "Comedy"], overview: "A murdered man is reincarnated as a housefly and seeks revenge on his killer.", poster_url: "https://image.tmdb.org/t/p/w500/e1b9.jpg" },
     { id: 27205, title: "Inception", rating: 8.4, release_date: "2010-07-16", genres: ["Action", "Science Fiction", "Adventure"], overview: "Cobb, a skilled thief who steals corporate secrets through dream-sharing technology, is given the inverse task of planting an idea into the mind of a C.E.O.", poster_url: "https://image.tmdb.org/t/p/w500/oYuLEW9W2Bmo2B2F8WoiBUdqT2a.jpg" },
     { id: 157336, title: "Interstellar", rating: 8.4, release_date: "2014-11-05", genres: ["Adventure", "Drama", "Science Fiction"], overview: "The adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel.", poster_url: "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg" },
     { id: 155, title: "The Dark Knight", rating: 8.5, release_date: "2008-07-16", genres: ["Drama", "Action", "Crime", "Thriller"], overview: "Batman raises the stakes in his war on crime with the help of Lt. Jim Gordon and District Attorney Harvey Dent.", poster_url: "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg" },
