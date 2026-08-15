@@ -7,15 +7,22 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 
 # ==========================================
-# STEP 1: LOAD DATASET
+# STEP 1: LOAD DATASETS
 # ==========================================
 
-print("Loading movie dataset...")
+print("Loading dataset...")
 
 movies = pd.read_csv("data/movies.csv")
 
+try:
+    ratings = pd.read_csv("data/ratings_filtered.csv", usecols=["movieId"])
+    top_ids = set(ratings["movieId"].value_counts().head(5000).index)
+    movies = movies[movies["movieId"].isin(top_ids)].reset_index(drop=True)
+except Exception:
+    movies = movies.head(5000).reset_index(drop=True)
+
 print("Dataset loaded successfully!")
-print("Number of movies:", len(movies))
+print("Number of catalog movies:", len(movies))
 
 
 # ==========================================
@@ -32,11 +39,8 @@ movies = movies.fillna("")
 print("Creating movie features...")
 
 movies["tags"] = (
-    movies["overview"] + " " +
-    movies["genres"] + " " +
-    movies["keywords"] + " " +
-    movies["cast"] + " " +
-    movies["director"]
+    movies["title"] + " " +
+    movies["genres"].str.replace("|", " ", regex=False)
 )
 
 movies["tags"] = movies["tags"].str.lower()
@@ -49,7 +53,8 @@ movies["tags"] = movies["tags"].str.lower()
 print("Converting movie information into vectors...")
 
 tfidf = TfidfVectorizer(
-    stop_words="english"
+    stop_words="english",
+    max_features=5000
 )
 
 tfidf_matrix = tfidf.fit_transform(movies["tags"])
@@ -82,53 +87,35 @@ movie_indices = movie_indices[~movie_indices.index.duplicated(keep="first")]
 
 
 # ==========================================
-# STEP 7: CREATE MODEL FOLDER
+# STEP 7: SAVE MODEL ARTIFACTS
 # ==========================================
 
 os.makedirs("model", exist_ok=True)
-
-
-# ==========================================
-# STEP 8: SAVE TRAINED MODEL
-# ==========================================
 
 print("Saving trained model...")
 
 joblib.dump(
     similarity_matrix,
-    "model/movie_similarity.pkl"
+    "model/movie_similarity.pkl",
+    compress=3
 )
 
 joblib.dump(
     movies,
-    "model/movie_data.pkl"
+    "model/movie_data.pkl",
+    compress=3
 )
 
 joblib.dump(
     movie_indices,
-    "model/movie_indices.pkl"
+    "model/movie_indices.pkl",
+    compress=3
 )
 
 joblib.dump(
     tfidf,
-    "model/tfidf_vectorizer.pkl"
+    "model/tfidf_vectorizer.pkl",
+    compress=3
 )
 
-
-# ==========================================
-# TRAINING COMPLETE
-# ==========================================
-
-print()
-print("==========================================")
-print("       MODEL TRAINING COMPLETED!")
-print("==========================================")
-print()
-print("Movies trained:", len(movies))
-print("Model files saved inside the 'model' folder.")
-print()
-print("Created files:")
-print("1. movie_similarity.pkl")
-print("2. movie_data.pkl")
-print("3. movie_indices.pkl")
-print("4. tfidf_vectorizer.pkl")
+print("MODEL TRAINING COMPLETED SUCCESSFULLY!")
