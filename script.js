@@ -1038,68 +1038,80 @@ function switchView(mode) {
 // 08. ENDLESS DISCOVERY MODAL & CHAIN DISCOVERY
 // --------------------------------------------------------------------------
 function openModal(movie) {
-    if (!movie) return;
-    const modalMovieBody = document.getElementById("modalMovieBody");
-    const movieModal = document.getElementById("movieModal");
-    if (!modalMovieBody || !movieModal) return;
+    try {
+        if (!movie) return;
+        const modalMovieBody = document.getElementById("modalMovieBody");
+        const movieModal = document.getElementById("movieModal");
+        if (!modalMovieBody || !movieModal) return;
 
-    const poster = movie.poster_url || createFallbackPoster(movie.title);
-    const year = movie.release_date ? movie.release_date.substring(0, 4) : "N/A";
-    const rating = movie.rating ? Number(movie.rating).toFixed(1) : "N/A";
-    const genres = (movie.genres || []).map(g => `<span class="genre-pill">${escapeHtml(g)}</span>`).join("");
-    
-    let matchPct = 85;
-    if (typeof movie.similarity === "number" && !isNaN(movie.similarity)) {
-        matchPct = movie.similarity <= 1 ? Math.round(movie.similarity * 100) : Math.round(movie.similarity);
-    } else if (movie.similarity_level) {
-        if (movie.similarity_level === "Very High") matchPct = 95;
-        else if (movie.similarity_level === "High") matchPct = 88;
-        else if (movie.similarity_level === "Medium") matchPct = 75;
-        else if (movie.similarity_level === "Low") matchPct = 60;
-    }
-    const catName = movie.category || "CineMatch Pick";
-    let whyText = movie.why_explanation;
-    if (!whyText || whyText.includes("vector proximity")) {
-        if (catName === "Genre Matches") {
-            whyText = "Genre Match — Shares primary genre classification, character tropes & thematic style";
-        } else if (catName === "Interest Matches") {
-            whyText = "Interest Match — High audience rating consensus, user reviews & popularity score";
-        } else if (catName === "Content Matches") {
-            whyText = "Content Match — High narrative, storyline & plot theme vector overlap";
-        } else {
-            whyText = "CineMatch Pick — Curated k-NN algorithmic vector match & critical recommendation";
+        const poster = movie.poster_url || createFallbackPoster(movie.title);
+        const year = movie.release_date ? movie.release_date.substring(0, 4) : "N/A";
+        const rating = movie.rating ? Number(movie.rating).toFixed(1) : "N/A";
+        const genres = (movie.genres || []).map(g => `<span class="genre-pill">${escapeHtml(g)}</span>`).join("");
+        
+        let matchPct = 85;
+        if (typeof movie.similarity === "number" && !isNaN(movie.similarity)) {
+            matchPct = movie.similarity <= 1 ? Math.round(movie.similarity * 100) : Math.round(movie.similarity);
+        } else if (movie.similarity_level) {
+            if (movie.similarity_level === "Very High") matchPct = 95;
+            else if (movie.similarity_level === "High") matchPct = 88;
+            else if (movie.similarity_level === "Medium") matchPct = 75;
+            else if (movie.similarity_level === "Low") matchPct = 60;
         }
+        const catName = movie.category || "CineMatch Pick";
+        let whyText = movie.why_explanation;
+        if (!whyText || whyText.includes("vector proximity")) {
+            if (catName === "Genre Matches") {
+                whyText = "Genre Match — Shares primary genre classification, character tropes & thematic style";
+            } else if (catName === "Interest Matches") {
+                whyText = "Interest Match — High audience rating consensus, user reviews & popularity score";
+            } else if (catName === "Content Matches") {
+                whyText = "Content Match — High narrative, storyline & plot theme vector overlap";
+            } else {
+                whyText = "CineMatch Pick — Curated k-NN algorithmic vector match & critical recommendation";
+            }
+        }
+        const tmdbLink = movie.tmdb_id ? `https://www.themoviedb.org/movie/${movie.tmdb_id}` : "#";
+
+        modalMovieBody.innerHTML = `
+            <div>
+                <img class="modal-poster" src="${poster}" alt="${escapeHtml(movie.title)}" onerror="this.src='${createFallbackPoster(movie.title)}'">
+            </div>
+            <div class="modal-info">
+                <h2>${escapeHtml(movie.title)}</h2>
+                <div class="movie-meta-bar">
+                    <span class="rating-badge">★ ${rating}</span>
+                    <span class="year-badge">${year}</span>
+                    <span class="rating-badge" style="background: rgba(6, 182, 212, 0.2); color: var(--accent-cyan);">${matchPct}% Match</span>
+                    ${genres}
+                </div>
+                <div style="background: rgba(245, 197, 24, 0.1); border-left: 4px solid var(--accent-gold); padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-size: 14px;">
+                    <strong style="color: var(--accent-gold);">Why Recommended:</strong>
+                    <span style="color: #e2e8f0; display: block; margin-top: 4px;">${escapeHtml(whyText)}</span>
+                </div>
+                <p>${escapeHtml(movie.overview || "No overview available.")}</p>
+                <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+                    <button class="chain-discover-btn">
+                        ⚡ Discover Movies Similar to This
+                    </button>
+                    ${movie.tmdb_id ? `<a class="secondary-action-btn" href="${tmdbLink}" target="_blank" rel="noopener">TMDB Details ↗</a>` : ""}
+                </div>
+            </div>
+        `;
+
+        const chainBtn = modalMovieBody.querySelector(".chain-discover-btn");
+        if (chainBtn) {
+            chainBtn.addEventListener("click", () => {
+                closeModal();
+                searchMovie(movie.title);
+            });
+        }
+
+        movieModal.classList.remove("hidden");
+        document.body.style.overflow = "hidden";
+    } catch (e) {
+        console.error("Error opening modal:", e);
     }
-    const tmdbLink = movie.tmdb_id ? `https://www.themoviedb.org/movie/${movie.tmdb_id}` : "#";
-
-    modalMovieBody.innerHTML = `
-        <div>
-            <img class="modal-poster" src="${poster}" alt="${escapeHtml(movie.title)}" onerror="this.src='${createFallbackPoster(movie.title)}'">
-        </div>
-        <div class="modal-info">
-            <h2>${escapeHtml(movie.title)}</h2>
-            <div class="movie-meta-bar">
-                <span class="rating-badge">★ ${rating}</span>
-                <span class="year-badge">${year}</span>
-                <span class="rating-badge" style="background: rgba(6, 182, 212, 0.2); color: var(--accent-cyan);">${matchPct}% Match</span>
-                ${genres}
-            </div>
-            <div style="background: rgba(245, 197, 24, 0.1); border-left: 4px solid var(--accent-gold); padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-size: 14px;">
-                <strong style="color: var(--accent-gold);">Why Recommended:</strong>
-                <span style="color: #e2e8f0; display: block; margin-top: 4px;">${escapeHtml(whyText)}</span>
-            </div>
-            <p>${escapeHtml(movie.overview || "No overview available.")}</p>
-            <div style="display: flex; gap: 14px; flex-wrap: wrap;">
-                <button class="chain-discover-btn" onclick="chainDiscover('${escapeJavaScriptString(movie.title)}')">
-                    ⚡ Discover Movies Similar to This
-                </button>
-                ${movie.tmdb_id ? `<a class="secondary-action-btn" href="${tmdbLink}" target="_blank" rel="noopener">TMDB Details ↗</a>` : ""}
-            </div>
-        </div>
-    `;
-
-    movieModal.classList.remove("hidden");
-    document.body.style.overflow = "hidden";
 }
 
 function closeModal() {
