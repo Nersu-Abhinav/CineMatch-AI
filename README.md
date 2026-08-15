@@ -1,9 +1,9 @@
 <div align="center">
 
-# 🎬 CineMatch AI — Next-Gen Movie Recommendation Engine
+# 🎬 CineMatch AI
 
 <a href="https://readme-typing-svg.herokuapp.com">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Outfit&weight=800&size=26&duration=2500&pause=800&color=F5C518&center=true&vCenter=true&width=800&lines=%F0%9F%8F%AC+CINEMATCH+AI+%E2%80%94+DISCOVER+MOVIES+BEYOND+ORDINARY+ALGORITHMS;%F0%9F%8C%8C+Item-Item+Collaborative+Filtering+Vector+Space;%F0%9F%9A%80+Real-Time+TMDB+v3+4K+Poster+%26+Metadata+Enrichment;%E2%9C%A8+High-Dimensional+Nearest-Neighbors+Matrix+Math" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Outfit&weight=800&size=22&duration=2500&pause=800&color=F5C518&center=true&vCenter=true&width=900&lines=%F0%9F%8F%AC+CineMatch+AI+%E2%80%94+Next-Gen+Movie+Recommendation+Engine;%F0%9F%8C%8C+Item-Item+Collaborative+Filtering+(29M%2B+Ratings);%F0%9F%9A%80+Real-Time+TMDB+v3+Metadata+%26+4K+Poster+Enrichment;%E2%9C%A8+Sparse+Vector+Space+Cosine+Math+%26+FastAPI" alt="Typing SVG" />
 </a>
 
 <br><br>
@@ -17,7 +17,7 @@
 
 <br>
 
-[🌐 Live Application](https://nersu-abhinav.github.io/CineMatch-AI/) • [🔮 Features](#-quantum-engine-features) • [🏗️ Architecture](#%EF%B8%8F-futuristic-system-architecture) • [🛠️ Tech Stack](#%EF%B8%8F-high-tech-matrix) • [🚀 Launch Engine](#-launch-engine-quick-start)
+[🌐 Live Application](https://nersu-abhinav.github.io/CineMatch-AI/) • [🔮 Features](#-quantum-engine-features) • [🏗️ Architecture](#%EF%B8%8F-futuristic-system-architecture) • [🛠️ Tech Stack](#%EF%B8%8F-high-tech-matrix) • [🚀 Quick Start](#-launch-engine-quick-start)
 
 ---
 
